@@ -112,8 +112,13 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
-" Enable neocomplete
-let g:neocomplete#enable_at_startup = 1
+" Setup supertab
+let g:SuperTabDefaultCompletionType = "<C-X><C-P>"
+let g:SuperTabCrMapping = 1
+autocmd FileType *
+  \ if &omnifunc != '' |
+  \   call SuperTabChain(&omnifunc, "<c-p>") |
+  \ endif
 " Setup omnisharp
 let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
 let g:OmniSharp_server_use_mono = 1
