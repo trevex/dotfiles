@@ -48,8 +48,7 @@ set nolist
 set lcs+=space:·
 set wildmenu
 set wildmode=list:full
-set completeopt=longest,menuone,preview
-set previewheight=5
+set completeopt-=preview
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
@@ -118,7 +117,6 @@ let g:neocomplete#enable_at_startup = 1
 " Setup omnisharp
 let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
 let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_selector_ui = 'ctrlp'
 let g:OmniSharp_timeout = 5
 augroup omnisharp_commands
     autocmd!
