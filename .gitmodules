@@ -37,3 +37,6 @@
 [submodule "vim/.vim/bundle/vim-multiple-cursors"]
 	path = vim/.vim/bundle/vim-multiple-cursors
 	url = git@github.com:terryma/vim-multiple-cursors.git
+[submodule "vim/.vim/bundle/vim-easymotion"]
+	path = vim/.vim/bundle/vim-easymotion
+	url = git@github.com:easymotion/vim-easymotion.git
