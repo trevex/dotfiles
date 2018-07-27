@@ -45,6 +45,9 @@ stow profile
 # rm $HOME/.Xresources
 stow x11
 
+# rm $HOME/.fehbg
+stow wallpapers
+
 
 # Setup firefox
 
