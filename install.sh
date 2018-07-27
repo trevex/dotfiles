@@ -9,7 +9,7 @@ do
   if pacman -Qi $p > /dev/null ; then
   	echo "Package ${p} already installed."
   else
-    echo "Installing ${p}... (Might ask for sudo)"
+    echo "Installing ${p}... (might ask for sudo)"
     sudo pacman -Sy $p
   fi
 done
@@ -72,4 +72,13 @@ else
   rm $HOME/.zshrc
   stow zsh
 fi
+
+
+# Remove manjaro grub theme
+if pacman -Qi grub-theme-manjaro > /dev/null ; then
+  echo "Removing existing grub-theme... (might ask for sudo)"
+  sudo pacman -R grub-theme-manjaro
+  sudo update-grub
+fi
+
 
