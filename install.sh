@@ -2,7 +2,7 @@
 
 # Install necessary packages
 
-required_packages=(firefox stow compton curl git imagemagick xorg-xdpyinfo bc pavucontrol pulseaudio-ctl manjaro-pulse rxvt-unicode polybar libmpdclient libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance gtk-engine-murrine)
+required_packages=(firefox stow vim compton curl git imagemagick xorg-xdpyinfo bc pavucontrol pulseaudio-ctl manjaro-pulse rxvt-unicode polybar libmpdclient libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance gtk-engine-murrine)
 
 for p in "${required_packages[@]}"
 do
@@ -25,6 +25,11 @@ do
     yaourt -S $p
   fi
 done
+
+
+# Initialise git submodules
+
+git submodule update --init
 
 
 # GNU/Stow
@@ -61,6 +66,8 @@ stow profile
 stow x11
 
 stow wallpapers
+
+stow vim
 
 
 # Setup firefox
