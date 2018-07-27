@@ -1,1 +1,1 @@
-Quickly thrown together dotfiles. Use `install.sh` to install. Files need major cleanup!
+Quickly thrown together dotfiles. Use `install.sh` to install. Files need major cleanup! Currently expects manjaro bspwm-minimal as base OS. Might or might not work elsewhere!
