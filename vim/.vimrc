@@ -48,6 +48,8 @@ set nolist
 set lcs+=space:·
 set wildmenu
 set wildmode=list:full
+set completeopt=longest,menuone,preview
+set previewheight=5
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
@@ -110,3 +112,5 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
+" Enable neocomplete
+let g:neocomplete#enable_at_startup = 1
