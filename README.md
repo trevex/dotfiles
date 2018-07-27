@@ -1,0 +1,1 @@
+Quickly thrown together dotfiles. Use `install.sh` to install. Files need major cleanup!
