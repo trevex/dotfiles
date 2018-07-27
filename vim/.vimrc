@@ -113,16 +113,16 @@ nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
 " Setup supertab
-let g:SuperTabDefaultCompletionType = "<C-X><C-P>"
 let g:SuperTabCrMapping = 1
 autocmd FileType *
   \ if &omnifunc != '' |
   \   call SuperTabChain(&omnifunc, "<c-p>") |
   \ endif
-" Setup omnisharp
+" Setup omnisharp amd C# language defaults
 let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
 let g:OmniSharp_server_use_mono = 1
 let g:OmniSharp_timeout = 5
+autocmd Filetype cs setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 augroup omnisharp_commands
     autocmd!
     autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
