@@ -116,7 +116,7 @@ label-dimmed-underline = ${BAR.background}
 
 label-active = %name%
 label-active-foreground = #fff
-label-active-background = #773f3f3f
+label-active-background = #3b4252
 label-active-underline = #88c0d0
 label-active-font = 1
 label-active-padding = 3
