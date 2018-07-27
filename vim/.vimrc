@@ -44,10 +44,15 @@ set notimeout
 set ttimeout
 set ttimeoutlen=10
 set cursorline
+set nolist
+set lcs+=space:·
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
 endif
+" Set leader to ,
+let mapleader = ","
+let g:mapleader = ","
 " Speed up syntax highlighting
 syntax sync minlines=256
 set synmaxcol=300
@@ -62,14 +67,37 @@ colorscheme nord
 let g:lightline = {
       \ 'colorscheme': 'nord',
       \ }
+" Extra commands
+function! DeleteInactiveBufs() " Taken form jessfraz/.vim
+  let tablist = []
+  for i in range(tabpagenr('$'))
+    call extend(tablist, tabpagebuflist(i + 1))
+  endfor
+  let nWipeouts = 0
+  for i in range(1, bufnr('$'))
+    if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+      silent exec 'bwipeout' i
+      let nWipeouts = nWipeouts + 1
+    endif
+  endfor
+  echomsg nWipeouts . ' buffer(s) wiped out'
+endfunction
+command! Ball :call DeleteInactiveBufs()
+" Keybindings
+nnoremap <C-x> :bnext<CR>
+nnoremap <C-z> :bprev<CR>
 " Setup CtrlP
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10		" maxiumum height of match window
-let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
-let g:ctrlp_mruf_max=450 		" number of recently opened files
-let g:ctrlp_max_files=0  		" do not limit the number of searchable files
+let g:ctrlp_max_height = 10
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_mruf_max=450
+let g:ctrlp_max_files=0
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Setup NerdTree
+nmap <C-n> :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<cr>
+noremap <Leader>f :NERDTreeFind<cr>

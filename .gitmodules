@@ -13,3 +13,24 @@
 [submodule "vim/.vim/bundle/vim-sensible"]
 	path = vim/.vim/bundle/vim-sensible
 	url = git@github.com:tpope/vim-sensible.git
+[submodule "vim/.vim/bundle/vim-commentary"]
+	path = vim/.vim/bundle/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
+[submodule "vim/.vim/bundle/vim-json"]
+	path = vim/.vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
+[submodule "vim/.vim/bundle/vim-markdown"]
+	path = vim/.vim/bundle/vim-markdown
+	url = git@github.com:tpope/vim-markdown.git
+[submodule "vim/.vim/bundle/nerdtree"]
+	path = vim/.vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "vim/.vim/bundle/vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "vim/.vim/bundle/tabular"]
+	path = vim/.vim/bundle/tabular
+	url = git://github.com/godlygeek/tabular.git
+[submodule "vim/.vim/bundle/vim-repeat"]
+	path = vim/.vim/bundle/vim-repeat
+	url = git@github.com:tpope/vim-repeat.git
