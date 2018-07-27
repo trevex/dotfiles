@@ -276,8 +276,8 @@ super + shift + b
 	$BROWSER
     		
 super + e
-    st -f "Terminus:size=14:style=regular" ranger
-#	urxvt -e ranger
+	urxvt -e ranger
+#    st -f "Terminus:size=14:style=regular" ranger
 #spacefm -n
 
 # Use slightly bigger font for ranger
