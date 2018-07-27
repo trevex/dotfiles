@@ -46,6 +46,8 @@ set ttimeoutlen=10
 set cursorline
 set nolist
 set lcs+=space:·
+set wildmenu
+set wildmode=list:full
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
@@ -86,6 +88,13 @@ command! Ball :call DeleteInactiveBufs()
 " Keybindings
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
+nnoremap <space> zz
+nmap <leader>w :w!<cr>
+map <Up> gk
+map <Down> gj
+map k gk
+map j gj
+imap jk <ESC>l
 " Setup CtrlP
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
