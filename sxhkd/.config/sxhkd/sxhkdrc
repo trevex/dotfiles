@@ -329,3 +329,8 @@ super + ctrl + space
 # Remove receptacles
 super + BackSpace
   for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
+
+
+# i3lock
+super + =
+	beterlockscreen -l blur

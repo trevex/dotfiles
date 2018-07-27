@@ -2,7 +2,7 @@
 
 # Install necessary packages
 
-required_packages=(firefox stow curl git pavucontrol pulseaudio-ctl manjaro-pulse rxvt-unicode polybar libmpdclient libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance gtk-engine-murrine)
+required_packages=(firefox stow curl git imagemagick xorg-xdpyinfo bc pavucontrol pulseaudio-ctl manjaro-pulse rxvt-unicode polybar libmpdclient libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance gtk-engine-murrine)
 
 for p in "${required_packages[@]}"
 do
@@ -11,6 +11,18 @@ do
   else
     echo "Installing ${p}... (might ask for sudo)"
     sudo pacman -Sy $p
+  fi
+done
+
+required_packages_aur=(i3lock-color betterlockscreen)
+
+for p in "${required_packages_aur[@]}"
+do
+  if pacman -Qi $p > /dev/null ; then
+    echo "Package ${p} (AUR) already installed."
+  else
+    echo "Installing ${p}... (via AUR)"
+    yaourt -S $p
   fi
 done
 
@@ -45,7 +57,6 @@ stow profile
 # rm $HOME/.Xresources
 stow x11
 
-# rm $HOME/.fehbg
 stow wallpapers
 
 
@@ -73,6 +84,15 @@ else
   stow zsh
 fi
 
+
+# 
+if [ -d "$HOME/.cache/i3lock" ]; then
+  echo "Skipping betterlockscreen generation, because directory exists"
+else 
+  echo "Generating betterlockscreen images..."
+  betterlockscreen -u $HOME/.wallpapers/wallhaven-558971.jpg -b 0.5
+  betterlockscreen -w
+fi
 
 # Remove manjaro grub theme
 if pacman -Qi grub-theme-manjaro > /dev/null ; then
