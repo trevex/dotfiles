@@ -90,7 +90,7 @@ if [ -d "$HOME/.cache/i3lock" ]; then
   echo "Skipping betterlockscreen generation, because directory exists"
 else 
   echo "Generating betterlockscreen images..."
-  betterlockscreen -u $HOME/.wallpapers/wallhaven-558971.jpg -b 0.5
+  betterlockscreen -u $HOME/.wallpapers/wallhaven-558971.jpg -b 1
   betterlockscreen -w
 fi
 

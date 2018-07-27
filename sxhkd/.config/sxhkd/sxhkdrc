@@ -2,11 +2,11 @@
 #
 # Cleanly quit bspwm
 super + shift + q
-	bspc quit 1 && pkill lemonpanel && pkill lemonbar
+	bspc quit 1 && pkillall polybar
 
 # Show keybindings
-super + F1
-	$TERMINAL -e keybindings.sh
+#super + F1
+#	$TERMINAL -e keybindings.sh
 #
 # Window manipulation
 # ______________
@@ -332,5 +332,5 @@ super + BackSpace
 
 
 # i3lock
-super + =
-	beterlockscreen -l blur
+super + F1
+	betterlockscreen -l blur
