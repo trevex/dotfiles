@@ -1,2 +1,2 @@
-#!/bin/sh*
-feh --bg-scale '$HOME/.wallpapers/wallhaven-558971.jpg' 
+#!/bin/sh
+feh --bg-scale "$HOME/.wallpapers/wallhaven-558971.jpg"
