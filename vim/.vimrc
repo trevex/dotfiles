@@ -97,6 +97,7 @@ map <Down> gj
 map k gk
 map j gj
 imap jk <ESC>l
+imap <leader><space> <C-X><C-O>
 " Setup CtrlP
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -115,7 +116,7 @@ noremap <Leader>f :NERDTreeFind<cr>
 " Enable neocomplete
 let g:neocomplete#enable_at_startup = 1
 " Setup omnisharp
-let g:OmniSharp_server_path = '/home/nik/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
+let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
 let g:OmniSharp_server_use_mono = 1
 let g:OmniSharp_selector_ui = 'ctrlp'
 let g:OmniSharp_timeout = 5
@@ -134,4 +135,5 @@ augroup omnisharp_commands
     autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
     autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
     autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+    autocmd FileType cs nnoremap <F2> :OmniSharpRename<CR>
 augroup END
