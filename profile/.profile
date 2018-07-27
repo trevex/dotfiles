@@ -18,6 +18,8 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export VISUAL=/usr/bin/micro
 export EDITOR=/usr/bin/micro
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+# Fix for java apps like IntelliJ
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
