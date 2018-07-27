@@ -40,9 +40,6 @@
 [submodule "vim/.vim/bundle/vim-easymotion"]
 	path = vim/.vim/bundle/vim-easymotion
 	url = git@github.com:easymotion/vim-easymotion.git
-[submodule "vim/.vim/bundle/neocomplete.vim"]
-	path = vim/.vim/bundle/neocomplete.vim
-	url = https://github.com/Shougo/neocomplete.vim
 [submodule "vim/.vim/bundle/omnisharp-vim"]
 	path = vim/.vim/bundle/omnisharp-vim
 	url = git://github.com/OmniSharp/omnisharp-vim.git
