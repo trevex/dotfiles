@@ -121,6 +121,10 @@ autocmd FileType *
   \ if &omnifunc != '' |
   \   call SuperTabChain(&omnifunc, "<c-p>") |
   \ endif
+" Configure ALE
+let g:ale_linters = {
+\   'cs': ['omnisharp'],
+\}
 " Setup omnisharp amd C# language defaults
 let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
 let g:OmniSharp_server_use_mono = 1
