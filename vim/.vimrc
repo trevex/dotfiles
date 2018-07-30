@@ -112,6 +112,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
+" Setup better whitespace
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
 " Setup supertab
 let g:SuperTabCrMapping = 1
 autocmd FileType *
