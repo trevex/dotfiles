@@ -1,36 +1,40 @@
 /* Hide tab borders */
 :root {
   --tabs-border: transparent !important;
-  }
+}
+
+#navigator-toolbox {
+  --tabs-border-color: rgba(0,0,0,0) !important;
+}
 
 /* Hide separators between background tabs */
 .tabbrowser-tab::before {
-  color: purple !important; 
-  opacity: 0 !important; 
-  }
+  color: purple !important;
+  opacity: 0 !important;
+}
 
 /* Hide border from rightmost background tab */
 .tabbrowser-tab::after {
-  color: green !important; 
-  opacity: 0 !important; 
-  }
+  color: green !important;
+  opacity: 0 !important;
+}
 
 /* Remove placeholder right border */
 .titlebar-placeholder {
   border: none !important;
-  }
+}
 
 /* Remove border under navbar */
 #navigator-toolbox::after {
   border-bottom: 0px !important;
-  }
+}
 
-/* tab line - adjust color & size */ 
-.tab-line { 
-  background-color: #0a84ff !important; 
+/* tab line - adjust color & size */
+.tab-line {
+  background-color: #0a84ff !important;
   height: 0px !important;
-  }
-  
+}
+
 /* Additional rules for compact mode */
 /* Remove padding above tabbar in compact mode */
 #main-window[sizemode="normal"] > #titlebar {
