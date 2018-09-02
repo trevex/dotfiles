@@ -33,7 +33,6 @@ set lazyredraw
 set conceallevel=0
 set wrap
 set textwidth=79
-set formatoptions=qrn1a
 set autoindent
 set complete-=i
 set showmatch
@@ -49,6 +48,9 @@ set lcs+=space:·
 set wildmenu
 set wildmode=list:full
 set completeopt-=preview
+set tabstop=4
+set shiftwidth=4
+set expandtab
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
@@ -86,6 +88,8 @@ function! DeleteInactiveBufs() " Taken form jessfraz/.vim
   echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
 command! Ball :call DeleteInactiveBufs()
+" Disable auto-comment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Keybindings
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
@@ -96,7 +100,7 @@ map <Down> gj
 map k gk
 map j gj
 imap jk <ESC>l
-imap <leader><space> <C-X><C-O>
+imap <leader><leader> <C-X><C-O>
 " Setup CtrlP
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -122,6 +126,7 @@ autocmd FileType *
   \   call SuperTabChain(&omnifunc, "<c-p>") |
   \ endif
 " Configure ALE
+let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'cs': ['omnisharp'],
 \}
