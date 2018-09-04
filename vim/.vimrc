@@ -64,13 +64,12 @@ set synmaxcol=300
 set re=1
 " Setup nord colorscheme
 set background=dark
-let g:nord_italic = 1
-let g:nord_underline = 1
-let g:nord_italic_comments = 1
-let g:nord_cursor_line_number_background = 1
-colorscheme nord
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_number_column="bg0"
+colorscheme gruvbox
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gruvbox',
       \ }
 " Extra commands
 function! DeleteInactiveBufs() " Taken form jessfraz/.vim

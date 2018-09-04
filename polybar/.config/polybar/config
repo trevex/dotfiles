@@ -3,8 +3,8 @@ monitor = ${env:MONITOR}
 width = 100%
 height = 24
 
-background = #ff2e3440
-foreground = #ccffffff
+background = #ff282828
+foreground = #ccfbf1c7
 
 line-color = ${bar/bottom.background}
 line-size = 2
@@ -116,8 +116,8 @@ label-dimmed-underline = ${BAR.background}
 
 label-active = %name%
 label-active-foreground = #fff
-label-active-background = #3b4252
-label-active-underline = #88c0d0
+label-active-background = #928374
+label-active-underline = #ebdbb2
 label-active-font = 1
 label-active-padding = 3
 
@@ -129,16 +129,16 @@ label-occupied-padding = 3
 
 label-urgent = %name%
 label-urgent-foreground = #000000
-label-urgent-background = #bd2c40
-label-urgent-underline = #9b0a20
+label-urgent-background = #928374
+label-urgent-underline = #d65d0e
 label-urgent-font = 1
 label-urgent-padding = 3
 
-label-empty = 
+label-empty =
 
 label-monocle = 
 label-monocle-underline = ${module/bspwm.label-active-underline}
-label-monocle-background = #3b4252
+label-monocle-background = #928374
 label-monocle-padding = 4
 
 label-locked = 
@@ -350,7 +350,7 @@ menu-2-1-exec = menu_open-0
 [module/clock]
 type = internal/date
 interval = 2
-date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+date = %%{F#bdae93}%Y-%m-%d%%{F-}  %%{F#ebdbb2}%H:%M%%{F-}
 
 [module/title]
 type = internal/xwindow
