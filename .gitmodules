@@ -67,3 +67,6 @@
 [submodule "vim/.vim/bundle/vim-go"]
 	path = vim/.vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
+[submodule "vim/.vim/bundle/gruvbox"]
+	path = vim/.vim/bundle/gruvbox
+	url = git@github.com:morhetz/gruvbox.git
