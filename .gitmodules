@@ -7,9 +7,6 @@
 [submodule "vim/.vim/bundle/lightline.vim"]
 	path = vim/.vim/bundle/lightline.vim
 	url = git@github.com:itchyny/lightline.vim.git
-[submodule "vim/.vim/bundle/nord-vim"]
-	path = vim/.vim/bundle/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
 [submodule "vim/.vim/bundle/vim-sensible"]
 	path = vim/.vim/bundle/vim-sensible
 	url = git@github.com:tpope/vim-sensible.git
