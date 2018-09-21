@@ -6,7 +6,7 @@ required_packages=(firefox stow vim compton curl git imagemagick xorg-xdpyinfo
 bc pavucontrol pulseaudio-ctl manjaro-pulse rxvt-unicode polybar libmpdclient
 libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp
 ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance
-gtk-engine-murrine arc-gtk-theme)
+gtk-engine-murrine arc-gtk-theme playerctl)
 
 for p in "${required_packages[@]}"
 do
