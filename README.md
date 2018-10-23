@@ -8,4 +8,4 @@ Manual steps:
 4. Enter a light GTK theme that you have installed on your system for the
    value.  e.g.  Arc
 5. Restart firefox.
-
+X. You might have to manually do a few settings in lxappearance as well
