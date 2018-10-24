@@ -18,7 +18,7 @@ do
   fi
 done
 
-required_packages_aur=(i3lock-color betterlockscreen)
+required_packages_aur=(i3lock-color betterlockscreen gtk-theme-arc-gruvbox-git)
 
 for p in "${required_packages_aur[@]}"
 do
@@ -47,7 +47,7 @@ stow compton
 
 # rm -rf $HOME/.config/gtk-2.0
 # rm -rf $HOME/.config/gtk-3.0
-stow gtk-theme
+stow gtk
 
 stow polybar
 
