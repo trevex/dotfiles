@@ -21,7 +21,7 @@ font-2 = FontAwesome:pixelsize=11:antialias=true;3
 inherit = bar/master
 modules-left = bspwm music-previous music-playpause music-next music-metadata
 modules-center = title
-modules-right = memory cpu volume battery date time
+modules-right = memory cpu volume wireless-network battery date time
 
 border-top-size = 5
 border-left-size = 5
@@ -119,7 +119,7 @@ format-margin = 4
 [module/volume]
 type = internal/pulseaudio
 label-volume = VOL %percentage%%
-format-volume-padding = 5
+format-volume-padding = 2
 format-volume-background = ${colors.accent}
 format-volume-foreground = ${colors.foreground}
 format-volume-margin = 0
@@ -127,7 +127,7 @@ format-volume-margin = 0
 [module/cpu]
 type = internal/cpu
 label = CPU %percentage%%
-format-padding = 5
+format-padding = 2
 format-background = ${colors.accent}
 format-foreground = ${colors.foreground}
 format-margin = 0
@@ -135,7 +135,7 @@ format-margin = 0
 [module/memory]
 type = internal/memory
 label = RAM %gb_used%
-format-padding = 5
+format-padding = 2
 format-background = ${colors.accent}
 format-foreground = ${colors.foreground}
 format-margin = 0
@@ -145,7 +145,7 @@ type = custom/script
 interval = 2
 exec = ~/.config/polybar/scripts/music-metadata.sh
 exec-if = playerctl status
-format-padding = 5
+format-padding = 2
 format-background = ${colors.background}
 
 [module/music-playpause]
@@ -175,4 +175,53 @@ format-background = ${colors.accent}
 
 [module/title]
 type = internal/xwindow
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 5
+label-charging = BAT %percentage%%
+label-discharging = BAT %percentage%%
+label-full = BAT %percentage%%
+format-charging-padding = 2
+format-charging-background = ${colors.accent}
+format-charging-foreground = ${colors.foreground}
+format-charging-margin = 0
+format-discharging-padding = 2
+format-discharging-background = ${colors.accent}
+format-discharging-foreground = ${colors.foreground}
+format-discharging-margin = 0
+format-full-padding = 2
+format-full-background = ${colors.accent}
+format-full-foreground = ${colors.foreground}
+format-full-margin = 0
+
+[module/wireless-network]
+type = internal/network
+interface = wlp4s0
+interval = 3.0
+accumulate-stats = true
+unknown-as-up = true
+label-connected = NET up
+label-disconnected = NET down
+label-packetloss = NET loss
+label-connected-padding = 3
+label-connected-background = ${colors.accent}
+label-connected-foreground = ${colors.foreground}
+label-connected-margin = 0
+label-disconnected-padding = 3
+label-disconnected-background = ${colors.accent}
+label-disconnected-foreground = ${colors.foreground}
+label-disconnected-margin = 0
+label-packetlos-padding = 3
+label-packetlos-background = ${colors.accent}
+label-packetlos-foreground = ${colors.foreground}
+label-packetlos-margin = 0
+
+
+
+
+
 
