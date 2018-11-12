@@ -63,6 +63,11 @@ ZSH_THEME="bureau"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  kubectl
+  helm
+  docker
+  cp
+  man
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -123,6 +123,11 @@ format-volume-padding = 2
 format-volume-background = ${colors.accent}
 format-volume-foreground = ${colors.foreground}
 format-volume-margin = 0
+label-muted = VOL muted
+format-muted-padding = 2
+format-muted-background = ${colors.accent}
+format-muted-foreground = ${colors.foreground}
+format-muted-margin = 0
 
 [module/cpu]
 type = internal/cpu

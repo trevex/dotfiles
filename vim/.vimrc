@@ -6,6 +6,7 @@ filetype off
 " Basic settings
 syntax on
 filetype plugin indent on
+set clipboard=unnamed
 set noerrorbells
 set number
 set showcmd
@@ -32,7 +33,8 @@ set ttyfast
 set lazyredraw
 set conceallevel=0
 set wrap
-set textwidth=79
+set textwidth=0
+set wrapmargin=0
 set autoindent
 set complete-=i
 set showmatch
@@ -54,6 +56,12 @@ set expandtab
 au FocusLost * :wa
 if has('mouse')
   set mouse=a
+  noremap <M-LeftMouse> <4-LeftMouse>
+  inoremap <M-LeftMouse> <4-LeftMouse>
+  onoremap <M-LeftMouse> <C-C><4-LeftMouse>
+  noremap <M-LeftDrag> <LeftDrag>
+  inoremap <M-LeftDrag> <LeftDrag>
+  onoremap <M-LeftDrag> <C-C><LeftDrag>
 endif
 " Set leader to ,
 let mapleader = ","
