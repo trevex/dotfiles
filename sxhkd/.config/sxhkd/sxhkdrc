@@ -1,12 +1,9 @@
 # bspwm hotkeys
 #
 # Cleanly quit bspwm
-super + shift + q
+ctrl + alt + q
 	bspc quit 1 && pkillall polybar
 
-# Show keybindings
-#super + F1
-#	$TERMINAL -e keybindings.sh
 #
 # Window manipulation
 # ______________
@@ -48,11 +45,10 @@ super + Escape
 	bspc node -g locked
 
 ### Map or unmap windows (functional equivalent of "minimize")
-super + c
-    whid dmenu
-
-super + x
-    whid hide
+# super + c
+#     whid dmenu
+# super + x
+#     whid hide
 
 
 #
@@ -172,27 +168,6 @@ super + g
 
 super + button{4,5}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
-#
-# mouse bindings
-# __________________
-
-#~button1
-#	DidIClickDesktop.sh && gapgrab
-
-#~button2
-#	DidIClickDesktop.sh && BspwmDesktopMenu
-#	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
-#	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
-
-#~button3
-#	DidIClickDesktop.sh && rofimenu -desktop
-#DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
-
-# Switch workspace by scrolling on the desktop. Causes scrolling issues on some systems.
-#~button4
-#	DidIClickDesktop.sh && bspc desktop -f next
-#~button5
-#	DidIClickDesktop.sh && bspc desktop -f prev
 
 ### Add or remove desktops by scrolling
 super + ctrl + button5
@@ -200,26 +175,6 @@ super + ctrl + button5
 
 super + ctrl + button4
     bspcp dsktp add
-
-# Spawn applications popup menu and manually tile selected
-# app where your mouse was when you opened the menu. Smartsplit only chooses
-# biggest dimension of the window, MouseLaunch only cares which edge is closer.
-# mod5 is alt_gr (first key right from space) on most keyboards.
-#mod5 + @button1
-#	smartsplit ; rofimenu -desktop
-#	smartsplit ; dboxmenu
-#    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
-
-# Spawn window manipulation menu
-# Mod1 is alt
-#mod1 + @button1
-#	BspwmWindowMenu
-# mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
-
-
-#
-# Touchpad "gestures" (depend on your touchpad driver, very likely to be unavailable)
-#_____________________
 
 #
 # spawn programs
@@ -233,8 +188,7 @@ super + shift + Return
 super + z
 	urxvt
 
-super + r
-	rofi-finder.sh
+# super + r
 
 super + shift + b
 	$BROWSER
@@ -260,10 +214,10 @@ XF86AudioMute
 	volume mute
 
 XF86MonBrightnessDown
- light -U 5
+    light -U 5
 
 XF86MonBrightnessUp
- light -A 5
+    light -A 5
 
 
 XF86Sleep
@@ -279,9 +233,9 @@ super + shift + r
 
 # Remove receptacles
 super + BackSpace
-  for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
+    for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
 
 
 # i3lock
 super + F1
-	betterlockscreen -l blur
+	lock

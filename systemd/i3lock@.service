@@ -1,0 +1,12 @@
+[Unit]
+Description=Lock screen before suspend
+Before=suspend.target sleep.target
+
+[Service]
+User=%I
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/bash -c 'exec /home/%I/.bin/lock'
+
+[Install]
+WantedBy=suspend.target sleep.target
