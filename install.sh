@@ -2,7 +2,7 @@
 
 # Install necessary packages
 
-required_packages=(firefox stow vim rxvt-unicode polybar rofi polybar playerctl feh compton)
+required_packages=(firefox stow vim rxvt-unicode polybar rofi polybar playerctl feh compton ranger imagemagick i3lock ntp)
 # compton curl git imagemagick xorg-xdpyinfo pavucontrol pulseaudio-ctl manjaro-pulse libmpdclient libxcb xcb-util-cursor xcb-util-image xcb-util-renderutil jsoncpp ttf-material-icons ttf-font-awesome ttf-dejavu paper-icon-theme lxappearance gtk-engine-murrine arc-gtk-theme playerctl
 
 for p in "${required_packages[@]}"
@@ -15,17 +15,17 @@ do
   fi
 done
 
-# required_packages_aur=(i3lock-color betterlockscreen gtk-theme-arc-gruvbox-git)
-#
-# for p in "${required_packages_aur[@]}"
-# do
-#   if pacman -Qi $p > /dev/null ; then
-#     echo "Package ${p} (AUR) already installed."
-#   else
-#     echo "Installing ${p}... (via AUR)"
-#     yaourt -S $p
-#   fi
-# done
+required_packages_aur=(i3lock-color )
+
+for p in "${required_packages_aur[@]}"
+do
+  if pacman -Qi $p > /dev/null ; then
+    echo "Package ${p} (AUR) already installed."
+  else
+    echo "Installing ${p}... (via AUR)"
+    yay -S $p
+  fi
+done
 
 
 # Initialise git submodules
@@ -40,6 +40,8 @@ echo "Using stow to setup system configuration.."
 # stow fonts
 
 stow compton
+
+stow i3lock
 
 # rm -rf $HOME/.config/gtk-2.0
 # rm -rf $HOME/.config/gtk-3.0
@@ -105,11 +107,7 @@ fi
 #   betterlockscreen -w
 # fi
 
-# Remove manjaro grub theme
-if pacman -Qi grub-theme-manjaro > /dev/null ; then
-  echo "Removing existing grub-theme... (might ask for sudo)"
-  sudo pacman -R grub-theme-manjaro
-  sudo update-grub
-fi
+sudo systemctl enable ntpd.service
+
 
 

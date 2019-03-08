@@ -61,10 +61,10 @@ super + x
 
 # Autopresel (split window in its largest dimension)
 super + ctrl + Return
-	$HOME/.config/bspwm/auto-presel
+	auto-presel
 
 ctrl + space
-	$HOME/.config/bspwm/auto-presel
+	auto-presel
 
 # Presel window for splitting in certain direction
 alt + ctrl + {a,s,w,d}
@@ -82,7 +82,7 @@ alt + ctrl + {1-9}
 
 # Move current window to largest space or preselected area if there is one.
 super + Return
-    $HOME/.config/bspwm/window-promoter
+    window-promoter
 
 # Create a new "master area", splitting the whole desktop instead of just windows.
 alt + Return
@@ -106,36 +106,36 @@ super + Tab
 
 #Focus windows by direction, works with multihead
 super +  {a,s,w,d}
-    $HOME/.config/bspwm/focus-mover {west,south,north,east}
+    focus-mover {west,south,north,east}
 
 super +  {h,j,k,l}
-    $HOME/.config/bspwm/focus-mover {west,south,north,east}
+    focus-mover {west,south,north,east}
 
 super +  {Left,Down,Up,Right}
-    $HOME/.config/bspwm/focus-mover {west,south,north,east}
+    focus-mover {west,south,north,east}
 
 # Move tiled windows. Moving a tiled window to
 # preselected one moves into preselection instead.
 # Moving out of the screen should move the window to next monitor if possible
 super + shift + {a,s,w,d}
-	$HOME/.config/bspwm/euclid-mover {west,south,north,east}
+	euclid-mover {west,south,north,east}
 
 super + shift + {h,j,k,l}
-	$HOME/.config/bspwm/euclid-mover {west,south,north,east}
+	euclid-mover {west,south,north,east}
 
 # Different style of movement: transplant into window in chosen direction
 super + shift + {Left,Down,Up,Right}
-	$HOME/.config/bspwm/euclid-mover {west,south,north,east}
+	euclid-mover {west,south,north,east}
 
 #resize windows
 super + ctrl + {a,s,w,d}
-	$HOME/.config/bspwm/window-resize {west,south,north,east}
+	window-resize {west,south,north,east}
 
 super + ctrl + {h,j,k,l}
-	$HOME/.config/bspwm/window-resize {west,south,north,east}
+	window-resize {west,south,north,east}
 
 super + ctrl + {Left,Down,Up,Right}
-	$HOME/.config/bspwm/window-resize {west,south,north,east}
+	window-resize {west,south,north,east}
 
 #
 # Layout manipulation/desktop level controls
@@ -241,12 +241,6 @@ super + shift + b
 
 super + e
 	urxvt -e ranger
-#    st -f "Terminus:size=14:style=regular" ranger
-#spacefm -n
-
-# Use slightly bigger font for ranger
-#super + shift + e
-#	st -f "Dejavu Sans Mono:size=10:style=regular" ranger
 
 Print
 	scrot
@@ -282,13 +276,6 @@ super + shift + Escape
 # In case bspwmrc fails to execute/you wish have plugged in a new monitor
 super + shift + r
 	bspwmrc
-#edit this file
-#alt + ctrl + space
-#	$GUI_EDITOR ~/.config/sxhkd/sxhkdrc
-# Toggle compositing
-super + ctrl + space
-	{pkill compton ,\
-	compton -b }
 
 # Remove receptacles
 super + BackSpace
