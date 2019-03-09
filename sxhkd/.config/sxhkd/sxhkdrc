@@ -205,20 +205,19 @@ Print
 #
 
 XF86AudioRaiseVolume
-	volume up
+    pactl set-sink-volume 0 +5%
 
 XF86AudioLowerVolume
-	volume down
+    pactl set-sink-volume 0 -5%
 
 XF86AudioMute
-	volume mute
+    pactl set-sink-mute 0 toggle
 
 XF86MonBrightnessDown
-    light -U 5
+    xbacklight -dec 10
 
 XF86MonBrightnessUp
-    light -A 5
-
+    xbacklight -inc 10
 
 XF86Sleep
 	systemctl suspend
