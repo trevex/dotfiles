@@ -128,34 +128,3 @@ let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 " Setup supertab
 let g:SuperTabCrMapping = 1
-autocmd FileType *
-  \ if &omnifunc != '' |
-  \   call SuperTabChain(&omnifunc, "<c-p>") |
-  \ endif
-" Configure ALE
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-\   'cs': ['omnisharp'],
-\}
-" Setup omnisharp amd C# language defaults
-let g:OmniSharp_server_path = $HOME.'/Development/tmp/omnisharp/omnisharp/OmniSharp.exe'
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_timeout = 5
-autocmd Filetype cs setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-augroup omnisharp_commands
-    autocmd!
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
-    autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-    autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-    autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-    autocmd FileType cs nnoremap <F2> :OmniSharpRename<CR>
-augroup END

@@ -1,6 +1,3 @@
-[submodule "vim/.vim/bundle/ctrlp.vim"]
-	path = vim/.vim/bundle/ctrlp.vim
-	url = git@github.com:kien/ctrlp.vim.git
 [submodule "vim/.vim/bundle/vim-gitgutter"]
 	path = vim/.vim/bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
@@ -37,15 +34,9 @@
 [submodule "vim/.vim/bundle/vim-easymotion"]
 	path = vim/.vim/bundle/vim-easymotion
 	url = git@github.com:easymotion/vim-easymotion.git
-[submodule "vim/.vim/bundle/omnisharp-vim"]
-	path = vim/.vim/bundle/omnisharp-vim
-	url = git://github.com/OmniSharp/omnisharp-vim.git
 [submodule "vim/.vim/bundle/supertab"]
 	path = vim/.vim/bundle/supertab
 	url = git@github.com:ervandew/supertab.git
-[submodule "vim/.vim/bundle/ale"]
-	path = vim/.vim/bundle/ale
-	url = git@github.com:w0rp/ale.git
 [submodule "vim/.vim/bundle/editorconfig-vim"]
 	path = vim/.vim/bundle/editorconfig-vim
 	url = git@github.com:editorconfig/editorconfig-vim.git
