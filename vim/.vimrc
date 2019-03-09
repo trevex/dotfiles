@@ -108,17 +108,8 @@ map k gk
 map j gj
 imap jk <ESC>l
 imap <leader><leader> <C-X><C-O>
-" Setup CtrlP
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_height = 10
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_mruf_max=450
-let g:ctrlp_max_files=0
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" Setup fzf
+nnoremap <C-p> :Files<cr>
 " Setup NerdTree
 nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
