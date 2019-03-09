@@ -68,6 +68,7 @@ plugins=(
   docker
   cp
   man
+  fzf
 )
 
 source $ZSH/oh-my-zsh.sh
