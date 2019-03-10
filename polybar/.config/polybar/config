@@ -180,6 +180,8 @@ format-background = ${colors.accent}
 
 [module/title]
 type = internal/xwindow
+label = %title%
+label-maxlen = 50
 
 [module/battery]
 type = internal/battery
@@ -205,7 +207,7 @@ format-full-margin = 0
 
 [module/wireless-network]
 type = internal/network
-interface = wlp4s0
+interface = wlp61s0
 interval = 3.0
 accumulate-stats = true
 unknown-as-up = true

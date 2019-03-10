@@ -22,8 +22,7 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-# start some nice programs
-
+# run additional xinit scripts
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
   [ -x "$f" ] && . "$f"
@@ -35,6 +34,10 @@ if [ -f $HOME/.profile ]; then
     . $HOME/.profile
 fi
 
+# setup the right pointer
+xsetroot -cursor_name left_ptr
+
+# start desktop environment
 sxhkd &
 compton -config $HOME/.config/compton/compton.conf -b
 feh --bg-scale ~/.wallpapers/wallhaven-558971.jpg
