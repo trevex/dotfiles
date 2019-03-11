@@ -16,6 +16,7 @@ foreground = ${colors.foreground}
 font-0 = DejaVu Sans:pixelsize=11:antialias=true;3
 font-1 = MaterialIcons:size=10:antialias=true;3
 font-2 = FontAwesome:pixelsize=11:antialias=true;3
+wm-restack = bspwm
 
 [bar/top]
 inherit = bar/master
