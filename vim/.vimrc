@@ -108,6 +108,10 @@ map k gk
 map j gj
 imap jk <ESC>l
 imap <leader><leader> <C-X><C-O>
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+nnoremap <leader>p "0p
+xnoremap <leader>p "0p
 " Setup fzf
 nnoremap <C-p> :Files<cr>
 " Setup NerdTree
@@ -119,3 +123,5 @@ let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 " Setup supertab
 let g:SuperTabCrMapping = 1
+" Sensible TAML defaults
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

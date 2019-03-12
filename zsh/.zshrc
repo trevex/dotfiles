@@ -104,3 +104,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vims="vim --servername VIM"
+alias vimr="vim --servername VIM --remote"
