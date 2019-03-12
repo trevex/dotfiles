@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+autorandr $1
+sleep 1
+$HOME/.fehbg
+$HOME/.config/polybar/launch.sh
+killall dunst;notify-send Monitor changed

@@ -40,6 +40,6 @@ xsetroot -cursor_name left_ptr
 # start desktop environment
 sxhkd &
 compton -config $HOME/.config/compton/compton.conf -b
-feh --bg-scale ~/.wallpapers/wallhaven-558971.jpg
+$HOME/.fehbg
 $HOME/.config/polybar/launch.sh
 exec bspwm
