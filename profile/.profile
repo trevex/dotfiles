@@ -4,7 +4,7 @@
 umask 022
 
 # set our default path
-export GOPATH="$HOME/Development/go"
+export GOPATH="$HOME/development/go"
 # /usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 export PATH="$PATH:$HOME/.bin:$GOPATH/bin"
 export XDG_CONFIG_HOME="$HOME/.config"

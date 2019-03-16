@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-autorandr $1
+autorandr $@
 sleep 1
 $HOME/.fehbg
 $HOME/.config/polybar/launch.sh
