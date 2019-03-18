@@ -150,7 +150,7 @@ format-margin = 0
 type = custom/script
 interval = 2
 exec = ~/.config/polybar/scripts/music-metadata.sh
-exec-if = playerctl status
+exec-if = ~/.config/polybar/scripts/music-status.sh
 format-padding = 2
 format-background = ${colors.background}
 
@@ -158,23 +158,23 @@ format-background = ${colors.background}
 type = custom/script
 interval = 0
 exec = ~/.config/polybar/scripts/music-playpause.sh
-exec-if = playerctl status
+exec-if = ~/.config/polybar/scripts/music-status.sh
 click-left = playerctl play-pause
 format-padding = 3
 format-background = ${colors.accent}
 
 [module/music-previous]
 type = custom/script
-exec = echo ""
-exec-if = playerctl status
+exec = echo "<"
+exec-if = ~/.config/polybar/scripts/music-status.sh
 click-left = playerctl previous
 format-padding = 3
 format-background = ${colors.accent}
 
 [module/music-next]
 type = custom/script
-exec = echo ""
-exec-if = playerctl status
+exec = echo ">"
+exec-if = ~/.config/polybar/scripts/music-status.sh
 click-left = playerctl next
 format-padding = 3
 format-background = ${colors.accent}

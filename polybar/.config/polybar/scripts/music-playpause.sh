@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 if [[ $(playerctl status) == 'Playing' ]];
   then
-    echo ""
+    echo "pause"
   else
-    echo ""
+    echo "play"
 fi
 
