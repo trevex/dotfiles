@@ -75,7 +75,7 @@ URxvt*saveLines:                  5000
 ! other possible settings:
 URxvt.iso14755: false
 !URxvt.perl-ext:
-!URxvt.perl-ext-common:
+URxvt.perl-ext-common: font-size
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 !! Cursor word movement

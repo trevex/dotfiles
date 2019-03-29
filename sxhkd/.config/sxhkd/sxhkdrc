@@ -197,7 +197,8 @@ super + e
 	urxvt -e ranger
 
 Print
-	scrot
+    sleep 0.2; \
+	scrot -s -e 'mv $f ~/images'
 
 
 #

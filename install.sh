@@ -46,6 +46,7 @@ stow profile
 stow xorg
 stow wallpapers
 stow vim
+stow urxvt
 
 # Install oh my zsh
 if [ -d "$HOME/.oh-my-zsh" ]; then
