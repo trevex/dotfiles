@@ -39,7 +39,7 @@ xsetroot -cursor_name left_ptr
 
 # start desktop environment
 sxhkd &
-compton -config $HOME/.config/compton/compton.conf -b
+compton --config $HOME/.config/compton/compton.conf -b
 $HOME/.fehbg
 $HOME/.config/polybar/launch.sh
 exec bspwm
