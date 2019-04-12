@@ -13,7 +13,7 @@ do
   fi
 done
 
-required_packages_aur=(i3lock-color gtk3-nocsd-git)
+required_packages_aur=(i3lock-color)
 
 for p in "${required_packages_aur[@]}"
 do
