@@ -7,6 +7,9 @@ export ZSH="/home/nik/.oh-my-zsh"
 # Default command for fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 
+# Fast vi-mode switching
+export KEYTIMEOUT=10
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -65,19 +68,30 @@ ZSH_THEME="bureau"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  vi-mode
   git
   kubectl
+  kube-ps1
   helm
   docker
   cp
   man
   fzf
+  kubetail
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+function _vi_mode() {
+    if [ -z $(vi_mode_prompt_info ) ]; then
+        echo ">"
+    else
+        echo "%{$fg_bold[red]%}<%{$reset_color%}"
+    fi
+}
+PROMPT='$(_vi_mode) $_LIBERTY '
+RPROMPT='$(kube_ps1)'$RPROMPT
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -89,6 +103,18 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey -M viins "${terminfo[khome]}" beginning-of-line # Home key
+bindkey -M viins "${terminfo[kend]}" end-of-line # End key
+bindkey -M viins '^[[1;5C' forward-word # Ctrl-Right
+bindkey -M viins '^[[1;5D' backward-word # Ctrl-Left
+bindkey -M viins ${terminfo[kdch1]} delete-char # Del key
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -101,8 +127,9 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vims="vim --servername VIM"
-alias vimr="vim --servername VIM --remote"
+alias vims='vim --servername VIM'
+alias vimr='vim --servername VIM --remote'
+alias kubelogin='kubelogin --username $(lpass show 7660927770583698316 --username) --password $(lpass show 7660927770583698316 --password)'
+function source-env() {
+    source $HOME/development/env/$1.sh
+}
