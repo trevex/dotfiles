@@ -133,3 +133,36 @@ alias kubelogin='kubelogin --username $(lpass show 7660927770583698316 --usernam
 function source-env() {
     source $HOME/development/env/$1.sh
 }
+function kxi(){
+	local pod=$(kubectl get pods | fzf | awk '{print $1}')
+	local containers=$(kubectl get pods "${pod}" -o jsonpath='{.spec.containers[*].name}')
+	local container=${containers}
+	if [[ $containers =~ ' ' ]]; then
+		container=$(echo "${containers}" | tr ' ' '\n' | fzf)
+	fi
+	echo "${pod}" - "${container}"
+	kubectl exec -it "${pod}" -c "${container}" -- "${@}"
+}
+function kli() {
+	local pod=$(kubectl get pods | fzf | awk '{print $1}')
+	local containers=$(kubectl get pods "${pod}" -o jsonpath='{.spec.containers[*].name}')
+	local container=${containers}
+	if [[ $containers =~ ' ' ]]; then
+		container=$(echo "${containers}" | tr ' ' '\n' | fzf)
+	fi
+	echo "${pod}" - "${container}"
+	kubectl logs "${@}" "${pod}" -c "${container}"
+}
+function klfi() {
+	kli -f --tail=10
+}
+function kdi() {
+	local typ=${1:-"pods"}
+	local item=$(kubectl get "${typ}" | fzf | awk '{print $1}')
+	kubectl describe "${typ}" "${item}"
+}
+function kcni() {
+	local ns=$(kubectl get namespace | fzf | awk '{print $1}')
+	local current=$(kubectl config current-context)
+	kubectl config set-context "${current}" --namespace="${ns}"
+}

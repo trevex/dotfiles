@@ -59,8 +59,8 @@ super + Escape
 super + ctrl + Return
 	auto-presel
 
-ctrl + space
-	auto-presel
+# ctrl + space
+	# auto-presel
 
 # Presel window for splitting in certain direction
 alt + ctrl + {a,s,w,d}
@@ -238,4 +238,4 @@ super + BackSpace
 
 # i3lock
 super + F1
-	lock
+	lock -n

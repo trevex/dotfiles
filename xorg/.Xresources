@@ -1,3 +1,4 @@
+Xft.dpi:        96
 Xft*antialias:  true
 Xft*hinting:    true
 Xft*rgba:       rgb
@@ -59,13 +60,13 @@ URxvt.color250: #d5c4a1
 
 ! alternative font settings with 'terminus':
 !URxvt.font:      -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso10646-1
-URxvt.font: xft:Dejavu Sans Mono:size=10,xft:TerminessTTFNerdFontMono:size=10
+URxvt.font: xft:DejaVuSansMono Nerd Font Mono:style=Book:size=10
 !URxvt.bold.font: -xos4-terminus-bold-r-normal--16-160-72-72-c-80-iso10646-1
 
 URxvt*scrollBar:                  false
 URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
-URxvt*saveLines:                  5000
+URxvt*saveLines:                  50000
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines
 ! URxvt*inheritPixmap:            true
@@ -75,7 +76,8 @@ URxvt*saveLines:                  5000
 ! other possible settings:
 URxvt.iso14755: false
 !URxvt.perl-ext:
-URxvt.perl-ext-common: font-size
+URxvt.perl-ext-common: font-size,vim-scrollback
+URxvt.vim-scrollback: M-s
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 !! Cursor word movement

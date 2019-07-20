@@ -3,6 +3,8 @@
 # Install necessary packages
 required_packages=(firefox stow vim rxvt-unicode polybar rofi polybar playerctl feh compton ranger imagemagick i3lock ntp ttf-dejavu ttf-material-icons ttf-font-awesome dunst libnotify w3m autorandr gtk-engine-murrine gtk-engines numix lxappearance mupdf paper-icon-theme numix-gtk-theme pulseaudio pulseaudio-alsa pavucontrol xorg-xbacklight fzf ripgrep)
 
+# nerd-fonts-dejavu-complete
+
 for p in "${required_packages[@]}"
 do
   if pacman -Qi $p > /dev/null ; then

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+args=${1:-}
+if ! [ -z "${opt}"]; then killall -SIGUSR1 dunst; fi
+
 B='#00000000'  # blank
 C='#ffffff22'  # clear ish
 D='#b8bb26cc'  # default
@@ -8,6 +11,7 @@ W='#fb4934bb'  # wrong
 V='#fabd2fbb'  # verifying
 
 i3lock \
+${args} \
 --insidevercolor=$C   \
 --ringvercolor=$V     \
 \
@@ -32,3 +36,4 @@ i3lock \
 --indicator           \
 --timestr="%H:%M:%S"  \
 --datestr="%A, %m %Y"
+if ! [ -z "${opt}"]; then killall -SIGUSR2 dunst; fi
