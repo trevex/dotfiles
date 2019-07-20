@@ -15,6 +15,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'shougo/echodoc.vim'
+Plug 'kizza/actionmenu.nvim'
 Plug 'brooth/far.vim', { 'on': 'Far' }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
@@ -143,6 +144,21 @@ let g:go_def_mapping_enabled = 0
 " Setup echodoc
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'virtual'
+
+" Actionmenu setup
+" let s:code_actions = []
+" func! ActionMenuCodeActions() abort
+"   let s:code_actions = CocAction('codeActions')
+"   let l:menu_items = map(copy(s:code_actions), { index, item -> item['title'] })
+"   call actionmenu#open(l:menu_items, 'ActionMenuCodeActionsCallback')
+" endfunc
+" func! ActionMenuCodeActionsCallback(index, item) abort
+"   if a:index >= 0
+"     let l:selected_code_action = s:code_actions[a:index]
+"     let l:response = CocAction('doCodeAction', l:selected_code_action)
+"   endif
+" endfunc
+" nnoremap <silent> <Leader>s :call ActionMenuCodeActions()<CR>
 
 " FZF configuration
 let g:fzf_action = {

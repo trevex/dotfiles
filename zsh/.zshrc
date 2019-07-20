@@ -115,6 +115,26 @@ bindkey -M viins "${terminfo[kend]}" end-of-line # End key
 bindkey -M viins '^[[1;5C' forward-word # Ctrl-Right
 bindkey -M viins '^[[1;5D' backward-word # Ctrl-Left
 bindkey -M viins ${terminfo[kdch1]} delete-char # Del key
+# Use beam in insert mode and block in normal
+function zle-keymap-select {
+  VI_KEYMAP=$KEYMAP
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+  zle reset-prompt
+  zle -R
+}
+zle -N zle-keymap-select
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -127,8 +147,9 @@ bindkey -M viins ${terminfo[kdch1]} delete-char # Del key
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-alias vims='vim --servername VIM'
-alias vimr='vim --servername VIM --remote'
+alias vim='nvim'
+alias vims='nvim --servername VIM'
+alias vimr='nvim --servername VIM --remote'
 alias kubelogin='kubelogin --username $(lpass show 7660927770583698316 --username) --password $(lpass show 7660927770583698316 --password)'
 function source-env() {
     source $HOME/development/env/$1.sh
