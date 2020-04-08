@@ -2,11 +2,13 @@
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'junegunn/fzf'
+Plug 'junegunn/vim-peekaboo'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 Plug 'ap/vim-buftabline'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
@@ -15,11 +17,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'shougo/echodoc.vim'
-Plug 'kizza/actionmenu.nvim'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
+Plug 'jparise/vim-graphql'
+" Plug 'kizza/actionmenu.nvim'
 Plug 'brooth/far.vim', { 'on': 'Far' }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve', { 'for': 'go' }
 Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 call plug#end()
@@ -37,6 +43,7 @@ let g:lightline = {
 " Basic settings
 let mapleader = ',' " Use comma as leader
 let g:mapleader = ','
+set clipboard=unnamed
 if has('mouse') " If mouse is available, use it
   set mouse=a
 endif
@@ -61,7 +68,7 @@ set noshowmode " We want to see echodoc instead and mode is part of lightline
 
 " Additional keybindings
 nnoremap <leader>u :UndotreeToggle<cr>
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 map <C-p> :FZF<CR>
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
@@ -76,6 +83,11 @@ nnoremap <leader>d "_d
 xnoremap <leader>d "_d
 nnoremap <leader>p "0p
 xnoremap <leader>p "0p
+noremap <Leader>c :ccl <bar> lcl<CR>
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
 
 " Highlight and cleanup trailing whitespaces
 let g:better_whitespace_enabled=1
@@ -140,10 +152,10 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Disable vim-go go-to definition binding
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled=0
 " Setup echodoc
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'virtual'
+let g:echodoc#enable_at_startup=1
+let g:echodoc#type='virtual'
 
 " Actionmenu setup
 " let s:code_actions = []
@@ -159,6 +171,23 @@ let g:echodoc#type = 'virtual'
 "   endif
 " endfunc
 " nnoremap <silent> <Leader>s :call ActionMenuCodeActions()<CR>
+
+" Additional settings for golang
+let g:go_highlight_build_constraints=1
+let g:go_highlight_extra_types=1
+let g:go_highlight_fields=1
+let g:go_highlight_functions=1
+let g:go_highlight_methods=1
+let g:go_highlight_operators=1
+let g:go_highlight_structs=1
+let g:go_highlight_types=1
+let g:go_auto_sameids=1
+au FileType go nmap <leader>gt :GoDeclsDir<cr>
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+au FileType go nmap <F10> :GoTest -short<cr>
 
 " FZF configuration
 let g:fzf_action = {
@@ -181,3 +210,20 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Tab stops
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+autocmd Filetype bash setlocal ts=2 sw=2 expandtab
+autocmd Filetype sh setlocal ts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sw=2 expandtab
+autocmd Filetype gohtmltmpl setlocal ts=2 sw=2 expandtab
+autocmd Filetype proto setlocal ts=2 sw=2 expandtab
+" netrw buf fixes
+autocmd FileType netrw setl bufhidden=wipe
+let g:netrw_fastbrowse = 0
+" quickfix fixes
+autocmd FileType qf setl bufhidden=wipe
