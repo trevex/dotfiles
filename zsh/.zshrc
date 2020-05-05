@@ -10,6 +10,8 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --smart-case --glob "!.git/*"'
 # Fast vi-mode switching
 export KEYTIMEOUT=10
 
+export MINIKUBE_IN_STYLE=false
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -147,10 +149,12 @@ precmd_functions+=(_fix_cursor)
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+alias watch='watch '
 alias vim='nvim'
-alias vims='nvim --servername VIM'
-alias vimr='nvim --servername VIM --remote'
-alias kubelogin='kubelogin --username $(lpass show 7660927770583698316 --username) --password $(lpass show 7660927770583698316 --password)'
+alias vims='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
+alias vimr='nvr --remote'
+alias oplogin='eval $(op signin finleapconnect)'
+alias kubelogin='kubelogin --username niklas.voss --password $(op get item haqowy4yzazos4w5nqthgxvdma  | jq ".details.fields[] | select(.designation==\"password\").value" | sed -e "s/\"//g")'
 function source-env() {
     source $HOME/development/env/$1.sh
 }
