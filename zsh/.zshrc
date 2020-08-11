@@ -1,8 +1,19 @@
 export GOPATH=$HOME/Development/go
 export PATH=$PATH:$GOPATH/bin
+export VISUAL=nvim
+
+# Load zplug
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
+# Enable vi-mode
+bindkey -v
+
+# Disable the underline for paths
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]='none'
+
+# Load plugins
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "junegunn/fzf", as:command, hook-build:"./install --bin", use:"bin/{fzf-tmux,fzf}"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -21,6 +32,10 @@ zplug load
 # Load fzf
 source $ZPLUG_HOME/repos/junegunn/fzf/shell/key-bindings.zsh
 source $ZPLUG_HOME/repos/junegunn/fzf/shell/completion.zsh
+
+# Add keybinding to edit command-line via vim
+autoload edit-command-line; zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # Setup yubikey for ssh
 export GPG_TTY="$(tty)"
