@@ -8,6 +8,8 @@ source $ZPLUG_HOME/init.zsh
 
 # Enable vi-mode
 bindkey -v
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
 
 # Disable the underline for paths
 typeset -A ZSH_HIGHLIGHT_STYLES
