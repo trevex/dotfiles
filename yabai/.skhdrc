@@ -15,14 +15,22 @@ alt - m : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if 
 alt - x : yabai -m window --focus recent
 alt - z : yabai -m window --focus stack.prev
 alt - c : yabai -m window --focus stack.next
-alt - h : yabai -m window --focus west
+alt - h : yabai -m window --focus west \
+    || ((yabai -m display --focus next || yabai -m display --focus first) \
+        && yabai -m window --focus east)
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
-alt - left : yabai -m window --focus west
+alt - l : yabai -m window --focus east \
+    || ((yabai -m display --focus next || yabai -m display --focus first) \
+        && yabai -m window --focus west)
+alt - left : yabai -m window --focus west \
+    || ((yabai -m display --focus next || yabai -m display --focus first) \
+        && yabai -m window --focus east)
 alt - down : yabai -m window --focus south
 alt - up : yabai -m window --focus north
-alt - right : yabai -m window --focus east
+alt - right : yabai -m window --focus east \
+    || ((yabai -m display --focus next || yabai -m display --focus first) \
+        && yabai -m window --focus west)
 
 # move windows on same desktop
 shift + alt - h : yabai -m window --warp west
@@ -58,10 +66,12 @@ ctrl + alt - 1  : yabai -m display --focus 1
 ctrl + alt - 2  : yabai -m display --focus 2
 ctrl + alt - 3  : yabai -m display --focus 3
 
+# move desktops to monitor
+ctrl + cmd - x  : yabai -m space --display recent && yabai -m display --focus recent
+ctrl + cmd - z  : yabai -m space --display prev && yabai -m display --focus prev
+ctrl + cmd - c  : yabai -m space --display next && yabai -m display --focus next
+
 # send window to monitor and follow focus
-ctrl + cmd - x  : yabai -m window --display recent && yabai -m display --focus recent
-ctrl + cmd - z  : yabai -m window --display prev && yabai -m display --focus prev
-ctrl + cmd - c  : yabai -m window --display next && yabai -m display --focus next
 ctrl + cmd - 1  : yabai -m window --display 1 && yabai -m display --focus 1
 ctrl + cmd - 2  : yabai -m window --display 2 && yabai -m display --focus 2
 ctrl + cmd - 3  : yabai -m window --display 3 && yabai -m display --focus 3
