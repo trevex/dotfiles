@@ -1,5 +1,6 @@
 export GOPATH=$HOME/Development/go
 export PATH=$PATH:$GOPATH/bin
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export VISUAL=nvim
 
 # Load zplug
