@@ -28,6 +28,7 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve', { 'for': 'go' }
 Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'hashivim/vim-terraform', { 'for': 'tf' }
 call plug#end()
 
 " Colorscheme
@@ -216,6 +217,10 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 autocmd Filetype bash setlocal ts=2 sw=2 expandtab
 autocmd Filetype sh setlocal ts=2 sw=2 expandtab
