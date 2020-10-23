@@ -2,6 +2,8 @@ export GOPATH=$HOME/Development/go
 export PATH=$PATH:$GOPATH/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export VISUAL=nvim
+export EDITOR=nvim
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 
 # Load zplug
 export ZPLUG_HOME=/usr/local/opt/zplug

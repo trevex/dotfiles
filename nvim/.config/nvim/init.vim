@@ -232,3 +232,5 @@ autocmd FileType netrw setl bufhidden=wipe
 let g:netrw_fastbrowse = 0
 " quickfix fixes
 autocmd FileType qf setl bufhidden=wipe
+" terragrunt
+au BufRead,BufNewFile *.hcl set filetype=terraform
