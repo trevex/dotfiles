@@ -23,7 +23,7 @@ Plug 'jparise/vim-graphql'
 " Plug 'kizza/actionmenu.nvim'
 Plug 'brooth/far.vim', { 'on': 'Far' }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve', { 'for': 'go' }
 Plug 'mbbill/undotree', { 'on':  'UndotreeToggle' }
