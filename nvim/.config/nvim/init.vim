@@ -2,6 +2,7 @@
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-commentary'
@@ -57,7 +58,7 @@ set hidden " If hidden is not set, TextEdit might fail.
 set updatetime=300 " Smaller updatetime for CursorHold and CursorHoldI
 set shortmess+=c " Don't give `ins-completion-menu` messages
 set signcolumn=yes " Always show signcolumns
-set splitright
+set splitright " More natural splits
 set splitbelow
 set encoding=utf-8
 set noerrorbells
@@ -67,10 +68,17 @@ set autoread
 set autowrite
 set noshowmode " We want to see echodoc instead and mode is part of lightline
 
+" Easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Additional keybindings
 nnoremap <leader>u :UndotreeToggle<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 map <C-p> :FZF<CR>
+nnoremap <C-g> :Rg<Cr>
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
 nmap <leader>w :w!<cr>
@@ -219,7 +227,7 @@ set tabstop=4
 set expandtab
 
 " Terraform
-let g:terraform_align=1
+let g:terraform_align=0
 let g:terraform_fmt_on_save=1
 
 autocmd Filetype bash setlocal ts=2 sw=2 expandtab

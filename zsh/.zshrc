@@ -5,6 +5,11 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 
+# GCP
+export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 # Load zplug
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -13,6 +18,11 @@ source $ZPLUG_HOME/init.zsh
 bindkey -v
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
+
+export HISTSIZE=10000000
+export SAVEHIST=10000000
+# Enable shared history between sessions
+setopt share_history
 
 # Disable the underline for paths
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -54,3 +64,6 @@ alias vims='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 alias vimr='nvr --remote'
 alias ls='ls -G'
 alias gpgbye='gpg-connect-agent updatestartuptty /bye'
+alias ssh='TERM=xterm ssh'
+alias tmux='tmux -u'
+alias kush='kubectl run ubuntu --rm -i --tty --image ubuntu -- bash'

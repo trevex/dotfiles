@@ -94,9 +94,5 @@ alt - i : yabai -m window --toggle sticky
 # toggle topmost (keep above other windows)
 alt - o : yabai -m window --toggle topmost
 
-# toggle picture-in-picture
-alt - p : yabai -m window --toggle border && \
-          yabai -m window --toggle pip
-
 # toggle focus follows mouse
-alt - s : if [[ $(yabai -m config focus_follows_mouse) = "autoraise" ]]; then yabai -m config focus_follows_mouse off; else yabai -m config focus_follows_mouse autoraise; fi
+alt - p : if [[ $(yabai -m config focus_follows_mouse) = "autoraise" ]]; then yabai -m config focus_follows_mouse off; else yabai -m config focus_follows_mouse autoraise; fi

@@ -43,4 +43,6 @@ brew install gnupg yubikey-personalization hopenpgp-tools ykman pinentry-mac
 rng
 ```
 brew install go make nodejs neovim
+brew cask install kitty
+brew install fzf
 ```

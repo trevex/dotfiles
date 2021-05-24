@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/vossni/Development/iam-live/teams/seller-acquisition'
+let g:netrw_dirhist_6='/Users/vossni/Development/terraform-modules/team'
+let g:netrw_dirhist_5='/Users/vossni/Development/cloud-platform-live/ev-cloud-platform/peering'
+let g:netrw_dirhist_4='/Users/vossni/Development/cloud-platform-live/gcp-operations-stage/network/.terragrunt-cache'
+let g:netrw_dirhist_3='/Users/vossni/Development/cloud-platform-live/gcp-operations-stage/network'
+let g:netrw_dirhist_2='/Users/vossni/Development/cloud-platform-live/ev-cloud-stage/project'
+let g:netrw_dirhist_1='/Users/vossni/Development/cloud-platform-live/ev-seller-acquisition-stage/project'
+let g:netrw_dirhist_0='/Users/vossni/Development/iam-live/teams/seller-acquisition/.terragrunt-cache'
+let g:netrw_dirhist_9='/Users/vossni/Development/seller-acquisition/property-evaluation-api'
+let g:netrw_dirhist_8='/Users/vossni/Development/iam-live/teams/marketplace'
