@@ -51,6 +51,7 @@
       krew
       kubernetes-helm
       google-cloud-sdk
+      kubectx
       # language servers
       gopls
       terraform-ls
@@ -289,6 +290,8 @@
         ssh = "TERM=xterm ssh";
         tmux = "tmux -u";
         kush = "kubectl run ubuntu --rm -i --tty --image ubuntu -- bash";
+        kctx = "kubectx";
+        kns = "kubens";
       };
       initExtra = ''
         export GPG_TTY="$(tty)"
@@ -298,6 +301,9 @@
         # Disable the underline for paths
         typeset -A ZSH_HIGHLIGHT_STYLES
         ZSH_HIGHLIGHT_STYLES[path]='none'
+
+        # Make sure krew works
+        export PATH="$PATH:$HOME/.krew/bin"
       '';
     };
 
@@ -327,6 +333,7 @@
         shlvl.symbol = " ";
         gcloud.symbol = " ";
         terraform.symbol = "行";
+        lua.symbol = " ";
       };
     };
 
