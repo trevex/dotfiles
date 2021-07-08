@@ -7,6 +7,9 @@
     sha256 = "0jnxf79rcn0fhxg6m140lzxixvq1zivkg7c43ra64mwzb8wxvv8l";
   };
 
+  # TODO: checkout https://github.com/glepnir/lspsaga.nvim
+  #       related https://blog.inkdrop.info/how-to-set-up-neovim-0-5-modern-plugins-lsp-treesitter-etc-542c3d9c9887
+
   xdg.configFile."nvim/lua/init.lua".source = ./neovim.lua;
 
   programs.neovim = {
