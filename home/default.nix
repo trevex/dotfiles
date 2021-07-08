@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   inherit (pkgs) stdenv;
   devDirRelativeToHome = if stdenv.isLinux then "development" else "Development";
@@ -17,6 +17,8 @@ in
     kubernetes-helm
     google-cloud-sdk
     kubectx
+    terraform_0_15
+    terragrunt_0_29
     # language servers
     gopls
     terraform-ls
