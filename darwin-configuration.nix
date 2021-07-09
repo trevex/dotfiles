@@ -43,10 +43,8 @@
   home-manager.useUserPackages = true;
   # Use global `pkgs` to save an extra Nixpkgs evaluation, adds consistency
   home-manager.useGlobalPkgs = true;
+  # Add overlays and packages
+  nixpkgs.overlays = [ (import ./pkgs) ];
 
-  nixpkgs.config.packageOverrides = super: {
-    terragrunt_0_29 = pkgs.callPackage ./pkg/terragrunt_0_29.nix {};
-  };
-
-  home-manager.users.vossni = import ./home/default.nix;
+  home-manager.users.vossni = import ./home;
 }
