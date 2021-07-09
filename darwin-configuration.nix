@@ -10,7 +10,12 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+   };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
