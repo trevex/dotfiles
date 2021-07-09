@@ -10,6 +10,8 @@ in
     ./neovim.nix
   ];
 
+  home.homeDirectory = lib.mkForce "/Users/vossni"; # hmm...
+
   home.packages = with pkgs; [
     httpie
     kubectl
