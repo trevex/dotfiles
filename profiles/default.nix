@@ -18,7 +18,10 @@ let
 
   profiles = self:
     {
-      base = mkProfile [ ];
+      base = mkProfile [ ./base ];
+      alacritty = mkProfile [ ./alacritty ];
+      zsh = mkProfile [ ./zsh ];
+      neovim = mkProfile [ ./neovim ];
       # ...
     }
     // optionalAttrs isLinux {

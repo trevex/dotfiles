@@ -1,7 +1,7 @@
 { config, pkgs, lib, profiles, ... }:
 
 {
-  imports = with profiles; [ base ];
+  imports = with profiles; [ base neovim alacritty zsh ];
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

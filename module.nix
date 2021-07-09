@@ -13,7 +13,7 @@ let
     toPath (attrNames filteredFiles);
 in
 {
-  imports = optionals isLinux (filesInDir ./modules/nixos);
+  # imports = optionals isLinux (filesInDir ./modules/nixos);
 
   options.my = {
     username = mkOption {
@@ -31,7 +31,7 @@ in
     home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
 
     my.home = { ... }:  {
-      imports = filesInDir ./modules/home-manager;
+      # imports = filesInDir ./modules/home-manager;
 
       options.my.identity = {
         name = mkOption {

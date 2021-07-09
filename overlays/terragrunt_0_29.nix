@@ -1,5 +1,5 @@
 final: prev: {
-  terragrunt_0_29 = { lib, buildGoModule, fetchFromGitHub }: buildGoModule rec {
+  terragrunt_0_29 = prev.callPackage ({ lib, buildGoModule, fetchFromGitHub }: buildGoModule rec {
     pname = "terragrunt";
     version = "0.29.10";
 
@@ -23,5 +23,5 @@ final: prev: {
       $out/bin/terragrunt --version | grep "v${version}"
       runHook postInstallCheck
     '';
-  };
+  }) {};
 }

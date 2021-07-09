@@ -21,6 +21,11 @@ lib.mkMerge [
     # users.groups.${username} = { };
   })
   # </isLinux>
+  (lib.optionalAttrs isDarwin {
+    my.home = { ... }: {
+      home.homeDirectory = lib.mkForce "/Users/${username}"; # hmm...
+    };
+  })
 
   {
     my.home = { ... }: {
