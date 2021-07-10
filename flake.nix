@@ -50,7 +50,7 @@
         defaults = { config, pkgs, lib, ... }: {
           imports = [ hostConfiguration userConfiguration ];
 
-          # networking.hostName = lib.mkDefault hostname; TODO: move to mkLinuxConfig
+          # networking.hostName = lib.mkDefault hostname; TODO: not working on Darwin? Move to mkLinuxConfig?
 
           nixpkgs.config.allowUnfree = true;
           nix = {
@@ -85,6 +85,8 @@
           ];
         };
       in [ ./module.nix defaults ] ++ extraModules;
+
+    # TODO: mkLinuxConfig = args:
 
     mkDarwinConfig = args:
       let
