@@ -25,7 +25,9 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      extraConfig = "lua require('init')";
+      extraConfig = ''
+        lua require('init')
+      '';
     };
   };
 }
