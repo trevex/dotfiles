@@ -1,5 +1,5 @@
 {
-  description = "dotfiles/nixconfig";
+  description = "My dotfiles that I copied together from everywhere...";
 
   inputs = {
     nixos-hardware.url = "nixos-hardware/master";
