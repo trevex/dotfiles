@@ -33,7 +33,7 @@ in
       google-cloud-sdk
       kubectx
       terraform_0_15
-      # terragrunt_0_29
+      terragrunt_0_29
     ];
 
     home.sessionVariables = {
