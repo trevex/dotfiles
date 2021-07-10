@@ -24,10 +24,7 @@ in
     enableSSHSupport = true;
   };
 
-
-
-  my.home = { pkgs, ... }:
-  {
+  my.home = {
     home.packages = with pkgs; [
       httpie
       kubectl

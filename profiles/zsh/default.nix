@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-  my.home = { pkgs, ... }:
-  {
+  my.home = {
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;

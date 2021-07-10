@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-  my.home = { pkgs, ... }:
-  {
+  my.home = {
     home.packages = with pkgs; [
       gopls
       terraform-ls
@@ -22,6 +21,7 @@
 
     programs.neovim = {
       enable = true;
+      package = pkgs.neovim-nightly;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;

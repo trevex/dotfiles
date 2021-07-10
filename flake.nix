@@ -3,10 +3,7 @@
 
   inputs = {
     nixos-hardware.url = "nixos-hardware/master";
-    # nixpkgs.url = "nixpkgs/21.05";
-    # nixpkgs-darwin.url = "nixpkgs/nixpkgs-21.05-darwin";
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    nixpkgs-darwin.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "nixpkgs/21.05";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,22 +12,20 @@
       url = "github:nix-community/home-manager/release-21.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
     nur = {
       url = "github:nix-community/nur";
       flake = false;
+    };
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = inputs @ {
     self,
-    nixos-hardware,
     nixpkgs,
-    nixpkgs-darwin,
-    darwin,
-    home-manager,
-    flake-utils,
-    nur
+    ...
   }: let
     inherit (nixpkgs) lib;
 
@@ -55,9 +50,7 @@
         defaults = { config, pkgs, lib, ... }: {
           imports = [ hostConfiguration userConfiguration ];
 
-          environment.systemPackages = [];
-
-          # networking.hostName = lib.mkDefault hostname; move to mkLinuxConfig
+          # networking.hostName = lib.mkDefault hostname; TODO: move to mkLinuxConfig
 
           nixpkgs.config.allowUnfree = true;
           nix = {
@@ -78,8 +71,7 @@
           home-manager.extraSpecialArgs = {
             isLinux = isLinux;
             isDarwin = !isLinux;
-            # Inject inputs
-            inputs = inputs;
+            inputs = inputs; # Inject inputs
             rootPath = ./.;
           };
           home-manager.sharedModules = [
@@ -97,7 +89,7 @@
     mkDarwinConfig = args:
       let
         modules = mkConfig (args // { isLinux = false; });
-        nixpkgs = inputs.nixpkgs-darwin;
+        nixpkgs = inputs.nixpkgs;
 
         darwinDefaults = { config, pkgs, lib, ... }: {
           imports = [ inputs.home-manager.darwinModules.home-manager ];
@@ -143,6 +135,7 @@
         value = import (./overlays + "/${name}");
       }) overlayFiles');
     in overlayFiles // {
+      neovim-nightly = inputs.neovim-nightly.overlay;
       nur = final: prev: {
         nur = import inputs.nur { nurpkgs = final; pkgs = final; };
       };
