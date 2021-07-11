@@ -29,6 +29,17 @@
   }: let
     inherit (nixpkgs) lib;
 
+    # TODO: use flake-utils instead?
+    platforms = [ "x86_64-linux" "x86_64-darwin" ];
+
+    forAllPlatforms = f: lib.genAttrs platforms (platform: f platform);
+
+    nixpkgsFor = forAllPlatforms (platform: import nixpkgs {
+      system = platform;
+      overlays = builtins.attrValues self.overlays;
+      config.allowUnfree = true;
+    });
+
     specialArgs = extraArgs:
       let
         args = self: {
@@ -49,8 +60,6 @@
       let
         defaults = { config, pkgs, lib, ... }: {
           imports = [ hostConfiguration userConfiguration ];
-
-          # networking.hostName = lib.mkDefault hostname; TODO: not working on Darwin? Move to mkLinuxConfig?
 
           nixpkgs.config.allowUnfree = true;
           nix = {
@@ -83,10 +92,50 @@
               systemd.user.startServices = "sd-switch";
             }
           ];
+
+          system.stateVersion = "21.05";
         };
       in [ ./module.nix defaults ] ++ extraModules;
 
-    # TODO: mkLinuxConfig = args:
+    mkLinuxConfig = { platform, ... } @ args:
+      let
+        modules = mkConfig ((removeAttrs args [ "platform" ]) // { isLinux = true; });
+
+        linuxDefaults = { pkgs, lib, ... }: {
+          imports = [ inputs.home-manager.nixosModules.home-manager ];
+
+          networking.hostName = lib.mkDefault args.hostname;
+
+          system.nixos.tags = [ "with-flakes" ];
+          nix = {
+            # Pin nixpkgs for older Nix tools
+            nixPath = [ "nixpkgs=${pkgs.path}" ];
+            allowedUsers = [ "@wheel" ];
+            trustedUsers = [ "root" "@wheel" ];
+
+            registry = {
+              self.flake = inputs.self;
+              nixpkgs.flake = inputs.nixpkgs;
+            };
+
+            # Optimize (hardlink duplicates) store automatically
+            autoOptimiseStore = true;
+
+            # Reduce IOnice and CPU niceness of the build daemon
+            daemonIONiceLevel = 3;
+            daemonNiceLevel = 10;
+          };
+        };
+      in
+        lib.nixosSystem {
+          modules = [ linuxDefaults ] ++ modules;
+          system = platform;
+          pkgs = nixpkgsFor.${platform};
+          specialArgs = specialArgs {
+            inherit inputs;
+            isLinux = true;
+          };
+        };
 
     mkDarwinConfig = args:
       let
@@ -127,6 +176,15 @@
         hostname = "CHG0332.local";
         username = "vossni";
         hostConfiguration = ./hosts/darwin.nix;
+      };
+    };
+
+    nixosConfigurations = {
+      vm = mkLinuxConfig {
+        hostname = "nixos";
+        username = "nik";
+        platform = "x86_64-linux";
+        hostConfiguration = ./hosts/virtualbox.nix;
       };
     };
 

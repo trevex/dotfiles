@@ -25,8 +25,7 @@ let
       # ...
     }
     // optionalAttrs isLinux {
-      # ...
-      # bspwm = mkProfile [ ./bspwm ];
+      bspwm = mkProfile [ ./bspwm ];
     }
     // optionalAttrs isDarwin {
       # ...

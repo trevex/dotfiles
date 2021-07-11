@@ -7,6 +7,9 @@ in
   environment.systemPackages = with pkgs; [
     vim
     ripgrep
+    curl
+    git
+    gcc
   ];
 
   fonts = {
