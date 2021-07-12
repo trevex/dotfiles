@@ -13,13 +13,13 @@ scrolling:
 
 font:
   normal:
-    family: FiraCode Nerd Font Mono
-    style: Light
+    family: MesloLGS Nerd Font Mono
+    style: Regular
   bold:
-    family: FiraCode Nerd Font Mono
-    style: Medium
+    family: MesloLGS Nerd Font Mono
+    style: Bold
   italic:
-    family: FiraCode Nerd Font Mono
+    family: MesloLGS Nerd Font Mono
     style: Italic
   size: 14.0
   use_thin_strokes: true

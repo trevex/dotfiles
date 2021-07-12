@@ -16,7 +16,7 @@ in
     enableFontDir = true;
     fonts = with pkgs; [
       dejavu_fonts
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
 
