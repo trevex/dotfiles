@@ -93,7 +93,6 @@
             }
           ];
 
-          system.stateVersion = "21.05";
         };
       in [ ./module.nix defaults ] ++ extraModules;
 
@@ -106,6 +105,7 @@
 
           networking.hostName = lib.mkDefault args.hostname;
 
+          system.stateVersion = "21.05";
           system.nixos.tags = [ "with-flakes" ];
           nix = {
             # Pin nixpkgs for older Nix tools
