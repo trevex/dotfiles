@@ -14,40 +14,8 @@ g.mapleader = ","
 
 
 require "paq" { -- paq itself has to be updated via nix!
-  -- TODO: maybe moving plugins to nix would make sense...
-  -- some vim essentials
-  {"tpope/vim-commentary"};
-  {"tpope/vim-surround"};
-  {"tpope/vim-unimpaired"};
-  {"tpope/vim-repeat"};
-  -- some neovim essentials
-  {"nvim-treesitter/nvim-treesitter", run=":TSUpdate"};
-  {"neovim/nvim-lspconfig"};
-  {"hrsh7th/nvim-compe"}; -- TODO: maybe nvim-lua/completion-nvim is an alternative?
-  -- colorscheme
-  {"rktjmp/lush.nvim"};
-  {"npxbr/gruvbox.nvim"};
-  -- telescope
-  {"nvim-lua/popup.nvim"};
-  {"nvim-lua/plenary.nvim"};
-  {"nvim-telescope/telescope.nvim"};
-  {"nvim-telescope/telescope-fzf-native.nvim", run="make" };
-  -- statusline
-  {"kyazdani42/nvim-web-devicons"};
-  {"hoob3rt/lualine.nvim"};
   -- buffer tabs
   {"jose-elias-alvarez/buftabline.nvim"};
-  -- utility
-  {"mg979/vim-visual-multi"};
-  {"lewis6991/gitsigns.nvim"}; -- depends on nvim-lua/plenary.nvim
-  {"unblevable/quick-scope"}; -- f/F/t/T preview
-  {"justinmk/vim-sneak"}; -- s<char><char>
-  {"ntpeters/vim-better-whitespace"}; -- whitespace cleanup
-  {"dstein64/nvim-scrollview"}; -- scrollbar
-  {"lukas-reineke/indent-blankline.nvim"};
-  -- language support
-  {"LnL7/vim-nix"};
-  {"hashivim/vim-terraform"};
 }
 
 
@@ -161,16 +129,16 @@ require "buftabline".setup {
 
 -- Telescope
 require('telescope').setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-    }
-  }
+  -- extensions = {
+  --   fzf = {
+  --     fuzzy = true,                    -- false will only do exact matching
+  --     override_generic_sorter = false, -- override the generic sorter
+  --     override_file_sorter = true,     -- override the file sorter
+  --     case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+  --   }
+  -- }
 }
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('fzf')
 
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {noremap=true})

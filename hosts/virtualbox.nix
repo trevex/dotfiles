@@ -27,4 +27,6 @@
 
   networking.useDHCP = false;
   networking.interfaces.enp0s3.useDHCP = true;
+
+  system.stateVersion = "21.05";
 }

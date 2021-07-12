@@ -21,10 +21,46 @@
 
     programs.neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+
+      # Plugin list can be found here:
+      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/vim-plugins/vim-plugin-names
+      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/vim-plugins/generated.nix
+      plugins = with pkgs.vimPlugins; [
+        # some vim essentials
+        vim-commentary
+        vim-surround
+        vim-unimpaired
+        vim-repeat
+        # some neovim essentials
+        nvim-treesitter
+        nvim-lspconfig
+        nvim-compe
+        # colorscheme
+        lush-nvim
+        gruvbox-nvim
+        # telescope
+        popup-nvim
+        plenary-nvim
+        telescope-nvim
+        # telescope-fzf-native-nvim
+        # statusbar
+        nvim-web-devicons
+        lualine-nvim
+        # utility
+        vim-visual-multi
+        gitsigns-nvim # depends on nvim-lua/plenary.nvim
+        quick-scope # f/F/t/T preview
+        vim-sneak # s<char><char>
+        vim-better-whitespace # whitespace cleanup
+        nvim-scrollview # scrollbar
+        indent-blankline-nvim
+        # language support
+        vim-nix
+        vim-terraform
+      ];
       extraConfig = ''
         lua require('init')
       '';

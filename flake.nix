@@ -4,6 +4,7 @@
   inputs = {
     nixos-hardware.url = "nixos-hardware/master";
     nixpkgs.url = "nixpkgs/21.05";
+    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,10 +16,6 @@
     nur = {
       url = "github:nix-community/nur";
       flake = false;
-    };
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -105,7 +102,6 @@
 
           networking.hostName = lib.mkDefault args.hostname;
 
-          system.stateVersion = "21.05";
           system.nixos.tags = [ "with-flakes" ];
           nix = {
             # Pin nixpkgs for older Nix tools
@@ -195,9 +191,15 @@
         value = import (./overlays + "/${name}");
       }) overlayFiles');
     in overlayFiles // {
-      neovim-nightly = inputs.neovim-nightly.overlay;
       nur = final: prev: {
         nur = import inputs.nur { nurpkgs = final; pkgs = final; };
+      };
+      unstable = let
+        config = { allowUnfree = true; };
+      in final: prev: {
+        unstable = import inputs.nixpkgs-unstable { inherit (prev) system; inherit config; };
+        neovim-unwrapped = final.unstable.neovim-unwrapped;
+        vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
       };
     };
   };
