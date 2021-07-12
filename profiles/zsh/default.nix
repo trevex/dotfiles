@@ -35,6 +35,8 @@
         kush = "kubectl run ubuntu --rm -i --tty --image ubuntu -- bash";
         kctx = "kubectx";
         kns = "kubens";
+        tf = "terraform";
+        tg = "terragrunt";
       };
       initExtra = ''
         export GPG_TTY="$(tty)"
