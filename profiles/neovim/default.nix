@@ -7,13 +7,6 @@
       rnix-lsp
     ];
 
-    xdg.dataFile."nvim/site/pack/paqs/start/paq-nvim".source = pkgs.fetchFromGitHub {
-      owner = "savq";
-      repo = "paq-nvim";
-      rev = "cdde12dfbe715df6b9d3a2774714c25fdbee86ec";
-      sha256 = "0jnxf79rcn0fhxg6m140lzxixvq1zivkg7c43ra64mwzb8wxvv8l";
-    };
-
     # TODO: checkout https://github.com/glepnir/lspsaga.nvim
     #       related https://blog.inkdrop.info/how-to-set-up-neovim-0-5-modern-plugins-lsp-treesitter-etc-542c3d9c9887
 
@@ -38,6 +31,10 @@
         nvim-treesitter
         nvim-lspconfig
         nvim-compe
+        nvim-web-devicons
+        nvim-tree-lua
+        nvim-bufferline-lua
+        lualine-nvim # statusbar
         # colorscheme
         lush-nvim
         gruvbox-nvim
@@ -45,21 +42,17 @@
         popup-nvim
         plenary-nvim
         telescope-nvim
-        # telescope-fzf-native-nvim
-        # statusbar
-        nvim-web-devicons
-        lualine-nvim
         # utility
         vim-visual-multi
         gitsigns-nvim # depends on nvim-lua/plenary.nvim
         quick-scope # f/F/t/T preview
         vim-sneak # s<char><char>
         vim-better-whitespace # whitespace cleanup
-        nvim-scrollview # scrollbar
         indent-blankline-nvim
         # language support
         vim-nix
         vim-terraform
+        vim-helm
       ];
       extraConfig = ''
         lua require('init')

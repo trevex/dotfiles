@@ -13,12 +13,6 @@ end
 g.mapleader = ","
 
 
-require "paq" { -- paq itself has to be updated via nix!
-  -- buffer tabs
-  {"jose-elias-alvarez/buftabline.nvim"};
-}
-
-
 -- Gitsigns
 require "gitsigns".setup {}
 
@@ -28,6 +22,7 @@ require "nvim-treesitter.configs".setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
+    disable = { "yaml" },
   },
 }
 
@@ -73,7 +68,15 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 opt.tabstop = 4
 opt.expandtab = true
-opt.clipboard = "unnamed"
+
+
+-- indent line
+g.indentLine_enabled = 1
+g.indent_blankline_char = "│"
+g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+g.indent_blankline_buftype_exclude = {"terminal"}
+g.indent_blankline_show_trailing_blankline_indent = false
+g.indent_blankline_show_first_indent_level = false
 
 
 -- Easier split navigation
@@ -83,8 +86,8 @@ map("n", "<C-L>", "<C-W><C-L>", {noremap=true})
 map("n", "<C-H>", "<C-W><C-H>", {noremap=true})
 
 -- Additional keybindings
-map("n", "<C-x>", ":BufNext<CR>", {noremap=true}) -- requires buftabline.nvim
-map("n", "<C-z>", ":BufPrev<CR>", {noremap=true}) -- requires buftabline.nvim
+map("n", "<C-x>", ":bnext<CR>", {noremap=true})
+map("n", "<C-z>", ":bprev<CR>", {noremap=true})
 map("n", "<leader>w", ":w!<cr>")
 map("", "<Up>", "gk")
 map("", "<Down>", "gj")
@@ -92,11 +95,17 @@ map("", "k", "gk")
 map("", "j", "gj")
 map("i", "jk", "<ESC>")
 map("i", "<leader><leader>", "<C-X><C-O>")
+map("", "<Leader>c", ":ccl <bar> lcl<CR>", {noremap=true})
 map("n", "<leader>d", "\"_d", {noremap=true})
 map("x", "<leader>d", "\"_d", {noremap=true})
-map("n", "<leader>p", "\"0p", {noremap=true})
-map("x", "<leader>p", "\"0p", {noremap=true})
-map("", "<Leader>c", ":ccl <bar> lcl<CR>", {noremap=true})
+map("v", "<leader>y", "\"+y", {noremap=true})
+map("n", "<leader>Y", "\"+yg_", {noremap=true})
+map("n", "<leader>y", "\"+y", {noremap=true})
+map("n", "<leader>yy", "\"+yy", {noremap=true})
+map("n", "<leader>p", "\"+p", {noremap=true})
+map("n", "<leader>P", "\"+P", {noremap=true})
+map("v", "<leader>p", "\"+p", {noremap=true})
+map("v", "<leader>P", "\"+P", {noremap=true})
 
 
 -- Lualine with icons
@@ -120,15 +129,110 @@ require "lualine".setup {
   },
 }
 
--- Buffer tabs
-require "buftabline".setup {
-  icons = true,
-  hlgroup_current = "StatusLine",
-  hlgroup_normal = "StatusLineNC",
+
+-- Bufferline
+require "bufferline".setup {
+  options = {
+    offsets = {{filetype = "NvimTree", text = "", padding = 1}},
+    buffer_close_icon = "",
+    modified_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
+    max_name_length = 14,
+    max_prefix_length = 13,
+    tab_size = 20,
+    show_tab_indicators = true,
+    enforce_regular_tabs = false,
+    view = "multiwindow",
+    show_buffer_close_icons = true,
+    show_close_icon = false,
+    separator_style = "thin",
+    mappings = "true"
+  }
 }
+
+-- nvim-tree-lua
+g.nvim_tree_side = "left"
+g.nvim_tree_width = 25
+g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
+g.nvim_tree_gitignore = 1
+g.nvim_tree_auto_ignore_ft = {"dashboard"} -- don't open tree on specific fiypes.
+g.nvim_tree_auto_open = 0
+g.nvim_tree_auto_close = 1 -- closes tree when it's the last window
+g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
+g.nvim_tree_follow = 1
+g.nvim_tree_indent_markers = 1
+g.nvim_tree_hide_dotfiles = 1
+g.nvim_tree_git_hl = 1
+g.nvim_tree_highlight_opened_files = 0
+g.nvim_tree_tab_open = 0
+g.nvim_tree_allow_resize = 1
+g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
+g.nvim_tree_disable_netrw = 1
+g.nvim_tree_hijack_netrw = 0
+g.nvim_tree_update_cwd = 1
+
+g.nvim_tree_show_icons = {
+  git = 1,
+  folders = 1,
+  files = 1
+}
+g.nvim_tree_icons = {
+  default = "",
+  symlink = "",
+  git = {
+      unstaged = "✗",
+      staged = "✓",
+      unmerged = "",
+      renamed = "➜",
+      untracked = "★",
+      deleted = "",
+      ignored = "◌"
+  },
+  folder = {
+      default = "",
+      open = "",
+      empty = "", -- 
+      empty_open = "",
+      symlink = "",
+      symlink_open = ""
+  }
+}
+
+map("n", "<C-T>", ":NvimTreeToggle<CR>", {noremap=true})
+map("n", "<leader>r", ":NvimTreeRefresh<CR>", {noremap=true})
+map("n", "<leader>n", ":NvimTreeFindFile<CR>", {noremap=true})
+
 
 -- Telescope
 require('telescope').setup {
+  defaults = {
+    vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case"
+    },
+    prompt_prefix = "   ",
+    selection_caret = " ",
+    entry_prefix = "  ",
+    layout_config = {
+        horizontal = {
+            prompt_position = "bottom",
+            preview_width = 0.55,
+            results_width = 0.8
+        },
+        vertical = {
+            mirror = false
+        },
+        width = 0.90,
+        height = 0.80,
+        preview_cutoff = 120
+    },
+  },
   -- extensions = {
   --   fzf = {
   --     fuzzy = true,                    -- false will only do exact matching
@@ -141,6 +245,7 @@ require('telescope').setup {
 -- require('telescope').load_extension('fzf')
 
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
+map("", "<C-P>", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
 map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {noremap=true})
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {noremap=true})
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
@@ -245,6 +350,7 @@ cmd [[
   autocmd Filetype bash setlocal ts=2 sw=2 expandtab
   autocmd Filetype sh setlocal ts=2 sw=2 expandtab
   autocmd FileType yaml setlocal ts=2 sw=2 expandtab
+  autocmd FileType helm setlocal ts=2 sw=2 expandtab
   autocmd FileType nix setlocal ts=2 sw=2 expandtab
   autocmd Filetype gohtmltmpl setlocal ts=2 sw=2 expandtab
   autocmd Filetype proto setlocal ts=2 sw=2 expandtab

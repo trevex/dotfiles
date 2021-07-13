@@ -10,6 +10,7 @@ in
     curl
     git
     gcc
+    bat
   ];
 
   fonts = {
