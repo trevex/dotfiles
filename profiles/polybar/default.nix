@@ -5,7 +5,7 @@
       enable = true;
       config = ./config.ini;
       script = ''
-        polybar --reload top &
+        polybar top &
       '';
     };
   };

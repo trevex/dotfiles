@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
-  environment.etc = {
-    "bspwmrc".source = ./bspwmrc;
-    "sxhkdrc".source = ./sxhkdrc;
-  };
+  # environment.etc = {
+  #   "bspwmrc".source = ./bspwmrc;
+  #   "sxhkdrc".source = ./sxhkdrc;
+  # };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -19,14 +19,21 @@
       #   enable = true;
       #   noDesktop = true;
       #   enableXfwm = false;
-      # };
+      # }
+      session = [{
+        name = "home-manager";
+        start = ''
+          ${pkgs.stdenv.shell} $HOME/.xsession-hm &
+          waitPID=$!
+        '';
+      }];
     };
-    windowManager.bspwm = {
-      enable = true;
-      configFile = "/etc/bspwmrc";
-      sxhkd.configFile = "/etc/sxhkdrc";
-    };
-    displayManager.defaultSession = "none+bspwm";
+    # windowManager.bspwm = {
+    #   enable = true;
+    #   configFile = "/etc/bspwmrc";
+    #   sxhkd.configFile = "/etc/sxhkdrc";
+    # };
+    displayManager.defaultSession = "home-manager";
   };
 
   sound.enable = true;
@@ -38,5 +45,20 @@
     inactiveOpacity = 0.9;
     shadow = true;
     fadeDelta = 4;
+  };
+
+  my.home = {
+    xsession = {
+      enable = true;
+      scriptPath = ".xsession-hm";
+      windowManager.bspwm = {
+        enable = true;
+        extraConfig = builtins.readFile ./bspwmrc;
+      };
+    };
+    services.sxhkd = {
+      enable = true;
+      extraConfig = builtins.readFile ./sxhkdrc;
+    };
   };
 }
