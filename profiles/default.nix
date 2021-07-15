@@ -26,6 +26,8 @@ let
     }
     // optionalAttrs isLinux {
       bspwm = mkProfile [ ./bspwm ];
+      desktop = mkProfile [ ./desktop ];
+      polybar = mkProfile [ ./polybar ];
     }
     // optionalAttrs isDarwin {
       # ...

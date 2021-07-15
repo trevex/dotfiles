@@ -182,6 +182,11 @@
         platform = "x86_64-linux";
         hostConfiguration = ./hosts/virtualbox.nix;
       };
+      pulse = mkLinuxConfig {
+        hostname = "pulse";
+        username = "nik";
+        platform = "x86_64-linux";
+      };
     };
 
     overlays = let
