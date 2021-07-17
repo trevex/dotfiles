@@ -11,6 +11,7 @@
     libinput.enable = true;
     desktopManager = {
       xterm.enable = false;
+      wallpaper.mode = "fill";
       session = [{
         name = "home-manager";
         start = ''
@@ -53,6 +54,12 @@
     home.packages = with pkgs; [
       lxappearance
     ];
+    home.file.".background-image".source = ./wallpaper.jpg;
+    services.redshift = {
+      enable = true;
+      dawnTime = "6:00-8:00";
+      duskTime = "19:00-20:00";
+    };
     services.network-manager-applet.enable = true;
     services.screen-locker = {
       enable = true;
