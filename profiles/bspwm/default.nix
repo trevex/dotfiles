@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
 {
-  # environment.etc = {
-  #   "bspwmrc".source = ./bspwmrc;
-  #   "sxhkdrc".source = ./sxhkdrc;
-  # };
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -15,11 +10,6 @@
     libinput.enable = true;
     desktopManager = {
       xterm.enable = false;
-      # xfce = {
-      #   enable = true;
-      #   noDesktop = true;
-      #   enableXfwm = false;
-      # }
       session = [{
         name = "home-manager";
         start = ''
@@ -28,11 +18,6 @@
         '';
       }];
     };
-    # windowManager.bspwm = {
-    #   enable = true;
-    #   configFile = "/etc/bspwmrc";
-    #   sxhkd.configFile = "/etc/sxhkdrc";
-    # };
     displayManager.defaultSession = "home-manager";
   };
 
@@ -43,7 +28,7 @@
     enable = true;
     fade = true;
     inactiveOpacity = 0.9;
-    shadow = true;
+    shadow = false;
     fadeDelta = 4;
   };
 
