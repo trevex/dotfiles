@@ -29,7 +29,7 @@
   services.picom = {
     enable = true;
     fade = true;
-    inactiveOpacity = 0.9;
+    inactiveOpacity = 0.95;
     shadow = false;
     fadeDelta = 4;
   };
