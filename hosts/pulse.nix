@@ -4,7 +4,7 @@
 { config, lib, pkgs, modulesPath, profiles, ... }:
 
 {
-  imports = with profiles; [ base neovim alacritty zsh bspwm polybar desktop (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = with profiles; [ base neovim alacritty zsh bspwm polybar rofi desktop (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -43,4 +43,6 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
+
+  fonts.fontconfig.dpi = 90;
 }

@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 {
+  services.acpid.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     # Configure keymap in X11
     layout = "us";
-    xkbOptions = "eurosign:e";
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
     desktopManager = {
@@ -32,6 +33,10 @@
     fadeDelta = 4;
   };
 
+  environment.systemPackages = with pkgs; [ brightnessctl ];
+
+  services.logind.lidSwitch = "suspend";
+
   my.home = {
     xsession = {
       enable = true;
@@ -44,6 +49,18 @@
     services.sxhkd = {
       enable = true;
       extraConfig = builtins.readFile ./sxhkdrc;
+    };
+    home.packages = with pkgs; [
+      lxappearance
+    ];
+    services.network-manager-applet.enable = true;
+    services.screen-locker = {
+      enable = true;
+      inactiveInterval = 300;
+      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+      xautolockExtraOptions = [
+        "Xautolock.killer: systemctl suspend"
+      ];
     };
   };
 }

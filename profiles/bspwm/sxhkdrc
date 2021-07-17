@@ -215,10 +215,10 @@ XF86AudioMute
     pactl set-sink-mute 0 toggle
 
 XF86MonBrightnessDown
-    xbacklight -dec 10
+    brightnessctl -c backlight set '10%-'
 
 XF86MonBrightnessUp
-    xbacklight -inc 10
+    brightnessctl -c backlight set '+10%'
 
 XF86Sleep
 	systemctl suspend

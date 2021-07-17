@@ -28,6 +28,7 @@ let
       bspwm = mkProfile [ ./bspwm ];
       desktop = mkProfile [ ./desktop ];
       polybar = mkProfile [ ./polybar ];
+      rofi = mkProfile [ ./rofi ];
     }
     // optionalAttrs isDarwin {
       # ...
