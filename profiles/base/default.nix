@@ -18,6 +18,7 @@ in
     fonts = with pkgs; [
       dejavu_fonts
       font-awesome
+      material-icons
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
