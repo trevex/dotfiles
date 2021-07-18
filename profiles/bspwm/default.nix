@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 {
+  # TODO: move some of the fundamental X11 stuff out...
+
   services.acpid.enable = true;
 
   # Enable the X11 windowing system.
@@ -34,11 +37,32 @@
     fadeDelta = 4;
   };
 
+  # Install required tools to make all our keybindings and scripts work
   environment.systemPackages = with pkgs; [ brightnessctl ];
 
-  services.logind.lidSwitch = "suspend";
+  my.home = { config, ... } : {
+    # Let's also install some convenience tools to configure gtk etc.
+    home.packages = with pkgs; [
+      lxappearance
+    ];
 
-  my.home = {
+    # Make sure workspaces are shown in polybar, for this we need an additional
+    # target to make sure polybar is not executed too early. And start it in
+    # `bspwmrc`.
+    # See https://github.com/nix-community/home-manager/issues/213#issuecomment-829743999
+    systemd.user.targets.graphical-session-bspwm = {
+      Unit = {
+        Description = "bspwm X session";
+        BindsTo = [ "graphical-session.target" ];
+        Requisite = [ "graphical-session.target" ];
+      };
+    };
+    systemd.user.services.polybar = mkIf (config.services.polybar.enable) {
+      Unit.After = [ "graphical-session-bspwm.target" ];
+      Install.WantedBy = mkForce [ "graphical-session-bspwm.target" ];
+    };
+
+    # Enable bspwm and sxhkd
     xsession = {
       enable = true;
       scriptPath = ".xsession-hm";
@@ -51,16 +75,17 @@
       enable = true;
       extraConfig = builtins.readFile ./sxhkdrc;
     };
-    home.packages = with pkgs; [
-      lxappearance
-    ];
+
+    # By default home-manager xsession will set background image to
+    # ~/.background-image using feh by default.
     home.file.".background-image".source = ./wallpaper.jpg;
+
     services.redshift = {
       enable = true;
       dawnTime = "6:00-8:00";
       duskTime = "19:00-20:00";
     };
-    services.network-manager-applet.enable = true;
+    # There is no inbuilt screen-locker, so let's use betterlockscreen.
     services.screen-locker = {
       enable = true;
       inactiveInterval = 300;

@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Start bspwm target, so that polybar can start as well
+systemctl --user start graphical-session-bspwm.target
+
 export gap=8
 
 # gap
