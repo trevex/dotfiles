@@ -80,6 +80,14 @@ with lib;
     # ~/.background-image using feh by default.
     home.file.".background-image".source = ./wallpaper.jpg;
 
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = "Papirus";
+        package = pkgs.papirus-icon-theme;
+      };
+    };
+
     services.redshift = {
       enable = true;
       dawnTime = "6:00-8:00";
