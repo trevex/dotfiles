@@ -1,7 +1,7 @@
 final: prev: {
   terragrunt_0_29 = prev.callPackage ({ lib, buildGoModule, fetchFromGitHub }: buildGoModule rec {
     pname = "terragrunt";
-    version = "0.29.9";
+    version = "0.29.3";
 
     src = fetchFromGitHub {
       owner = "gruntwork-io";

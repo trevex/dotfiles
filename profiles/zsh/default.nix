@@ -51,6 +51,8 @@
         zle -N edit-command-line
         bindkey "^X^X" edit-command-line
 
+        setopt PROMPT_SP
+
         # Make sure krew works
         export PATH="$PATH:$HOME/.krew/bin"
       '';
