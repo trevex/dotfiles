@@ -29,6 +29,7 @@ let
       desktop = mkProfile [ ./desktop ];
       polybar = mkProfile [ ./polybar ];
       rofi = mkProfile [ ./rofi ];
+      dunst = mkProfile [ ./dunst ];
     }
     // optionalAttrs isDarwin {
       # ...

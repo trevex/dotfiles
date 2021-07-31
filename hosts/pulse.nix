@@ -4,7 +4,18 @@
 { config, lib, pkgs, modulesPath, profiles, ... }:
 
 {
-  imports = with profiles; [ base neovim alacritty zsh bspwm polybar rofi desktop (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = with profiles; [
+    base
+    neovim
+    alacritty
+    zsh
+    bspwm
+    polybar
+    rofi
+    dunst
+    desktop
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
