@@ -1,12 +1,6 @@
-# bspwm hotkeys
-#
-# Cleanly quit bspwm
-ctrl + alt + q
-	bspc quit 1 && pkillall polybar
-
 #
 # Window manipulation
-# ______________
+#
 
 # Close window
 super + q
@@ -21,9 +15,11 @@ super + shift + t
 	bspc node -t {pseudo_tiled,tiled}
 super + t
 	{bspc node -t floating && window-placer $(bspc query -T -d | grep -o '"state":"floating"' | wc -l),bspc node -t tiled}
+
 # Force all windows of the desktop to tile
 super + ctrl + t
 	bspcp tile
+
 # Force all windows of the desktop to float and arrange them
 super + ctrl + shift + t
 	bspcp float
@@ -44,7 +40,7 @@ super + i
 super + Escape
 	bspc node -g locked
 
-### Map or unmap windows (functional equivalent of "minimize")
+# Map or unmap windows (functional equivalent of "minimize")
 # super + c
 #     whid dmenu
 # super + x
@@ -53,14 +49,14 @@ super + Escape
 
 #
 # Window moving and splitting
-# ______________
+#
 
 # Autopresel (split window in its largest dimension)
 super + ctrl + Return
 	auto-presel
 
 # ctrl + space
-	# auto-presel
+#  	 auto-presel
 
 # Presel window for splitting in certain direction
 alt + ctrl + {a,s,w,d}
@@ -84,7 +80,7 @@ super + Return
 alt + Return
 	bspc node -n @/
 
-# go (Shift=move) to desktop (and focus the monitor that the desktop is located on. Bspwm style)
+# Go (Shift=move) to desktop (and focus the monitor that the desktop is located on. Bspwm style)
 super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} ^{1-9,10}
 
@@ -92,7 +88,7 @@ super + {_,shift + }{1-9,0}
 super + {m,n}
 	bspc desktop -f {prev.occupied,next.occupied}
 
-# cycle windows
+# Cycle windows
 alt + {_,shift + }Tab
     bspc node -f {next,prev}
 
@@ -100,7 +96,7 @@ alt + {_,shift + }Tab
 super + Tab
 	rofi -show window -modi window
 
-#Focus windows by direction, works with multihead
+# Focus windows by direction, works with multihead
 super +  {a,s,w,d}
     focus-mover {west,south,north,east}
 
@@ -123,7 +119,7 @@ super + shift + {h,j,k,l}
 super + shift + {Left,Down,Up,Right}
 	euclid-mover {west,south,north,east}
 
-#resize windows
+# Resize windows
 super + ctrl + {a,s,w,d}
 	window-resize {west,south,north,east}
 
@@ -135,7 +131,7 @@ super + ctrl + {Left,Down,Up,Right}
 
 #
 # Layout manipulation/desktop level controls
-# ______________
+#
 
 # Toggle monocle mode
 super + f
@@ -169,7 +165,7 @@ super + g
 super + button{4,5}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
 
-### Add or remove desktops by scrolling
+# Add or remove desktops by scrolling
 super + ctrl + button5
     bspcp dsktp rm
 
@@ -177,7 +173,7 @@ super + ctrl + button4
     bspcp dsktp add
 
 #
-# spawn programs
+# Spawn programs
 #
 
 super + space
@@ -194,11 +190,11 @@ super + shift + b
 	$BROWSER
 
 super + e
-	urxvt -e ranger
+	alacritty -e ranger
 
 Print
     sleep 0.2; \
-	scrot -s -e 'mv $f ~/images'
+	scrot -s -e 'mv $f ~/Pictures'
 
 
 #
@@ -235,7 +231,3 @@ super + shift + r
 super + BackSpace
     for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
 
-
-# i3lock
-super + F1
-	lock -n

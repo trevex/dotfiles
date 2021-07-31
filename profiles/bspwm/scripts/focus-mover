@@ -1,0 +1,9 @@
+# From github.com/Chrysostomus/bspwm-scripts
+bspc config pointer_follows_monitor true; \
+bspc config pointer_follows_focus true; \
+dir=$@; \
+    if ! bspc node -f $dir; then \
+bspc monitor -f $dir; \
+fi; \
+bspc config pointer_follows_monitor false; \
+bspc config pointer_follows_focus false

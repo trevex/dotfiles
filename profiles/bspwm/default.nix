@@ -1,6 +1,27 @@
 { config, pkgs, lib, ... }:
 with lib;
-{
+let
+  focusMover = pkgs.writeScriptBin "focus-mover" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/focus-mover}
+  '';
+  euclidMover = pkgs.writeScriptBin "euclid-mover" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/euclid-mover}
+  '';
+  autoPresel = pkgs.writeScriptBin "auto-presel" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/auto-presel}
+    '';
+  windowPromoter = pkgs.writeScriptBin "window-promoter" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/window-promoter}
+  '';
+  windowResize = pkgs.writeScriptBin "window-resize" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/window-resize}
+  '';
+in {
   # TODO: move some of the fundamental X11 stuff out...
 
   services.acpid.enable = true;
@@ -38,7 +59,15 @@ with lib;
   };
 
   # Install required tools to make all our keybindings and scripts work
-  environment.systemPackages = with pkgs; [ brightnessctl ];
+  environment.systemPackages = [
+    focusMover
+    euclidMover
+    autoPresel
+    windowPromoter
+    windowResize
+    pkgs.brightnessctl
+    pkgs.scrot
+  ];
 
   my.home = { config, ... } : {
     # Let's also install some convenience tools to configure gtk etc.
