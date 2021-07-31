@@ -30,6 +30,10 @@
   };
 
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [
+    "acpi_backlight=vendor"
+    "video.use_native_backlight=1"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
