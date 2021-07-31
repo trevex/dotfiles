@@ -1,0 +1,233 @@
+#
+# Window manipulation
+#
+
+# Close window
+super + q
+	bspc  node -c
+
+# Kill window
+super + shift + q
+	bspc  node -k
+
+# Toggle tiling mode of window
+super + shift + t
+	bspc node -t {pseudo_tiled,tiled}
+super + t
+	{bspc node -t floating && window-placer $(bspc query -T -d | grep -o '"state":"floating"' | wc -l),bspc node -t tiled}
+
+# Force all windows of the desktop to tile
+super + ctrl + t
+	bspcp tile
+
+# Force all windows of the desktop to float and arrange them
+super + ctrl + shift + t
+	bspcp float
+
+# Toggle fullscreen
+super + shift + f
+	bspc node -t {fullscreen,tiled}
+
+# Try to keep size and position of the selected window
+super + o
+	bspc node -g private
+
+# Make window sticky
+super + i
+	bspc node -g sticky
+
+# Lock a window from closing
+super + Escape
+	bspc node -g locked
+
+# Map or unmap windows (functional equivalent of "minimize")
+# super + c
+#     whid dmenu
+# super + x
+#     whid hide
+
+
+#
+# Window moving and splitting
+#
+
+# Autopresel (split window in its largest dimension)
+super + ctrl + Return
+	auto-presel
+
+# ctrl + space
+#  	 auto-presel
+
+# Presel window for splitting in certain direction
+alt + ctrl + {a,s,w,d}
+	bspc node -p \~{west,south,north,east} -i
+
+alt + ctrl + {h,j,k,l}
+	bspc node -p \~{west,south,north,east}
+
+alt + ctrl + {Left,Down,Up,Right}
+	bspc node -p \~{west,south,north,east}
+
+# Set splitting ratio of windows
+alt + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Move current window to largest space or preselected area if there is one.
+super + Return
+    window-promoter
+
+# Create a new "master area", splitting the whole desktop instead of just windows.
+alt + Return
+	bspc node -n @/
+
+# Go (Shift=move) to desktop (and focus the monitor that the desktop is located on. Bspwm style)
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} ^{1-9,10}
+
+# Select previous / next desktop
+super + {m,n}
+	bspc desktop -f {prev.occupied,next.occupied}
+
+# Cycle windows
+alt + {_,shift + }Tab
+    bspc node -f {next,prev}
+
+# Go to specific window
+super + Tab
+	rofi -show window -modi window
+
+# Focus windows by direction, works with multihead
+super +  {a,s,w,d}
+    focus-mover {west,south,north,east}
+
+super +  {h,j,k,l}
+    focus-mover {west,south,north,east}
+
+super +  {Left,Down,Up,Right}
+    focus-mover {west,south,north,east}
+
+# Move tiled windows. Moving a tiled window to
+# preselected one moves into preselection instead.
+# Moving out of the screen should move the window to next monitor if possible
+super + shift + {a,s,w,d}
+	euclid-mover {west,south,north,east}
+
+super + shift + {h,j,k,l}
+	euclid-mover {west,south,north,east}
+
+# Different style of movement: transplant into window in chosen direction
+super + shift + {Left,Down,Up,Right}
+	euclid-mover {west,south,north,east}
+
+# Resize windows
+super + ctrl + {a,s,w,d}
+	window-resize {west,south,north,east}
+
+super + ctrl + {h,j,k,l}
+	window-resize {west,south,north,east}
+
+super + ctrl + {Left,Down,Up,Right}
+	window-resize {west,south,north,east}
+
+#
+# Layout manipulation/desktop level controls
+#
+
+# Toggle monocle mode
+super + f
+	bspc desktop -l next
+
+# Balance tree
+super + b
+	bspc node @/ -B
+
+# Balance brother node. If you do this on biggest window of the desktop, it usually means balancing all windows with except the biggest.
+super + alt + b
+	bspc node @brother -B
+
+# Undo balancing (equalize windows)
+super + ctrl + b
+	bspc node @/ -E
+
+# Mirror and flip leaves of tree
+super + {comma,period}
+	bspc node @/ -F {horizontal,vertical}
+
+# Rotate leaves of tree
+super + shift + {comma,period}
+	bspc node @/ -R {90,270}
+
+# Change window gap
+
+super + g
+	bspc config -d focused window_gap {$gap,$(($gap+$gap)),$(($gap+$gap+$gap))}
+
+super + button{4,5}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+# Add or remove desktops by scrolling
+super + ctrl + button5
+    bspcp dsktp rm
+
+super + ctrl + button4
+    bspcp dsktp add
+
+#
+# Spawn programs
+#
+
+super + space
+	rofi -show drun -modi drun
+
+super + shift + Return
+	alacritty
+super + z
+	alacritty
+
+# super + r
+
+super + shift + b
+	$BROWSER
+
+super + e
+	alacritty -e ranger
+
+Print
+    sleep 0.2; \
+	scrot -s -e 'mv $f ~/Pictures'
+
+
+#
+# Media keys
+#
+
+XF86AudioRaiseVolume
+    pactl set-sink-volume 0 +5%
+
+XF86AudioLowerVolume
+    pactl set-sink-volume 0 -5%
+
+XF86AudioMute
+    pactl set-sink-mute 0 toggle
+
+XF86MonBrightnessDown
+    brightnessctl -c backlight set '10%-'
+
+XF86MonBrightnessUp
+    brightnessctl -c backlight set '+10%'
+
+XF86Sleep
+	systemctl suspend
+
+# make sxhkd reload its configuration files:
+super + shift + Escape
+	pkill -USR1 -x sxhkd
+
+# In case bspwmrc fails to execute/you wish have plugged in a new monitor
+super + shift + r
+	bspwmrc
+
+# Remove receptacles
+super + BackSpace
+    for i in $(bspc query -N -n .leaf.!window.local); do bspc node $i -k; done
+
