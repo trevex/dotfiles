@@ -17,8 +17,7 @@ in
     enableFontDir = true;
     fonts = with pkgs; [
       dejavu_fonts
-      font-awesome
-      material-icons
+      material-design-icons
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
