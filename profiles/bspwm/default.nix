@@ -20,6 +20,10 @@ let
   windowResize = pkgs.writeScriptBin "window-resize" ''
     #!${pkgs.stdenv.shell}
     ${builtins.readFile ./scripts/window-resize}
+    '';
+  whid = pkgs.writeScriptBin "whid" ''
+    #!${pkgs.stdenv.shell}
+    ${builtins.readFile ./scripts/whid}
   '';
 in {
   # TODO: move some of the fundamental X11 stuff out...
@@ -65,9 +69,14 @@ in {
     autoPresel
     windowPromoter
     windowResize
-    pkgs.brightnessctl
-    pkgs.scrot
-  ];
+    whid
+  ] ++ (with pkgs; [
+    brightnessctl
+    scrot
+    wmutils-core
+    xdo
+    xdotool
+  ]);
 
   my.home = { config, ... } : {
     # Let's also install some convenience tools to configure gtk etc.

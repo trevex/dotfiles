@@ -41,10 +41,10 @@ super + Escape
 	bspc node -g locked
 
 # Map or unmap windows (functional equivalent of "minimize")
-# super + c
-#     whid dmenu
-# super + x
-#     whid hide
+super + c
+    whid dmenu
+super + x
+    whid hide
 
 
 #
