@@ -6,6 +6,9 @@
     firefox
   ];
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   my.home = {
     services.network-manager-applet.enable = true;
   };

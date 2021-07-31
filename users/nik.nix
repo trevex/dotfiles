@@ -5,6 +5,14 @@ let
 in
 lib.mkMerge [
   (lib.optionalAttrs isLinux {
+    security.sudo.extraRules = [
+      {
+        users = [ username ];
+        commands = [
+          { command = "ALL"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
     users.users.${username} = {
       createHome = true;
       isNormalUser = true;

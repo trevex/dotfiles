@@ -1,8 +1,4 @@
 { config, pkgs, ... }:
-let
-  inherit (pkgs) stdenv;
-  devDirRelativeToHome = if stdenv.isLinux then "development" else "Development";
-in
 {
   environment.systemPackages = with pkgs; [
     vim
@@ -51,8 +47,8 @@ in
 
     programs.go = {
       enable = true;
-      goPath = "${devDirRelativeToHome}/go";
-      goBin = "${devDirRelativeToHome}/go/bin";
+      goPath = "Development/go";
+      goBin = "Development/go/bin";
     };
   };
 }
