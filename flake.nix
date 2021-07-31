@@ -205,6 +205,7 @@
         unstable = import inputs.nixpkgs-unstable { inherit (prev) system; inherit config; };
         neovim-unwrapped = final.unstable.neovim-unwrapped;
         vimPlugins = prev.vimPlugins // final.unstable.vimPlugins;
+        terraform_1_0 = final.unstable.terraform_1_0;
       };
     };
   };

@@ -9,6 +9,7 @@ in
     ripgrep
     curl
     git
+    git-lfs
     gcc
     bat
   ];
@@ -37,8 +38,9 @@ in
       kubernetes-helm
       google-cloud-sdk
       kubectx
-      terraform_0_15
-      terragrunt_0_29
+      terraform_1_0
+      terragrunt_0_31
+      tfsec
     ];
 
     home.sessionVariables = {

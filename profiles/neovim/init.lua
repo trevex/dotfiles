@@ -117,7 +117,7 @@ require "lualine".setup {
     icons_enabled = true,
     theme = "gruvbox",
     component_separators = {"｜", "｜"},
-    section_separators = {" ", " "},
+    section_separators = {"", "" },
   },
   sections = {
     lualine_a = {{'mode', upper = true}},
@@ -146,7 +146,7 @@ require "bufferline".setup {
     view = "multiwindow",
     show_buffer_close_icons = true,
     show_close_icon = false,
-    separator_style = "thin",
+    separator_style = "slant",
     mappings = "true"
   }
 }
