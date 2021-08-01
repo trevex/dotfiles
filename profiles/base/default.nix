@@ -9,6 +9,7 @@
     gcc
     bat
     moreutils
+    tree
   ];
 
   fonts = {

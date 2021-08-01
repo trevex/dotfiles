@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  inherit (pkgs) stdenv;
+in
 {
   my.home = {
     programs.fzf = {
@@ -25,11 +28,12 @@
         size = 10000000;
       };
       shellAliases = {
+        ls = if stdenv.isLinux then "ls --color" else "ls -G";
+        cddev = "cd ~/Development";
         watch = "watch ";
         vim = "nvim";
         vims = "NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim";
         vimr = "nvr --remote";
-        ls = "ls -G";
         gpgbye = "gpg-connect-agent updatestartuptty /bye";
         tmux = "tmux -u";
         kush = "kubectl run ubuntu --rm -i --tty --image ubuntu -- bash";
