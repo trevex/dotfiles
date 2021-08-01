@@ -76,6 +76,7 @@ in {
     wmutils-core
     xdo
     xdotool
+    ranger
   ]);
 
   my.home = { config, ... } : {

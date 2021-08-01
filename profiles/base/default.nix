@@ -8,6 +8,7 @@
     git-lfs
     gcc
     bat
+    moreutils
   ];
 
   fonts = {
