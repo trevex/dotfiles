@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
-{
+let
+  go-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "go-nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "go.nvim";
+      rev = "1988bf39aeb3570f31586ec3ac1d280f5967e44e";
+      sha256 = "0pdfm88za0bhf6d85s8cjiqb322xdlcl70wn5zvnq7niym8n3pjn";
+    };
+    prePatch = ''
+      rm Makefile
+    '';
+  };
+in {
   my.home = {
     home.packages = with pkgs; [
       gopls
@@ -53,6 +66,7 @@
         vim-nix
         vim-terraform
         vim-helm
+        go-nvim
       ];
       extraConfig = ''
         lua require('init')

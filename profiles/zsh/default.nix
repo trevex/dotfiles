@@ -54,6 +54,8 @@ in
         autoload -z edit-command-line
         zle -N edit-command-line
         bindkey "^X^X" edit-command-line
+        bindkey '^A' beginning-of-line
+        bindkey '^E' end-of-line
 
         setopt PROMPT_SP
 

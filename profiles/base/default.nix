@@ -10,6 +10,9 @@
     bat
     moreutils
     tree
+    gnumake
+    unzip
+    protobuf
   ];
 
   fonts = {
@@ -52,5 +55,11 @@
       goPath = "Development/go";
       goBin = "Development/go/bin";
     };
+
+    # TODO: use environment.shellInit?
+    programs.zsh.initExtra = ''
+     export PATH="$PATH:$GOBIN"
+    '';
+
   };
 }

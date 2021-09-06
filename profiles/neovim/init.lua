@@ -295,6 +295,15 @@ map("i", "<C-f>", "compe#scroll({ 'delta': +4 })", opts)
 map("i", "<C-d>", "compe#scroll({ 'delta': -4 })", opts)
 
 
+-- go.nvim
+require('go').setup()
+
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+
+
+
+
 -- LSP
 local lspconfig = require "lspconfig"
 
