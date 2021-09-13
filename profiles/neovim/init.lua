@@ -299,7 +299,7 @@ map("i", "<C-d>", "compe#scroll({ 'delta': -4 })", opts)
 require('go').setup()
 
 vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
--- vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
 
 
 
