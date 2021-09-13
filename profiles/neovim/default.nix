@@ -46,7 +46,7 @@ in {
         nvim-compe
         nvim-web-devicons
         nvim-tree-lua
-        nvim-bufferline-lua
+        bufferline-nvim
         lualine-nvim # statusbar
         # colorscheme
         lush-nvim
