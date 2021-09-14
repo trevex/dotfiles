@@ -203,10 +203,14 @@
         config = { allowUnfree = true; };
       in final: prev: {
         unstable = import inputs.nixpkgs-unstable { inherit (prev) system; inherit config; };
-        neovim-unwrapped = final.unstable.neovim-unwrapped;
+        # let's setup everything for vim/neovim to use unstable
+        vim = final.unstable.vim;
+        vimUtils = final.unstable.vimUtils;
         vimPlugins = final.unstable.vimPlugins;
+        neovim-unwrapped = final.unstable.neovim-unwrapped;
+        neovimUtils = final.unstable.neovimUtils;
         wrapNeovimUnstable = final.unstable.wrapNeovimUnstable;
-	neovimUtils = final.unstable.neovimUtils;
+        # newest terraform
         terraform_1_0 = final.unstable.terraform_1_0;
       };
     };
