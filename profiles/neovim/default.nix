@@ -1,7 +1,8 @@
 { config, pkgs, ... }:
 let
   go-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "go-nvim";
+    pname = "go.nvim";
+    version = "04-09-2021";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
