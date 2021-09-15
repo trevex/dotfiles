@@ -41,6 +41,9 @@ in {
     # Let's setup chromium and add our custom desktop item
     programs.chromium = {
       enable = true;
+      extensions = [
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+      ];
     };
     home.packages = [ chromiumDesktopItem ];
   };
