@@ -32,6 +32,16 @@ in {
     ];
   };
 
+  # Configure printing
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.brlaser ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+
   # Enable docker
   virtualisation.docker.enable = true;
 
