@@ -65,14 +65,6 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  services.picom = {
-    enable = true;
-    fade = true;
-    inactiveOpacity = 0.95;
-    shadow = false;
-    fadeDelta = 4;
-  };
-
   # Install required tools to make all our keybindings and scripts work
   environment.systemPackages = [
     focusMover
@@ -138,11 +130,34 @@ in {
       };
     };
 
+    services.picom = {
+      enable = true;
+      experimentalBackends = true;
+      fade = true;
+      inactiveOpacity = "0.95";
+      shadow = false;
+      fadeDelta = 4;
+      extraOptions = ''
+        corner-radius = 5.0;
+
+        rounded-corners-exclude = [
+          "window_type = 'dock'",
+          "window_type = 'desktop'",
+          "window_type = 'toolbar'",
+          "window_type = 'menu'",
+          "window_type = 'dropdown_menu'",
+          "window_type = 'popup_menu'",
+          "window_type = 'tooltip'"
+        ];
+      '';
+    };
+
     services.redshift = {
       enable = true;
       dawnTime = "6:00-8:00";
       duskTime = "19:00-20:00";
     };
+
     # There is no inbuilt screen-locker, so let's use betterlockscreen.
     services.screen-locker = {
       enable = true;
