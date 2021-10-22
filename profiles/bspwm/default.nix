@@ -147,7 +147,7 @@ in {
     services.screen-locker = {
       enable = true;
       inactiveInterval = 300;
-      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l blur";
       xautolockExtraOptions = [
         "Xautolock.killer: systemctl suspend"
       ];
