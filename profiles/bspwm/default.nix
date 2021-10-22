@@ -134,7 +134,7 @@ in {
       enable = true;
       experimentalBackends = true;
       fade = true;
-      inactiveOpacity = "0.95";
+      inactiveOpacity = "1.0";
       shadow = false;
       fadeDelta = 4;
       extraOptions = ''
