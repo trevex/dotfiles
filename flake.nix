@@ -133,9 +133,9 @@
           };
         };
 
-    mkDarwinConfig = args:
+    mkDarwinConfig = { platform, ... } @ args:
       let
-        modules = mkConfig (args // { isLinux = false; });
+        modules = mkConfig ((removeAttrs args [ "platform" ]) // { isLinux = false; });
         nixpkgs = inputs.nixpkgs;
 
         darwinDefaults = { config, pkgs, lib, ... }: {
@@ -160,6 +160,7 @@
         inputs.darwin.lib.darwinSystem {
           modules = modules ++ [ darwinDefaults ];
           inputs.nixpkgs = nixpkgs;
+          system = platform;
           specialArgs = specialArgs {
             inputs = inputs // { darwin = inputs.darwin; };
             isLinux = false;
@@ -171,6 +172,7 @@
       CHG0332 = mkDarwinConfig {
         hostname = "CHG0332.local";
         username = "vossni";
+        platform = "x86_64-darwin";
         hostConfiguration = ./hosts/darwin.nix;
       };
     };
