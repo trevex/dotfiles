@@ -44,11 +44,16 @@ in {
         # some neovim essentials
         nvim-treesitter
         nvim-lspconfig
-        nvim-compe
         nvim-web-devicons
         nvim-tree-lua
         bufferline-nvim
         lualine-nvim # statusbar
+        # code completion
+        vim-vsnip # snippets
+        nvim-cmp
+        cmp-vsnip
+        cmp-nvim-lsp
+        cmp-buffer
         # colorscheme
         lush-nvim
         gruvbox-nvim
