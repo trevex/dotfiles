@@ -260,10 +260,14 @@ map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {n
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
 
 
-
+-- Icons for code completion
+local lspkind = require "lspkind"
 -- Code completion
 local cmp = require "cmp"
 cmp.setup({
+  formatting = {
+    format = lspkind.cmp_format({with_text = true, maxwidth = 50})
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)

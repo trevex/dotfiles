@@ -54,6 +54,7 @@ in {
         cmp-vsnip
         cmp-nvim-lsp
         cmp-buffer
+        lspkind-nvim
         # colorscheme
         lush-nvim
         gruvbox-nvim
