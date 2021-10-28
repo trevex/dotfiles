@@ -259,7 +259,15 @@ map("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", 
 map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {noremap=true})
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
 
-
+-- Tabninefor code completion
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({
+  max_lines = 1000;
+  max_num_results = 20;
+  sort = true;
+	run_on_every_keystroke = true;
+	snippet_placeholder = '..';
+})
 -- Icons for code completion
 local lspkind = require "lspkind"
 -- Code completion
@@ -283,7 +291,9 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
+    { name = 'cmp_tabnine' },
   }, {
+    { name = 'path' },
     { name = 'buffer' },
   })
 })

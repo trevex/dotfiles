@@ -16,6 +16,7 @@ in {
     firefox
     libva-utils
     ffmpeg-full
+    font-manager
   ];
 
   # Some applications interact with power controls via DBus, e.g. Chromium
