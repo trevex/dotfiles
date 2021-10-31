@@ -16,6 +16,7 @@ let
 in {
   my.home = {
     home.packages = with pkgs; [
+      # language servers
       gopls
       terraform-ls
       rnix-lsp
@@ -64,6 +65,7 @@ in {
         popup-nvim
         plenary-nvim
         telescope-nvim
+        telescope-fzf-native-nvim
         # utility
         vim-visual-multi
         gitsigns-nvim # depends on nvim-lua/plenary.nvim

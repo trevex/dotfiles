@@ -242,16 +242,16 @@ require('telescope').setup {
         preview_cutoff = 120
     },
   },
-  -- extensions = {
-  --   fzf = {
-  --     fuzzy = true,                    -- false will only do exact matching
-  --     override_generic_sorter = false, -- override the generic sorter
-  --     override_file_sorter = true,     -- override the file sorter
-  --     case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-  --   }
-  -- }
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = false,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
+  }
 }
--- require('telescope').load_extension('fzf')
+require('telescope').load_extension('fzf')
 
 map("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
 map("", "<C-P>", "<cmd>lua require('telescope.builtin').find_files()<cr>", {noremap=true})
@@ -374,5 +374,4 @@ cmd [[
   au BufRead,BufNewFile *.hcl set filetype=terraform
   " zsh.nix is causing confusion
   au BufRead,BufNewFile *.nix set filetype=nix
-
 ]]
