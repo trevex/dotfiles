@@ -35,7 +35,7 @@
           icon_position = "left";
         };
         frame = {
-          width = 2;
+          width = 4;
           color = "#ebdbb2";
         };
         shortcuts = {

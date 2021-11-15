@@ -66,6 +66,7 @@ in {
         plenary-nvim
         telescope-nvim
         telescope-fzf-native-nvim
+        telescope-project-nvim
         # utility
         vim-visual-multi
         gitsigns-nvim # depends on nvim-lua/plenary.nvim
