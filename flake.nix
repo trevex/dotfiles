@@ -214,6 +214,10 @@
         wrapNeovimUnstable = final.unstable.wrapNeovimUnstable;
         # newest terraform
         terraform_1_0 = final.unstable.terraform_1_0;
+        # up-to-date language servers
+        gopls = final.unstable.gopls;
+        terraform-ls = final.unstable.terraform-ls;
+        rnix-lsp = final.unstable.rnix-lsp;
       };
     };
   };
