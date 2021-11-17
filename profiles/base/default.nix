@@ -24,7 +24,7 @@
     ];
   };
 
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = false;  # we are using home-manager zsh, so do not enable!
 
   programs.gnupg.agent = {
     enable = true;
