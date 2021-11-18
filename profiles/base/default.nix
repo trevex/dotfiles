@@ -24,7 +24,10 @@
     ];
   };
 
-  programs.zsh.enable = false;  # we are using home-manager zsh, so do not enable!
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false; # we are using home-manager zsh, so do not enable!
+  };
 
   programs.gnupg.agent = {
     enable = true;
