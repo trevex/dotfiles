@@ -106,6 +106,8 @@ map("n", "<leader>p", "\"+p", {noremap=true})
 map("n", "<leader>P", "\"+P", {noremap=true})
 map("v", "<leader>p", "\"+p", {noremap=true})
 map("v", "<leader>P", "\"+P", {noremap=true})
+-- Symbols outline
+map("n", "<C-S>", ":SymbolsOutline<CR>", {noremap=true})
 
 
 -- Lualine with icons
@@ -304,7 +306,9 @@ cmp.setup({
 -- go.nvim
 require('go').setup()
 
-vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
+map("n", "<leader>gf", "<cmd>lua require('go.format').gofmt()<cr>", {noremap=true})
+map("n", "<leader>gF", "<cmd>lua require('go.format').gofmt()<cr>", {noremap=true})
+-- vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
 -- vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
 
 
@@ -356,6 +360,48 @@ for _, lsp in ipairs(servers) do
     },
   }
 end
+
+
+-- Dashboard
+local g = vim.g
+g.dashboard_default_executive ='telescope'
+g.dashboard_custom_section = {
+    a = {description = {"  Find File                 leader f f"}, command = "Telescope find_files"},
+    c = {description = {"  Find Word                 leader f g"}, command = "Telescope live_grep"},
+    e = {description = {"  Projects                  leader f p"}, command = "Telescope projects"},
+    i = {description = {"  Exit                      leader e e"}, command = "exit"}
+}
+g.dashboard_custom_footer = {'type  :help<Enter>  or  <F1>  for on-line help'}
+vim.cmd [[
+augroup dashboard_au
+     autocmd! * <buffer>
+     autocmd User dashboardReady let &l:stl = 'Dashboard'
+     autocmd User dashboardReady nnoremap <buffer> <leader>ee <cmd>exit<CR>
+augroup END
+]]
+
+g.dashboard_custom_header = {
+  "⠪⠐⠐⠀⠂⠠⢑⠑⢕⠱⢱⢑⢕⠕⡕⡕⡜⡄⠕⢌⠢⡑⢌⠢⡑⡨⢐⢐⢐⢀⠂⡐⢀⠂⡐⢀⠂⡐⢀",
+  "⠂⢀⠁⠈⡀⠁⠂⠠⡀⠑⡀⠊⡘⢘⠌⠌⡘⠸⠱⡱⡱⡸⡐⡕⡌⡢⡑⡰⡐⢔⢀⢂⠐⡀⢂⠐⡀⢂⠐",
+  "⠠⠀⠀⠄⠀⠐⠈⠀⠂⠠⠀⠑⠌⠄⡌⡐⡈⠄⠡⠐⠱⢱⢱⢱⢱⢱⡨⡢⡊⡆⢆⡂⡂⢂⠂⢂⠂⡂⠌",
+  "⠀⠂⢀⠐⠈⠀⠄⠁⢈⠀⡈⠄⠂⠠⠁⠂⠡⠐⠠⢁⠨⠀⠅⠱⡱⣣⡳⡕⡧⡳⣕⢵⢕⡐⡈⠄⢂⢐⠐",
+  "⠁⠠⠀⠠⠐⠀⠂⠈⡀⠄⠠⠐⢈⠀⠡⢈⠠⠁⡐⠠⠐⡈⠌⠨⠠⠡⡑⢕⢕⢝⢜⢕⣗⢵⢐⠨⢐⠠⢈",
+  "⠐⠀⠂⠐⠀⢁⠈⠠⠀⠂⡁⢐⠠⠈⠨⠀⠄⠡⠐⠠⠡⢐⠨⢨⠈⠅⠢⡁⠣⡱⡱⡱⢵⢝⢵⠨⢐⠨⠠",
+  "⠂⢀⠁⡈⠀⠄⠐⠀⠌⠀⠄⠠⠐⡈⠄⠕⠡⡨⡈⡢⠡⠡⡂⢅⠌⠌⡂⡪⢐⠸⡘⡌⡧⡫⡯⣊⢢⠨⡂",
+  "⠐⠀⠄⠠⠈⡀⠈⠄⠈⠄⠌⠂⠅⠂⠅⡑⡡⢂⠌⠢⡑⡡⡊⢆⢕⢑⠌⣎⠢⡕⡸⡘⣜⢜⣝⢮⢪⢪⠢",
+  "⠁⡈⢀⠐⠠⠀⠡⠠⠁⡂⠌⡈⠄⡡⠨⡐⡨⡐⡌⡪⡰⡨⡪⡸⣘⢜⠜⡌⡇⣇⢇⢇⢎⢧⡳⣫⢧⣳⡹",
+  "⠁⠠⠀⠂⡁⠈⠄⡁⢂⠐⡐⢀⢂⠂⢅⢒⢜⢜⢜⢎⢞⢜⢮⢝⢮⢮⡳⡵⣵⣱⢣⣳⢹⡪⡪⣮⢳⢕⢽",
+  "⢁⠐⠈⠠⢀⠁⡂⢐⠐⠐⢐⠐⠠⢑⠡⡊⡆⡇⡇⡏⡗⣝⢎⢗⡳⡵⣝⣝⢮⢮⣳⣳⡳⣝⣝⡜⣜⢜⢕",
+  "⠠⠐⠈⡀⠂⡀⢂⠐⢈⠐⠀⠄⠅⠢⡱⡑⡕⣕⢵⢹⢪⢎⢗⢗⡝⡮⡮⡺⣪⡳⡳⣕⢯⡺⡮⡯⣺⡪⡳",
+  "⠂⠀⠂⡀⠂⡐⠠⢈⠠⠀⡁⠨⠠⡑⡕⡕⡝⣜⢜⢎⢧⡫⣝⢵⡹⡺⡪⡯⣺⡪⣯⡺⡽⡽⡽⣝⣞⡮⡯",
+  "⠂⠁⠠⠀⠂⡐⢀⠂⠄⠂⠠⠨⢐⠨⡪⡪⣪⢪⡪⣳⢱⢕⢧⡳⣝⢭⡫⡯⣺⣺⣺⡪⡯⡯⣯⡺⡮⡯⣯",
+  "⠐⠈⠀⡈⠠⠐⢀⠂⠡⠈⠠⢈⢐⠈⡎⡮⡪⡺⡜⡎⣇⢯⢺⢜⢮⡳⣝⢞⢞⢮⣺⡪⡯⡯⡮⡯⣯⣻⡺",
+  "⠂⠈⢀⠠⠐⠈⠠⠈⠄⠅⠨⢀⠐⠨⠨⡪⡪⡎⡮⡪⣪⢪⢳⡹⣕⢕⢧⡫⣫⡣⡳⣝⢝⢮⣫⡻⡺⣜⠮",
+  "⡀⠁⢀⠀⠄⠈⠄⠡⠈⠌⠨⠠⠈⠌⠐⢌⢪⢪⢪⢪⢪⡪⡣⣣⢳⡹⡪⡺⡸⣪⢫⡪⡳⡕⡧⡫⡎⡎⡎",
+  "⡀⠄⠀⠄⠀⠂⠠⠁⠡⠡⠡⠡⠡⠡⡁⡂⠢⠡⠣⡱⢱⢱⢹⢸⢸⢜⢎⢎⢧⢳⢱⡹⡜⡎⡮⡪⡪⠪⡪",
+  "⠀⠄⠂⠀⠄⠁⡀⠈⠄⢈⠨⠈⢌⢂⢂⠢⠡⠨⠨⢈⠊⢆⢣⢣⢣⢣⢳⢱⢱⢱⢱⢱⠱⡑⢕⢑⢌⢪⠨",
+  "⠠⠀⠀⠂⠀⠁⠀⠂⠐⠀⡀⠁⠐⡀⠅⠊⠌⢌⢌⢐⠨⠠⠑⡈⠪⡊⢎⢪⠢⡣⡑⡕⡱⠡⠣⡑⢔⢱⢩",
+}
 
 
 -- Terraform

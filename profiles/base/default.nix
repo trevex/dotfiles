@@ -4,6 +4,7 @@
     vim
     ripgrep
     curl
+    exa
     git
     git-lfs
     gcc

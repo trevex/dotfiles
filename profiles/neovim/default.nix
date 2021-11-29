@@ -51,6 +51,7 @@ in {
         lualine-nvim # statusbar
         # code completion
         vim-vsnip # snippets
+        friendly-snippets
         nvim-cmp
         cmp-vsnip
         cmp-nvim-lsp
@@ -74,6 +75,9 @@ in {
         vim-sneak # s<char><char>
         vim-better-whitespace # whitespace cleanup
         indent-blankline-nvim
+        symbols-outline-nvim
+        # stabilize-nvim # TODO: not available yet :/
+        dashboard-nvim # \o/
         # language support
         vim-nix
         vim-terraform
