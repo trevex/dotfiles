@@ -49,6 +49,8 @@ opt.background = "dark"
 cmd "colorscheme gruvbox"
 g.gruvbox_italic = 1
 g.gruvbox_contrast_dark = "medium"
+cmd [[highlight! link CmpItemKindFunction GruvboxAqua]]
+
 
 cmd "if has('mouse') | set mouse=a | endif"
 cmd "if has('persistent_undo') | set undofile | set undodir=~/.local/share/nvim-undo | endif"
@@ -155,12 +157,10 @@ require "bufferline".setup {
 -- nvim-tree-lua
 g.nvim_tree_side = "left"
 g.nvim_tree_width = 25
-g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 g.nvim_tree_gitignore = 1
 g.nvim_tree_auto_ignore_ft = {"dashboard"} -- don't open tree on specific fiypes.
 g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
 g.nvim_tree_indent_markers = 1
-g.nvim_tree_hide_dotfiles = 1
 g.nvim_tree_git_hl = 1
 g.nvim_tree_highlight_opened_files = 0
 g.nvim_tree_allow_resize = 1
@@ -211,6 +211,10 @@ require'nvim-tree'.setup {
   update_cwd = true,
   update_focused_file = {
     enable = true,
+  },
+  filters = {
+    dotfiles = true,
+    custom = {".git", "node_modules", ".cache"},
   },
 }
 

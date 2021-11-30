@@ -2,12 +2,12 @@
 let
   go-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "go.nvim";
-    version = "04-09-2021";
+    version = "29-11-2021";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "1988bf39aeb3570f31586ec3ac1d280f5967e44e";
-      sha256 = "0pdfm88za0bhf6d85s8cjiqb322xdlcl70wn5zvnq7niym8n3pjn";
+      rev = "3329238deb8c2294d1b7f5ceffdeb3d5b31fe8be";
+      sha256 = "14vw0nrn4qqshj8ajz6s0k5y96qn06j08nax12lf52by7cfvvni0";
     };
     prePatch = ''
       rm Makefile
