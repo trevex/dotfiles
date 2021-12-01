@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, isLinux, isDarwin, ... }:
 {
   environment.systemPackages = with pkgs; [
     vim
@@ -18,13 +18,16 @@
   ];
 
   fonts = {
-    fontDir.enable = true;
     fonts = with pkgs; [
       dejavu_fonts
       material-design-icons
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
-  };
+  } // (if isLinux then {
+    fontDir.enable = true;
+  } else {
+    enableFontDir = true;
+  });
 
   programs.zsh = {
     enable = true;
