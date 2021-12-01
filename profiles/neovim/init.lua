@@ -309,17 +309,6 @@ cmp.setup({
 })
 
 
--- go.nvim
-require('go').setup()
-
-map("n", "<leader>gf", "<cmd>lua require('go.format').gofmt()<cr>", {noremap=true})
-map("n", "<leader>gF", "<cmd>lua require('go.format').gofmt()<cr>", {noremap=true})
--- vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').gofmt() ]], false)
--- vim.api.nvim_exec([[ autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
-
-
-
-
 -- LSP
 local lspconfig = require "lspconfig"
 
@@ -351,6 +340,12 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.api.nvim_command [[augroup END]]
+  end
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and

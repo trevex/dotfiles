@@ -42,6 +42,7 @@ in {
         vim-surround
         vim-unimpaired
         vim-repeat
+        vim-peekaboo
         # some neovim essentials
         nvim-treesitter
         nvim-lspconfig
@@ -82,7 +83,7 @@ in {
         vim-nix
         vim-terraform
         vim-helm
-        go-nvim
+        vim-go
       ];
       extraConfig = ''
         lua require('init')
