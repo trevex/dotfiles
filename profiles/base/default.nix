@@ -14,6 +14,7 @@
     gnumake
     unzip
     protobuf
+    htop
   ];
 
   fonts = {
@@ -62,7 +63,7 @@
 
     # TODO: use environment.shellInit?
     programs.zsh.initExtra = ''
-     export PATH="$PATH:$GOBIN"
+      export PATH="$PATH:$GOBIN"
     '';
 
   };
