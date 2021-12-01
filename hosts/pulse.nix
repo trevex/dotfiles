@@ -59,5 +59,5 @@
 
   time.timeZone = "Europe/Amsterdam";
 
-  fonts.fontconfig.dpi = 90;
+  # services.xserver.dpi = 90;
 }

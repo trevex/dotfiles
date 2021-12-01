@@ -157,7 +157,6 @@ require "bufferline".setup {
 -- nvim-tree-lua
 g.nvim_tree_side = "left"
 g.nvim_tree_width = 25
-g.nvim_tree_gitignore = 1
 g.nvim_tree_auto_ignore_ft = {"dashboard"} -- don't open tree on specific fiypes.
 g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
 g.nvim_tree_indent_markers = 1
@@ -175,21 +174,21 @@ g.nvim_tree_icons = {
   default = "",
   symlink = "",
   git = {
-      unstaged = "✗",
-      staged = "✓",
-      unmerged = "",
-      renamed = "➜",
-      untracked = "★",
-      deleted = "",
-      ignored = "◌"
+    unstaged = "✗",
+    staged = "✓",
+    unmerged = "",
+    renamed = "➜",
+    untracked = "★",
+    deleted = "",
+    ignored = "◌"
   },
   folder = {
-      default = "",
-      open = "",
-      empty = "", -- 
-      empty_open = "",
-      symlink = "",
-      symlink_open = ""
+    default = "",
+    open = "",
+    empty = "", -- 
+    empty_open = "",
+    symlink = "",
+    symlink_open = ""
   }
 }
 
@@ -215,6 +214,9 @@ require'nvim-tree'.setup {
   filters = {
     dotfiles = true,
     custom = {".git", "node_modules", ".cache"},
+  },
+  git = {
+    ignore = true,
   },
 }
 

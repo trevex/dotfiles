@@ -3,14 +3,14 @@
 
   inputs = {
     nixos-hardware.url = "nixos-hardware/master";
-    nixpkgs.url = "nixpkgs/21.05";
+    nixpkgs.url = "nixpkgs/21.11";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.05";
+      url = "github:nix-community/home-manager/release-21.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -116,10 +116,6 @@
 
             # Optimize (hardlink duplicates) store automatically
             autoOptimiseStore = true;
-
-            # Reduce IOnice and CPU niceness of the build daemon
-            daemonIONiceLevel = 3;
-            daemonNiceLevel = 10;
           };
         };
       in

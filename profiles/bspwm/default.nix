@@ -163,7 +163,7 @@ in {
       enable = true;
       inactiveInterval = 300;
       lockCmd = "${pkgs.i3lock-color}/bin/i3lock-color -n -c 1d2021 --indicator -k --timecolor=#ebdbb2ff --datecolor=#ebdbb2ff --insidecolor=#1d2021cc --insidevercolor=#1d202100 --insidewrongcolor=#cc241dcc --ringcolor=#689d6aff --ringvercolor=#689d6a00 --ringwrongcolor=#fb4934ff --keyhlcolor=#b16286ff --bshlcolor=#d79921ff --verifcolor=#00000000 --wrongcolor=#00000000 --line-uses-inside --ring-width 5 --pass-media-keys --separatorcolor=#00000000";
-      xautolockExtraOptions = [
+      xautolock.extraOptions = [
         "Xautolock.killer: systemctl suspend"
       ];
     };
