@@ -139,7 +139,7 @@ in
       shadow = false;
       fadeDelta = 4;
       extraOptions = ''
-        corner-radius = 5.0;
+        corner-radius = 4.0;
 
         rounded-corners-exclude = [
           "window_type = 'dock'",

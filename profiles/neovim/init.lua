@@ -49,7 +49,6 @@ opt.background = "dark"
 cmd "colorscheme gruvbox"
 g.gruvbox_italic = 1
 g.gruvbox_contrast_dark = "medium"
-cmd [[highlight! link CmpItemKindFunction GruvboxAqua]]
 
 
 cmd "if has('mouse') | set mouse=a | endif"
@@ -308,6 +307,9 @@ cmp.setup({
   })
 })
 
+
+-- Gruvbox for cmp
+-- cmd [[highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0]]
 
 -- LSP
 local lspconfig = require "lspconfig"
