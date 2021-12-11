@@ -63,9 +63,6 @@ in
     displayManager.defaultSession = "home-manager";
   };
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Install required tools to make all our keybindings and scripts work
   environment.systemPackages = [
     focusMover

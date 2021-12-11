@@ -9,7 +9,8 @@ let
     terminal = "false";
     categories = "Network;WebBrowser;";
   };
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     dconf
     libnotify
@@ -21,6 +22,19 @@ in {
 
   # Some applications interact with power controls via DBus, e.g. Chromium
   services.upower.enable = true;
+
+  # Setup PipeWire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Configure OpenGL fo VA-API (encoding HW-accleration) and Vulkan
   hardware.opengl = {
