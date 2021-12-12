@@ -18,10 +18,15 @@ in
     libva-utils
     ffmpeg-full
     font-manager
+    slack
   ];
 
   # Some applications interact with power controls via DBus, e.g. Chromium
   services.upower.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Setup PipeWire
   security.rtkit.enable = true;
@@ -30,11 +35,35 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    media-session.config.bluez-monitor.rules = [
+      {
+        # Matches all cards
+        matches = [{ "device.name" = "~bluez_card.*"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+            # mSBC is not expected to work on all headset + adapter combinations.
+            "bluez5.msbc-support" = true;
+            # SBC-XQ is not expected to work on all headset + adapter combinations.
+            "bluez5.sbc-xq-support" = true;
+            # Make sure to swap properly between A2DP and HSP/HFP
+            "bluez5.autoswitch-profile" = true;
+          };
+        };
+      }
+      {
+        matches = [
+          # Matches all sources
+          { "node.name" = "~bluez_input.*"; }
+          # Matches all outputs
+          { "node.name" = "~bluez_output.*"; }
+        ];
+        actions = {
+          "node.pause-on-idle" = false;
+        };
+      }
+    ];
   };
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   # Configure OpenGL fo VA-API (encoding HW-accleration) and Vulkan
   hardware.opengl = {
