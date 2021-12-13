@@ -26,7 +26,7 @@ in
 
   # Bluetooth
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  services.blueman.enable = true; # applet explicitly enabled below via home-manager
 
   # Setup PipeWire
   security.rtkit.enable = true;
@@ -91,6 +91,7 @@ in
 
   my.home = {
     services.network-manager-applet.enable = true;
+    services.blueman-applet.enable = true;
 
     # Let's setup chromium and add our custom desktop item
     programs.chromium = {
