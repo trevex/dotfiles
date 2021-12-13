@@ -34,6 +34,7 @@
     enableCompletion = false; # we are using home-manager zsh, so do not enable!
   };
 
+  # TODO: could move GPG shell stuff, from zsh-profile to environment.shellInit here instead
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -50,6 +51,7 @@
       terraform_1_0
       terragrunt_0_31
       tfsec
+      grype
     ];
 
     home.sessionVariables = {
