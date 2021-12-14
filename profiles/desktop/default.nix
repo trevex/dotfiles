@@ -1,25 +1,24 @@
 { config, pkgs, ... }:
-let
-  # Chromium is not properly leveraging HW-acceleration, so let's make sure
-  # to enable it by passing in the required flags.
-  chromiumDesktopItem = pkgs.makeDesktopItem {
-    name = "chromium-hw";
-    desktopName = "Chromium Hardware-Accelerated";
-    exec = "${pkgs.chromium}/bin/chromium --enable-features=VaapiVideoDecoder --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist";
-    terminal = "false";
-    categories = "Network;WebBrowser;";
-  };
-in
 {
   environment.systemPackages = with pkgs; [
     dconf
     libnotify
-    firefox
+    firefox # chrome is default and installed via home-manager below
     libva-utils
     ffmpeg-full
     font-manager
     slack
+    mate.atril # default for pdf
+    pdftk
+    qpdf
   ];
+
+  environment.etc."xdg/mimeapps.list" = {
+    text = ''
+      [Default Applications]
+      application/pdf=atril.desktop;
+    '';
+  };
 
   # Some applications interact with power controls via DBus, e.g. Chromium
   services.upower.enable = true;
@@ -99,8 +98,17 @@ in
       extensions = [
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
+      # Chromium is not properly leveraging HW-acceleration, so let's make sure
+      # to enable it by passing in the required flags.
+      package = (pkgs.chromium.override {
+        commandLineArgs = [
+          "--enable-features=VaapiVideoDecoder"
+          "--enable-gpu-rasterization"
+          "--enable-zero-copy"
+          "--ignore-gpu-blocklist"
+        ];
+      });
     };
-    home.packages = [ chromiumDesktopItem ];
   };
 
   # On every laptop we want to suspend once the lid is closed
