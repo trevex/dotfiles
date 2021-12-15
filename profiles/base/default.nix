@@ -15,6 +15,7 @@
     unzip
     protobuf
     htop
+    fd
   ];
 
   fonts = {

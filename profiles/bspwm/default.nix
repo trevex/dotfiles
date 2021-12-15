@@ -78,6 +78,8 @@ in
     xdo
     xdotool
     ranger
+    xsel
+    xclip
   ]);
 
   my.home = { config, ... }: {
