@@ -16,6 +16,8 @@
     protobuf
     htop
     fd
+    dig
+    wget
   ];
 
   fonts = {
@@ -53,6 +55,7 @@
       terragrunt_0_31
       tfsec
       grype
+      tokei
     ];
 
     home.sessionVariables = {

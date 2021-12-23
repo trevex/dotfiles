@@ -11,6 +11,7 @@
     mate.atril # default for pdf
     pdftk
     qpdf
+    ghostscript
   ];
 
   environment.etc."xdg/mimeapps.list" = {
@@ -97,6 +98,7 @@
       enable = true;
       extensions = [
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+        { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
       ];
       # Chromium is not properly leveraging HW-acceleration, so let's make sure
       # to enable it by passing in the required flags.
