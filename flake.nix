@@ -221,7 +221,7 @@
               neovimUtils = final.unstable.neovimUtils;
               wrapNeovimUnstable = final.unstable.wrapNeovimUnstable;
               # newest terraform
-              terraform_1_0 = final.unstable.terraform_1_0;
+              terraform_1 = final.unstable.terraform_1;
               # up-to-date language servers
               gopls = final.unstable.gopls;
               terraform-ls = final.unstable.terraform-ls;

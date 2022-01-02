@@ -53,6 +53,7 @@ g.gruvbox_contrast_dark = "medium"
 
 cmd "if has('mouse') | set mouse=a | endif"
 cmd "if has('persistent_undo') | set undofile | set undodir=~/.local/share/nvim-undo | endif"
+cmd "set shada='100,<500,/50,:100,@100,s10,h,c,n$HOME/.local/nvim/shada"
 opt.number = true -- Show line numbers
 opt.hidden = true -- If hidden is not set, TextEdit might fail
 opt.updatetime = 300 -- Smaller updatetime for CursorHold and CursorHoldI
