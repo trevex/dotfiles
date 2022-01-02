@@ -12,6 +12,9 @@
     pdftk
     qpdf
     ghostscript
+    vlc
+    mkchromecast
+    pavucontrol
   ];
 
   environment.etc."xdg/mimeapps.list" = {
