@@ -25,6 +25,7 @@ let
       # ...
     }
     // optionalAttrs isLinux {
+      x11 = mkProfile [ ./x11 ];
       bspwm = mkProfile [ ./bspwm ];
       desktop = mkProfile [ ./desktop ];
       polybar = mkProfile [ ./polybar ];

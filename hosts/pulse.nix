@@ -15,6 +15,7 @@ in
     neovim
     alacritty
     zsh
+    x11
     bspwm
     polybar
     rofi

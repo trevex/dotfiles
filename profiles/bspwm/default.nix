@@ -1,16 +1,6 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  xkbCustomLayout = pkgs.writeText "xkb-layout" ''
-    ! Map umlauts to RIGHT ALT + <key>
-    keycode 108 = Mode_switch
-    keysym e = e E EuroSign
-    keysym c = c C cent
-    keysym a = a A adiaeresis Adiaeresis
-    keysym o = o O odiaeresis Odiaeresis
-    keysym u = u U udiaeresis Udiaeresis
-    keysym s = s S ssharp
-  '';
   focusMover = pkgs.writeScriptBin "focus-mover" ''
     #!${pkgs.stdenv.shell}
     ${builtins.readFile ./scripts/focus-mover}
@@ -37,32 +27,6 @@ let
   '';
 in
 {
-  # TODO: move some of the fundamental X11 stuff out...
-
-  services.acpid.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    # Configure keymap in X11
-    layout = "us";
-    # Enable touchpad support (enabled default in most desktopManager).
-    libinput.enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "fill";
-      session = [{
-        name = "home-manager";
-        start = ''
-          ${pkgs.xorg.xmodmap}/bin/xmodmap ${xkbCustomLayout}
-          ${pkgs.stdenv.shell} $HOME/.xsession-hm &
-          waitPID=$!
-        '';
-      }];
-    };
-    displayManager.defaultSession = "home-manager";
-  };
-
   # Install required tools to make all our keybindings and scripts work
   environment.systemPackages = [
     focusMover
