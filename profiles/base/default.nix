@@ -18,6 +18,7 @@
     fd
     dig
     wget
+    openssl
   ];
 
   fonts = {
@@ -56,6 +57,7 @@
       tfsec
       grype
       tokei
+      act
     ];
 
     home.sessionVariables = {

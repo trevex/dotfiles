@@ -6,7 +6,7 @@ assert (
     true
   else
     builtins.trace "profiles: isLinux and isDarwin are mutually exclusive" false
-  );
+);
 
 let
   # Inlined lib.optionalAttrs
@@ -30,10 +30,12 @@ let
       polybar = mkProfile [ ./polybar ];
       rofi = mkProfile [ ./rofi ];
       dunst = mkProfile [ ./dunst ];
+      pipewire = mkProfile [ ./pipewire ];
+      pulseaudio = mkProfile [ ./pulseaudio ];
     }
     // optionalAttrs isDarwin {
       # ...
       # yabai = mkProfile [ ./yabai ];
     };
 in
-  fix profiles
+fix profiles
