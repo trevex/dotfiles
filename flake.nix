@@ -168,6 +168,38 @@
             isLinux = false;
           };
         };
+
+      mkHomeManagerConfig =
+        { hostname
+        , platform
+        , username
+        , homeDir ? /home + "/${username}"
+        , hostConfiguration ? ./hosts + "/${hostname}.nix"
+        , userConfiguration ? ./users + "/${username}.nix"
+        , extraModules ? [ ]
+        }:
+        let
+          defaults = { config, pkgs, lib, ... }: {
+            imports = [ hostConfiguration userConfiguration ];
+            # My custom user settings
+            my = { inherit username; };
+          };
+
+        in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          system = platform;
+          homeDirectory = homeDir;
+          username = username;
+          configuration.imports = [ ];
+          extraModules = [ ./module.nix defaults ] ++ extraModules;
+          extraSpecialArgs = {
+            isLinux = true;
+            isDarwin = false;
+            inputs = inputs; # Inject inputs
+            rootPath = ./.;
+          };
+          stateVersion = "21.11";
+        };
     in
     {
       darwinConfigurations = {
@@ -189,6 +221,14 @@
         pulse = mkLinuxConfig {
           hostname = "pulse";
           username = "nik";
+          platform = "x86_64-linux";
+        };
+      };
+
+      homeManagerConfigurations = {
+        x1c = mkHomeManagerConfig {
+          hostname = "x1c";
+          username = "nvoss";
           platform = "x86_64-linux";
         };
       };
