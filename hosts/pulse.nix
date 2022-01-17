@@ -30,14 +30,14 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
   boot.initrd.luks.devices."cryptroot" = {
     device = "/dev/disk/by-uuid/b1c5179c-f1fc-4930-87d6-b43f2bfc3545";
     preLVM = true;
     allowDiscards = true;
   };
 
-  boot.kernelModules = [ "kvm-amd" ];
+  # boot.kernelModules = [ "kvm-amd" ];
   boot.kernelParams = [
     "acpi_backlight=vendor"
     "video.use_native_backlight=1"
@@ -75,4 +75,6 @@ in
 
   # Fix media keys
   services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xkbCustomLayout}";
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 }

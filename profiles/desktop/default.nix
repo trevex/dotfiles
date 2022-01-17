@@ -15,6 +15,8 @@
     vlc
     mkchromecast
     pavucontrol
+    glxinfo
+    lshw
   ];
 
   environment.etc."xdg/mimeapps.list" = {
@@ -68,8 +70,8 @@
         commandLineArgs = [
           "--enable-features=VaapiVideoDecoder"
           "--enable-gpu-rasterization"
-          "--enable-zero-copy"
-          "--ignore-gpu-blocklist"
+          # "--enable-zero-copy"
+          # "--ignore-gpu-blocklist"
         ];
       });
     };
