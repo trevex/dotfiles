@@ -1,4 +1,4 @@
-{ config, options, lib, isLinux, ... }:
+{ config, options, lib, isLinux, isHomeConfig, inputs, ... }:
 
 with lib;
 
@@ -22,13 +22,20 @@ in
       example = "nik";
       readOnly = true;
     };
-    home = mkOption {
+    home = if !isHomeConfig then mkOption {
       type = options.home-manager.users.type.functor.wrapped;
-    };
+    } else {
+	programs = mkOption { type = types.anything; };
+	# programs = mkOption { type = hm.types.dagOf options.programs; };
+	};
   };
 
-  config = {
+  config = if isHomeConfig then {
+
+    programs = mkAliasDefinitions options.my.home.programs;
+} else {
     home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
+} // {
 
     my.home = { ... }:  {
       # imports = filesInDir ./modules/home-manager;

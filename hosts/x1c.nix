@@ -1,5 +1,5 @@
 { config, pkgs, lib, profiles, ... }:
 
 {
-  imports = with profiles; [ base neovim alacritty zsh ];
+  imports = with profiles; [ zsh ];
 }

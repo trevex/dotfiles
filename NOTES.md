@@ -6,6 +6,22 @@
 sudo nixos-rebuild switch --flake ".#$(hostname -s)"
 ```
 
+## Non-NixOS
+
+```
+apt install nix
+# Add user to `nix-users` group (and logout/login)
+nix-channel --add https://nixos.org/channels/nixos-21.11 nixpkgs
+nix-channel --update
+nix-instantiate '<nixpkgs>' -A hello # just to test
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+nix-channel --update
+# Let's create the first generation with home-manager
+nix-shell '<home-manager>' -A install
+# Support for flakes
+nix-env -iA nixpkgs.nixUnstable
+```
+
 ## Yubikey
 
 To setup the Yubikey for use with `git` and `ssh`, we only really need to import and trust it. The Yubikey is expected to be fully setup via [drduh's guide](https://github.com/drduh/YubiKey-Guide).
