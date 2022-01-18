@@ -1,4 +1,4 @@
-{ config, pkgs, isLinux, isHomeConfig, ... }:
+{ config, pkgs, isLinux, isHomeManager, ... }:
 let
   nixGLIntel = (pkgs.callPackage "${builtins.fetchTarball {
       url = https://github.com/guibou/nixGL/archive/17c1ec63b969472555514533569004e5f31a921f.tar.gz;
@@ -6,7 +6,7 @@ let
     }}/nixGL.nix"
     { }).nixGLIntel;
   alacrittyPackage =
-    if isHomeConfig then
+    if isHomeManager then
       (pkgs.writeShellScriptBin "alacritty" ''
         	#!/bin/bash
         	export LD_PRELOAD=/lib/x86_64-linux-gnu/libnss_sss.so.2
@@ -31,7 +31,7 @@ let
     };
   };
 in
-if isHomeConfig then home else
+if isHomeManager then home else
 {
   my.home = home;
 }

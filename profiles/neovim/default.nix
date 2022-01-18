@@ -1,4 +1,4 @@
-{ config, pkgs, isHomeConfig, ... }:
+{ config, pkgs, isHomeManager, ... }:
 let
   go-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "go.nvim";
@@ -91,6 +91,6 @@ let
   };
 
 in
-if isHomeConfig then home else {
+if isHomeManager then home else {
   my.home = home;
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, isHomeConfig, ... }:
+{ config, pkgs, isHomeManager, ... }:
 let
   inherit (pkgs) stdenv;
   home = {
@@ -93,6 +93,6 @@ let
     };
   };
 in
-if isHomeConfig then home else {
+if isHomeManager then home else {
   my.home = home;
 }

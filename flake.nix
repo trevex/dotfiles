@@ -44,7 +44,7 @@
             profiles = import ./profiles { inherit (self) isLinux; };
             isLinux = self.isLinux;
             isDarwin = !self.isLinux;
-            isHomeConfig = false;
+            isHomeManager = false;
             # This could import the whole tree if evaluated?, including ignored files?
             rootPath = ./.;
           } // extraArgs;
@@ -197,7 +197,7 @@
           extraModules = [ ./module.nix defaults ] ++ extraModules;
           extraSpecialArgs = specialArgs {
             isLinux = true;
-            isHomeConfig = true;
+            isHomeManager = true;
             inputs = inputs; # Inject inputs
           };
           stateVersion = "21.11";

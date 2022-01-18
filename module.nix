@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, isLinux, isHomeConfig, inputs, ... }:
+{ config, options, lib, pkgs, isLinux, isHomeManager, inputs, ... }:
 
 with lib;
 
@@ -21,7 +21,7 @@ in
       readOnly = true;
     };
     home =
-      if !isHomeConfig then
+      if !isHomeManager then
         mkOption { type = options.home-manager.users.type.functor.wrapped; }
       else # TODO: below does not work, so all profiles have to be aware whether they are run under HM or not :/
         let
@@ -36,7 +36,7 @@ in
   };
 
   config =
-    if isHomeConfig then { } else {
+    if isHomeManager then { } else {
       home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
     } // {
 

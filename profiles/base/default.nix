@@ -1,4 +1,4 @@
-{ config, lib, pkgs, isLinux, isDarwin, isHomeConfig, ... }:
+{ config, lib, pkgs, isLinux, isDarwin, isHomeManager, ... }:
 let
   fontPackages = with pkgs; [
     dejavu_fonts
@@ -26,6 +26,8 @@ let
     openssl
   ];
   home = {
+    fonts.fontconfig.enable = true;
+
     home.packages = with pkgs; [
       httpie
       kubectl
@@ -39,7 +41,7 @@ let
       grype
       tokei
       act
-    ] ++ (if isHomeConfig then fontPackages ++ systemPackages else [ ]);
+    ] ++ (if isHomeManager then fontPackages ++ systemPackages else [ ]);
 
     home.sessionVariables = {
       TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
@@ -102,7 +104,7 @@ let
   };
 
 in
-if isHomeConfig then home else
+if isHomeManager then home else
 {
   environment.systemPackages = systemPackages;
 
