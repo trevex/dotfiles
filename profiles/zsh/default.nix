@@ -1,9 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, isHomeConfig, ... }:
 let
   inherit (pkgs) stdenv;
-in
-{
-  my.home = {
+  home = {
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -14,13 +12,13 @@ in
       zplug = {
         enable = true;
         plugins = [
-          { name = "zsh-users/zsh-syntax-highlighting"; tags = ["defer:2"]; }
-          { name = "plugins/git"; tags = ["from:oh-my-zsh"]; }
-          { name = "plugins/kubectl"; tags = ["from:oh-my-zsh"]; }
-          { name = "plugins/helm"; tags = ["from:oh-my-zsh"]; }
-          { name = "plugins/docker"; tags = ["from:oh-my-zsh"]; }
-          { name = "plugins/cp"; tags = ["from:oh-my-zsh"]; }
-          { name = "plugins/man"; tags = ["from:oh-my-zsh"]; }
+          { name = "zsh-users/zsh-syntax-highlighting"; tags = [ "defer:2" ]; }
+          { name = "plugins/git"; tags = [ "from:oh-my-zsh" ]; }
+          { name = "plugins/kubectl"; tags = [ "from:oh-my-zsh" ]; }
+          { name = "plugins/helm"; tags = [ "from:oh-my-zsh" ]; }
+          { name = "plugins/docker"; tags = [ "from:oh-my-zsh" ]; }
+          { name = "plugins/cp"; tags = [ "from:oh-my-zsh" ]; }
+          { name = "plugins/man"; tags = [ "from:oh-my-zsh" ]; }
         ];
       };
       history = {
@@ -94,4 +92,7 @@ in
       };
     };
   };
+in
+if isHomeConfig then home else {
+  my.home = home;
 }

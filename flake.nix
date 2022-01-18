@@ -44,7 +44,7 @@
             profiles = import ./profiles { inherit (self) isLinux; };
             isLinux = self.isLinux;
             isDarwin = !self.isLinux;
-	    isHomeConfig = false;
+            isHomeConfig = false;
             # This could import the whole tree if evaluated?, including ignored files?
             rootPath = ./.;
           } // extraArgs;
@@ -181,24 +181,23 @@
         }:
         let
           defaults = { config, pkgs, lib, ... }: {
-           # imports = [ hostConfiguration userConfiguration ];
-            # My custom user settings
-            my = { inherit username; };
-	    my.home = {
-		programs.home-manager.enable = true;
-	};
+            imports = [ hostConfiguration userConfiguration ];
+            programs.home-manager.enable = true;
           };
-
+          configuration = { pkgs, ... }: {
+            nixpkgs.overlays = builtins.attrValues self.overlays;
+            imports = [ ];
+          };
         in
         inputs.home-manager.lib.homeManagerConfiguration {
+          inherit configuration;
           system = platform;
           homeDirectory = homeDir;
           username = username;
-          configuration.imports = [ ];
           extraModules = [ ./module.nix defaults ] ++ extraModules;
           extraSpecialArgs = specialArgs {
             isLinux = true;
-	    isHomeConfig = true;
+            isHomeConfig = true;
             inputs = inputs; # Inject inputs
           };
           stateVersion = "21.11";

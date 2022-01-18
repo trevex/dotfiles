@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, isHomeConfig, ... }:
 let
   go-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "go.nvim";
@@ -13,8 +13,7 @@ let
       rm Makefile
     '';
   };
-in {
-  my.home = {
+  home = {
     home.packages = with pkgs; [
       # language servers
       gopls
@@ -90,4 +89,8 @@ in {
       '';
     };
   };
+
+in
+if isHomeConfig then home else {
+  my.home = home;
 }

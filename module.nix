@@ -1,4 +1,4 @@
-{ config, options, lib, isLinux, isHomeConfig, inputs, ... }:
+{ config, options, lib, pkgs, isLinux, isHomeConfig, inputs, ... }:
 
 with lib;
 
@@ -13,8 +13,6 @@ let
     toPath (attrNames filteredFiles);
 in
 {
-  # imports = optionals isLinux (filesInDir ./modules/nixos);
-
   options.my = {
     username = mkOption {
       type = types.str;
@@ -22,40 +20,43 @@ in
       example = "nik";
       readOnly = true;
     };
-    home = if !isHomeConfig then mkOption {
-      type = options.home-manager.users.type.functor.wrapped;
-    } else {
-	programs = mkOption { type = types.anything; };
-	# programs = mkOption { type = hm.types.dagOf options.programs; };
-	};
+    home =
+      if !isHomeConfig then
+        mkOption { type = options.home-manager.users.type.functor.wrapped; }
+      else # TODO: below does not work, so all profiles have to be aware whether they are run under HM or not :/
+        let
+          extendedLib = import "${inputs.home-manager}/modules/lib/stdlib-extended.nix" pkgs.lib;
+          hmModules =
+            import "${inputs.home-manager}/modules/modules.nix" { inherit pkgs; lib = extendedLib; };
+          rawModule = extendedLib.evalModules { modules = hmModules; };
+          hmModule = types.submoduleWith { modules = hmModules; };
+        in
+        mkOption { type = hmModule; };
+
   };
 
-  config = if isHomeConfig then {
+  config =
+    if isHomeConfig then { } else {
+      home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
+    } // {
 
-    programs = mkAliasDefinitions options.my.home.programs;
-} else {
-    home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
-} // {
-
-    my.home = { ... }:  {
-      # imports = filesInDir ./modules/home-manager;
-
-      options.my.identity = {
-        name = mkOption {
-          type = types.str;
-          description = "Fullname";
-        };
-        email = mkOption {
-          type = types.str;
-          description = "Email";
-        };
-        gpgSigningKey = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          description = "Primary GPG signing key";
+      my.home = { ... }: {
+        options.my.identity = {
+          name = mkOption {
+            type = types.str;
+            description = "Fullname";
+          };
+          email = mkOption {
+            type = types.str;
+            description = "Email";
+          };
+          gpgSigningKey = mkOption {
+            type = types.nullOr types.str;
+            default = null;
+            description = "Primary GPG signing key";
+          };
         };
       };
     };
-  };
 
 }

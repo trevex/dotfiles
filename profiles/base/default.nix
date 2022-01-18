@@ -1,6 +1,11 @@
-{ config, lib, pkgs, isLinux, isDarwin, ... }:
-{
-  environment.systemPackages = with pkgs; [
+{ config, lib, pkgs, isLinux, isDarwin, isHomeConfig, ... }:
+let
+  fontPackages = with pkgs; [
+    dejavu_fonts
+    material-design-icons
+    (nerdfonts.override { fonts = [ "Meslo" ]; })
+  ];
+  systemPackages = with pkgs; [
     vim
     ripgrep
     curl
@@ -20,31 +25,7 @@
     wget
     openssl
   ];
-
-  fonts = {
-    fonts = with pkgs; [
-      dejavu_fonts
-      material-design-icons
-      (nerdfonts.override { fonts = [ "Meslo" ]; })
-    ];
-  } // (if isLinux then {
-    fontDir.enable = true;
-  } else {
-    enableFontDir = true;
-  });
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = false; # we are using home-manager zsh, so do not enable!
-  };
-
-  # TODO: could move GPG shell stuff, from zsh-profile to environment.shellInit here instead
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  my.home = {
+  home = {
     home.packages = with pkgs; [
       httpie
       kubectl
@@ -58,7 +39,7 @@
       grype
       tokei
       act
-    ];
+    ] ++ (if isHomeConfig then fontPackages ++ systemPackages else [ ]);
 
     home.sessionVariables = {
       TF_PLUGIN_CACHE_DIR = "$HOME/.terraform.d/plugin-cache";
@@ -119,4 +100,30 @@
       # Or use work sub-dir, e.g. https://github.com/jonringer/nixpkgs-config/blob/14626b49310d747a2a4d4c1e3fd62dedef4cb860/home.nix
     };
   };
+
+in
+if isHomeConfig then home else
+{
+  environment.systemPackages = systemPackages;
+
+  fonts = {
+    fonts = fontPackages;
+  } // (if isLinux then {
+    fontDir.enable = true;
+  } else {
+    enableFontDir = true;
+  });
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false; # we are using home-manager zsh, so do not enable!
+  };
+
+  # TODO: could move GPG shell stuff, from zsh-profile to environment.shellInit here instead
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  my.home = home;
 }
