@@ -21,6 +21,17 @@ nix-shell '<home-manager>' -A install
 # Support for flakes
 nix-env -iA nixpkgs.nixUnstable
 ```
+Add to `.profile`:
+```
+export XDG_DATA_DIRS="$HOME/.nix-profile/share/:$XDG_DATA_DIRS"
+```
+
+Changing to zsh without `chsh`:
+```
+if echo $- | grep -q 'i' && [[ -x "$HOME/.nix-profile/bin/zsh" ]]; then
+  exec "$HOME/.nix-profile/bin/zsh" -i
+fi
+```
 
 ## Yubikey
 

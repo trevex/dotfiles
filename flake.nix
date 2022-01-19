@@ -41,7 +41,7 @@
       specialArgs = extraArgs:
         let
           args = self: {
-            profiles = import ./profiles { inherit (self) isLinux; };
+            profiles = import ./profiles { inherit (self) isLinux isHomeManager; };
             isLinux = self.isLinux;
             isDarwin = !self.isLinux;
             isHomeManager = false;
@@ -183,6 +183,9 @@
           defaults = { config, pkgs, lib, ... }: {
             imports = [ hostConfiguration userConfiguration ];
             programs.home-manager.enable = true;
+            xdg.enable = true;
+            xdg.mime.enable = true;
+            targets.genericLinux.enable = true;
           };
           configuration = { pkgs, ... }: {
             nixpkgs.overlays = builtins.attrValues self.overlays;
@@ -196,7 +199,7 @@
           username = username;
           extraModules = [ ./module.nix defaults ] ++ extraModules;
           extraSpecialArgs = specialArgs {
-            isLinux = true;
+            isLinux = true; # TODO: deduce from platform?
             isHomeManager = true;
             inputs = inputs; # Inject inputs
           };

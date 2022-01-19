@@ -1,3 +1,4 @@
+# Expected to be used with mkProfile (see ../default.nix).
 { config, lib, pkgs, isLinux, isDarwin, isHomeManager, ... }:
 let
   fontPackages = with pkgs; [
@@ -7,11 +8,11 @@ let
   ];
   systemPackages = with pkgs; [
     vim
+    git
+    git-lfs
     ripgrep
     curl
     exa
-    git
-    git-lfs
     gcc
     bat
     moreutils
@@ -119,12 +120,6 @@ if isHomeManager then home else
   programs.zsh = {
     enable = true;
     enableCompletion = false; # we are using home-manager zsh, so do not enable!
-  };
-
-  # TODO: could move GPG shell stuff, from zsh-profile to environment.shellInit here instead
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
   };
 
   my.home = home;

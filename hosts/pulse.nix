@@ -12,6 +12,7 @@ in
 {
   imports = with profiles; [
     base
+    gpg
     neovim
     alacritty
     zsh

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, isHomeManager, ... }:
 with lib;
 let
   focusMover = pkgs.writeScriptBin "focus-mover" ''
@@ -25,10 +25,7 @@ let
     #!${pkgs.stdenv.shell}
     ${builtins.readFile ./scripts/whid}
   '';
-in
-{
-  # Install required tools to make all our keybindings and scripts work
-  environment.systemPackages = [
+  systemPackages = [
     focusMover
     euclidMover
     autoPresel
@@ -45,12 +42,12 @@ in
     xsel
     xclip
   ]);
-
-  my.home = { config, ... }: {
+  homePackages = with pkgs; [
+    lxappearance
+  ] ++ (if isHomeManager then systemPackages else [ ]);
+  home = {
     # Let's also install some convenience tools to configure gtk etc.
-    home.packages = with pkgs; [
-      lxappearance
-    ];
+    home.packages = homePackages;
 
     # Make sure workspaces are shown in polybar, for this we need an additional
     # target to make sure polybar is not executed too early. And start it in
@@ -86,41 +83,41 @@ in
     # ~/.background-image using feh by default.
     home.file.".background-image".source = ./wallpaper.jpg;
 
-    gtk = {
-      enable = true;
-      iconTheme = {
-        name = "Papirus";
-        package = pkgs.papirus-icon-theme;
-      };
-    };
+    # gtk = {
+    #   enable = true;
+    #   iconTheme = {
+    #     name = "Papirus";
+    #     package = pkgs.papirus-icon-theme;
+    #   };
+    # };
 
-    services.picom = {
-      enable = true;
-      experimentalBackends = true;
-      fade = true;
-      inactiveOpacity = "1.0";
-      shadow = false;
-      fadeDelta = 4;
-      extraOptions = ''
-        corner-radius = 4.0;
+    # services.picom = {
+    #   enable = true;
+    #   experimentalBackends = true;
+    #   fade = true;
+    #   inactiveOpacity = "1.0";
+    #   shadow = false;
+    #   fadeDelta = 4;
+    #   extraOptions = ''
+    #     corner-radius = 4.0;
 
-        rounded-corners-exclude = [
-          "window_type = 'dock'",
-          "window_type = 'desktop'",
-          "window_type = 'toolbar'",
-          "window_type = 'menu'",
-          "window_type = 'dropdown_menu'",
-          "window_type = 'popup_menu'",
-          "window_type = 'tooltip'"
-        ];
-      '';
-    };
+    #     rounded-corners-exclude = [
+    #       "window_type = 'dock'",
+    #       "window_type = 'desktop'",
+    #       "window_type = 'toolbar'",
+    #       "window_type = 'menu'",
+    #       "window_type = 'dropdown_menu'",
+    #       "window_type = 'popup_menu'",
+    #       "window_type = 'tooltip'"
+    #     ];
+    #   '';
+    # };
 
-    services.redshift = {
-      enable = true;
-      dawnTime = "6:00-8:00";
-      duskTime = "19:00-20:00";
-    };
+    # services.redshift = {
+    #   enable = true;
+    #   dawnTime = "6:00-8:00";
+    #   duskTime = "19:00-20:00";
+    # };
 
     # There is no inbuilt screen-locker, so let's use betterlockscreen.
     services.screen-locker = {
@@ -136,4 +133,11 @@ in
       ];
     };
   };
+in
+if isHomeManager then home else
+{
+  # Install required tools to make all our keybindings and scripts work
+  environment.systemPackages = systemPackages;
+
+  my.home = home;
 }
