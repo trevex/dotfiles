@@ -7,11 +7,11 @@ let
       sha256 = "0jwk4ci3xn1v21pns01v36ilw5q9nrf02cb3ir1npm6m15744i04";
     }}/nixGL.nix"
     { }).nixGLIntel;
+  # NOTE: the below override will require you to create your own desktop item!
   alacrittyPackage =
     if isHomeManager && isLinux then
       (pkgs.writeShellScriptBin "alacritty" ''
-        	#!/bin/bash
-          ${nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty "$@"
+        ${nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty "$@"
       '') else pkgs.alacritty;
   alacrittyTheme = pkgs.fetchFromGitHub {
     owner = "eendroroy";
@@ -23,7 +23,7 @@ in
 {
   xdg.configFile."alacritty/alacritty.yml".source = pkgs.substituteAll {
     src = ./alacritty.yml.tpl;
-    fontSize = if isLinux then 8.0 else 16.0;
+    fontSize = if isLinux then if isHomeManager then 12.0 else 8.0 else 16.0;
     colorScheme = builtins.readFile ("${alacrittyTheme}/themes/gruvbox_dark.yaml");
   };
 

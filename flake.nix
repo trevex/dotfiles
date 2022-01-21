@@ -186,6 +186,15 @@
             xdg.enable = true;
             xdg.mime.enable = true;
             targets.genericLinux.enable = true;
+            home.sessionVariables = {
+              EDITOR = "nvim";
+              BROWSER = "google-chrome";
+              TERMINAL = "alacritty";
+            };
+            pam.sessionVariables = config.home.sessionVariables // {
+              LANGUAGE = "en_US:en";
+              LANG = "en_US.UTF-8";
+            };
           };
           configuration = { pkgs, ... }: {
             nixpkgs.overlays = builtins.attrValues self.overlays;

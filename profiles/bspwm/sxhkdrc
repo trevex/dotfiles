@@ -180,9 +180,9 @@ super + space
 	rofi -show drun -modi drun
 
 super + shift + Return
-	urxvt
+	alacritty
 super + z
-	urxvt
+	alacritty
 
 # super + r
 

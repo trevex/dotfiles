@@ -33,6 +33,13 @@ if echo $- | grep -q 'i' && [[ -x "$HOME/.nix-profile/bin/zsh" ]]; then
 fi
 ```
 
+Also source home-manager if `.bashrc` is off limits for `nix`:
+```
+. "/home/nvoss/.nix-profile/etc/profile.d/hm-session-vars.sh"
+```
+
+For alacritty you'll have to create a Desktop item manually as the packet is overriden, checkout its repository for an example.
+
 ## Yubikey
 
 To setup the Yubikey for use with `git` and `ssh`, we only really need to import and trust it. The Yubikey is expected to be fully setup via [drduh's guide](https://github.com/drduh/YubiKey-Guide).
@@ -76,3 +83,10 @@ Summary of -dPDFSETTINGS:
 * `-dPDFSETTINGS=/default` selects output intended to be useful across a wide variety of uses, possibly at the expense of a larger output file
 
 Reference: https://www.ghostscript.com/doc/current/VectorDevices.htm#PSPDF_IN:
+
+
+## Misc
+
+### German Umlaute without Xmodmap
+
+https://blog.florianheinle.de/englische-tastatur-umlaute
