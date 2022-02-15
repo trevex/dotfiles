@@ -83,13 +83,13 @@ let
     # ~/.background-image using feh by default.
     home.file.".background-image".source = ./wallpaper.jpg;
 
-    # gtk = {
-    #   enable = true;
-    #   iconTheme = {
-    #     name = "Papirus";
-    #     package = pkgs.papirus-icon-theme;
-    #   };
-    # };
+    gtk = {
+      enable = true;
+      iconTheme = {
+        name = "Papirus";
+        package = pkgs.papirus-icon-theme;
+      };
+    };
 
     services.picom = {
       enable = true;
