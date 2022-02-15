@@ -44,6 +44,7 @@ let
       zsh = mkHomeProfile [ ./zsh ];
       neovim = mkHomeProfile [ ./neovim ];
       bspwm = mkProfile [ ./bspwm ];
+      termite = mkLinuxHomeProfile [ ./termite ];
       dunst = mkLinuxHomeProfile [ ./dunst ];
       polybar = mkLinuxHomeProfile [ ./polybar ];
       rofi = mkLinuxHomeProfile [ ./rofi ];

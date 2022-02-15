@@ -1,4 +1,4 @@
-# Expected to be used as "LinuxHomeProfile".
+# Expected to be used as "HomeProfile".
 # However without nixGL it will not work on non-NixOS!
 { config, pkgs, isLinux, isHomeManager, ... }:
 let
