@@ -60,7 +60,7 @@ let
         Requisite = [ "graphical-session.target" ];
       };
     };
-    systemd.user.services.polybar = mkIf (config.services.polybar.enable) {
+    systemd.user.services.polybar = mkIf (config.my.home.services.polybar.enable) {
       Unit.After = [ "graphical-session-bspwm.target" ];
       Install.WantedBy = mkForce [ "graphical-session-bspwm.target" ];
     };
@@ -91,33 +91,33 @@ let
     #   };
     # };
 
-    # services.picom = {
-    #   enable = true;
-    #   experimentalBackends = true;
-    #   fade = true;
-    #   inactiveOpacity = "1.0";
-    #   shadow = false;
-    #   fadeDelta = 4;
-    #   extraOptions = ''
-    #     corner-radius = 4.0;
+    services.picom = {
+      enable = true;
+      experimentalBackends = true;
+      fade = true;
+      inactiveOpacity = "1.0";
+      shadow = false;
+      fadeDelta = 4;
+      extraOptions = ''
+        corner-radius = 4.0;
 
-    #     rounded-corners-exclude = [
-    #       "window_type = 'dock'",
-    #       "window_type = 'desktop'",
-    #       "window_type = 'toolbar'",
-    #       "window_type = 'menu'",
-    #       "window_type = 'dropdown_menu'",
-    #       "window_type = 'popup_menu'",
-    #       "window_type = 'tooltip'"
-    #     ];
-    #   '';
-    # };
+        rounded-corners-exclude = [
+          "window_type = 'dock'",
+          "window_type = 'desktop'",
+          "window_type = 'toolbar'",
+          "window_type = 'menu'",
+          "window_type = 'dropdown_menu'",
+          "window_type = 'popup_menu'",
+          "window_type = 'tooltip'"
+        ];
+      '';
+    };
 
-    # services.redshift = {
-    #   enable = true;
-    #   dawnTime = "6:00-8:00";
-    #   duskTime = "19:00-20:00";
-    # };
+    services.redshift = {
+      enable = true;
+      dawnTime = "6:00-8:00";
+      duskTime = "19:00-20:00";
+    };
 
     # There is no inbuilt screen-locker, so let's use betterlockscreen.
     services.screen-locker = {

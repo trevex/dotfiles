@@ -82,6 +82,7 @@
             home-manager.extraSpecialArgs = {
               isLinux = isLinux;
               isDarwin = !isLinux;
+              isHomeManager = false; # This is not directly a home-manager only config
               inputs = inputs; # Inject inputs
               rootPath = ./.;
             };
