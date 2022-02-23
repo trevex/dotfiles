@@ -56,6 +56,11 @@ let
       goBin = "Development/go/bin";
     };
 
+    # https://github.com/nix-community/nix-direnv
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
+    programs.direnv.nix-direnv.enableFlakes = true;
+
     # TODO: use environment.shellInit?
     programs.zsh.initExtra = ''
       export PATH="$PATH:$GOBIN"

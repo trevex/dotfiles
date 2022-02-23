@@ -21,6 +21,7 @@ in
     gopls
     terraform-ls
     rnix-lsp
+    nodePackages.typescript-language-server
   ];
 
   # TODO: checkout https://github.com/glepnir/lspsaga.nvim
@@ -81,6 +82,7 @@ in
       # stabilize-nvim # TODO: not available yet :/
       dashboard-nvim # \o/
       # language support
+      vim-jsx-typescript
       vim-nix
       vim-terraform
       vim-helm

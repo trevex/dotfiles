@@ -353,7 +353,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "gopls", "rnix", "terraformls" }
+local servers = { "gopls", "rnix", "terraformls", "tsserver" }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -426,4 +426,6 @@ cmd [[
   au BufRead,BufNewFile *.hcl set filetype=terraform
   " zsh.nix is causing confusion
   au BufRead,BufNewFile *.nix set filetype=nix
+  " react support
+  autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 ]]
