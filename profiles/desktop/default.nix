@@ -17,6 +17,7 @@
     pavucontrol
     glxinfo
     lshw
+    inkscape
   ];
 
   environment.etc."xdg/mimeapps.list" = {
