@@ -1,4 +1,5 @@
 window:
+  opacity: 1.0
   padding:
     x: 5
     y: 5
@@ -25,8 +26,6 @@ font:
   use_thin_strokes: true
 
 draw_bold_text_with_bright_colors: true
-
-background_opacity: 1.0
 
 hints:
   enabled:

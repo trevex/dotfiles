@@ -1,5 +1,5 @@
 # Expected to be used with mkProfile (see ../default.nix).
-{ config, lib, pkgs, isLinux, isDarwin, isHomeManager, ... }:
+{ config, lib, pkgs, isNixos, isDarwin, isHomeManager, ... }:
 let
   fontPackages = with pkgs; [
     dejavu_fonts
@@ -59,7 +59,6 @@ let
     # https://github.com/nix-community/nix-direnv
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
-    programs.direnv.nix-direnv.enableFlakes = true;
 
     # TODO: use environment.shellInit?
     programs.zsh.initExtra = ''
@@ -116,7 +115,7 @@ if isHomeManager then home else
 
   fonts = {
     fonts = fontPackages;
-  } // (if isLinux then {
+  } // (if isNixos then {
     fontDir.enable = true;
   } else {
     enableFontDir = true;

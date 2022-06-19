@@ -1,5 +1,5 @@
 # Expected to be used as "LinuxHomeProfile".
-{ config, pkgs, isLinux, isHomeManager, ... }:
+{ config, pkgs, isNixos, isHomeManager, ... }:
 {
   home.packages = [ pkgs.glibcLocales ];
 

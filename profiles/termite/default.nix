@@ -1,6 +1,6 @@
 # Expected to be used as "LinuxHomeProfile".
 # However without nixGL it will not work on non-NixOS!
-{ config, pkgs, isLinux, isHomeManager, ... }:
+{ config, pkgs, isNixos, isHomeManager, ... }:
 {
   programs.termite = {
     enable = true;

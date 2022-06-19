@@ -3,19 +3,18 @@
 
   inputs = {
     nixos-hardware.url = "nixos-hardware/master";
-    nixpkgs.url = "nixpkgs/21.11";
+    nixpkgs.url = "nixpkgs/22.05";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
       url = "github:nix-community/nur";
-      flake = false;
     };
   };
 
@@ -41,20 +40,20 @@
       specialArgs = extraArgs:
         let
           args = self: {
-            profiles = import ./profiles { inherit (self) isLinux isHomeManager; };
-            isLinux = self.isLinux;
-            isDarwin = !self.isLinux;
-            isHomeManager = false;
+            profiles = import ./profiles { inherit (self) isNixos isDarwin isHomeManager; };
+            isNixos = self.isNixos;
+            isDarwin = self.isDarwin;
+            isHomeManager = self.isHomemanager;
             # This could import the whole tree if evaluated?, including ignored files?
             rootPath = ./.;
           } // extraArgs;
         in
         lib.fix args;
 
-      mkConfig =
+      mkConfig = # Helper only used by mkNixosConfig and mkDarwinConfig
         { hostname
         , username
-        , isLinux
+        , isNixos
         , hostConfiguration ? ./hosts + "/${hostname}.nix"
         , userConfiguration ? ./users + "/${username}.nix"
         , extraModules ? [ ]
@@ -80,16 +79,16 @@
               verbose = true;
             };
             home-manager.extraSpecialArgs = {
-              isLinux = isLinux;
-              isDarwin = !isLinux;
-              isHomeManager = false; # This is not directly a home-manager only config
+              isNixos = isNixos;
+              isDarwin = !isNixos;
+              isHomeManager = false; # Not used by home-manager configs
               inputs = inputs; # Inject inputs
               rootPath = ./.;
             };
             home-manager.sharedModules = [
               {
                 # Specify home-manager version compability
-                home.stateVersion = "21.05";
+                home.stateVersion = "22.05";
                 # Use the new systemd service activation/deactivation tool
                 # See https://github.com/nix-community/home-manager/pull/1656
                 systemd.user.startServices = "sd-switch";
@@ -100,9 +99,9 @@
         in
         [ ./module.nix defaults ] ++ extraModules;
 
-      mkLinuxConfig = { platform, ... } @ args:
+      mkNixosConfig = { platform, ... } @ args:
         let
-          modules = mkConfig ((removeAttrs args [ "platform" ]) // { isLinux = true; });
+          modules = mkConfig ((removeAttrs args [ "platform" ]) // { isNixos = true; });
 
           linuxDefaults = { pkgs, lib, ... }: {
             imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -110,6 +109,7 @@
             networking.hostName = lib.mkDefault args.hostname;
 
             system.nixos.tags = [ "with-flakes" ];
+            system.stateVersion = "22.05";
             nix = {
               # Pin nixpkgs for older Nix tools
               nixPath = [ "nixpkgs=${pkgs.path}" ];
@@ -132,13 +132,15 @@
           pkgs = nixpkgsFor.${platform};
           specialArgs = specialArgs {
             inherit inputs;
-            isLinux = true;
+            isNixos = true;
+            isDarwin = false;
+            isHomeManager = false;
           };
         };
 
       mkDarwinConfig = { platform, ... } @ args:
         let
-          modules = mkConfig ((removeAttrs args [ "platform" ]) // { isLinux = false; });
+          modules = mkConfig ((removeAttrs args [ "platform" ]) // { isNixos = false; });
           nixpkgs = inputs.nixpkgs;
 
           darwinDefaults = { config, pkgs, lib, ... }: {
@@ -167,7 +169,9 @@
           system = platform;
           specialArgs = specialArgs {
             inputs = inputs // { darwin = inputs.darwin; };
-            isLinux = false;
+            isNixos = false;
+            isDarwin = true;
+            isHomeManager = false;
           };
         };
 
@@ -209,11 +213,12 @@
           username = username;
           extraModules = [ ./module.nix defaults ] ++ extraModules;
           extraSpecialArgs = specialArgs {
-            isLinux = true; # TODO: deduce from platform?
+            isNixos = false;
+            isDarwin = false;
             isHomeManager = true;
             inputs = inputs; # Inject inputs
           };
-          stateVersion = "21.11";
+          stateVersion = "22.05";
         };
     in
     {
@@ -227,13 +232,13 @@
       };
 
       nixosConfigurations = {
-        vm = mkLinuxConfig {
+        vm = mkNixosConfig {
           hostname = "nixos";
           username = "nik";
           platform = "x86_64-linux";
           hostConfiguration = ./hosts/virtualbox.nix;
         };
-        pulse = mkLinuxConfig {
+        pulse = mkNixosConfig {
           hostname = "pulse";
           username = "nik";
           platform = "x86_64-linux";

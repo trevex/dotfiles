@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs, isLinux, isHomeManager, inputs, ... }:
+{ config, options, lib, pkgs, isNixos, isHomeManager, inputs, ... }:
 
 with lib;
 

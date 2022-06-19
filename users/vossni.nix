@@ -1,10 +1,10 @@
-{ config, lib, pkgs, isLinux, isDarwin, ... }:
+{ config, lib, pkgs, isNixos, isDarwin, ... }:
 
 let
   inherit (config.my) username;
 in
 lib.mkMerge [
-  (lib.optionalAttrs isLinux {
+  (lib.optionalAttrs isNixos {
     # users.users.${username} = {
     #   createHome = true;
     #   isNormalUser = true;
@@ -20,7 +20,7 @@ lib.mkMerge [
     # };
     # users.groups.${username} = { };
   })
-  # </isLinux>
+  # </isNixos>
   (lib.optionalAttrs isDarwin {
     my.home = { ... }: {
       home.homeDirectory = lib.mkForce "/Users/${username}"; # hmm...

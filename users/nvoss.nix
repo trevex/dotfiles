@@ -1,4 +1,4 @@
-{ config, lib, pkgs, isLinux, isDarwin, ... }:
+{ config, lib, pkgs, isNixos, isDarwin, ... }:
 let
   inherit (config.my) username;
 in

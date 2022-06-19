@@ -1,10 +1,10 @@
-{ config, lib, pkgs, isLinux, isDarwin, ... }:
+{ config, lib, pkgs, isNixos, isDarwin, ... }:
 
 let
   inherit (config.my) username;
 in
 lib.mkMerge [
-  (lib.optionalAttrs isLinux {
+  (lib.optionalAttrs isNixos {
     security.sudo.extraRules = [
       {
         users = [ username ];
@@ -34,7 +34,7 @@ lib.mkMerge [
       keyMap = "us";
     };
   })
-  # </isLinux>
+  # </isNixos>
   (lib.optionalAttrs isDarwin {
     my.home = { ... }: {
       home.homeDirectory = lib.mkForce "/Users/${username}"; # hmm...
