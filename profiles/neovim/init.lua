@@ -153,44 +153,15 @@ require "bufferline".setup {
     separator_style = "slant"
   }
 }
+cmd [[hi BufferLineSeparator guifg=#504945]]
+cmd [[hi BufferLineSeparatorSelected guifg=#504945]]
+cmd [[hi BufferLineSeparatorVisible guifg=#504945]]
 
 -- nvim-tree-lua
 g.nvim_tree_side = "left"
 g.nvim_tree_width = 25
 g.nvim_tree_auto_ignore_ft = {"dashboard"} -- don't open tree on specific fiypes.
-g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
-g.nvim_tree_indent_markers = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 0
 g.nvim_tree_allow_resize = 1
-g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
-
-g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1
-}
-g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    unstaged = "✗",
-    staged = "✓",
-    unmerged = "",
-    renamed = "➜",
-    untracked = "★",
-    deleted = "",
-    ignored = "◌"
-  },
-  folder = {
-    default = "",
-    open = "",
-    empty = "", -- 
-    empty_open = "",
-    symlink = "",
-    symlink_open = ""
-  }
-}
 
 map("n", "<C-T>", ":NvimTreeToggle<CR>", {noremap=true})
 map("n", "<leader>r", ":NvimTreeRefresh<CR>", {noremap=true})
@@ -199,7 +170,6 @@ map("n", "<leader>n", ":NvimTreeFindFile<CR>", {noremap=true})
 require'nvim-tree'.setup {
   disable_netrw = true,
   hijack_netrw = false,
-  auto_close = true, -- closes tree when it's the last window
   open_on_tab = false,
   update_to_buf_dir   = {
     -- enable the feature
@@ -217,6 +187,45 @@ require'nvim-tree'.setup {
   },
   git = {
     ignore = true,
+  },
+  actions = {
+    open_file = {
+      quit_on_open = false,
+    },
+  },
+  renderer = {
+    highlight_git = true,
+    highlight_opened_files = "none",
+    add_trailing = false, -- append a trailing slash to folder names
+    indent_markers = { enable = true },
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = "",
+        git = {
+          unstaged = "✗",
+          staged = "✓",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌"
+        },
+        folder = {
+          default = "",
+          open = "",
+          empty = "", -- 
+          empty_open = "",
+          symlink = "",
+          symlink_open = ""
+        },
+      },
+    },
   },
 }
 
