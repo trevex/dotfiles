@@ -26,10 +26,10 @@ in
     my.home = { ... }: {
       home.packages = with pkgs; [
         # language servers
-        gopls
-        terraform-ls
-        rnix-lsp
-        nodePackages.typescript-language-server
+        unstable.gopls
+        unstable.terraform-ls
+        unstable.rnix-lsp
+        unstable.nodePackages.typescript-language-server
       ];
 
       # TODO: checkout https://github.com/glepnir/lspsaga.nvim

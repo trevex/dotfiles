@@ -21,12 +21,12 @@
 
       system = "x86_64-linux";
 
-      mkPkgs = pkgs: extraOverlays: import pkgs {
+      mkPkgs = pkgs: overlays: import pkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = extraOverlays ++ (lib.attrValues self.overlays);
+        overlays = overlays;
       };
-      pkgs = mkPkgs nixpkgs [ self.overlays.default ];
+      pkgs = mkPkgs nixpkgs (lib.attrValues self.overlays);
       pkgs' = mkPkgs nixpkgs-unstable [ ];
 
       lib = nixpkgs.lib.extend

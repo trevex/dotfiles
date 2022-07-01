@@ -14,7 +14,7 @@ g.mapleader = ","
 
 
 -- Gitsigns
-require "gitsigns".setup {}
+-- require "gitsigns".setup {}
 
 
 -- Treesitter
@@ -193,40 +193,40 @@ require'nvim-tree'.setup {
       quit_on_open = false,
     },
   },
-  renderer = {
-    highlight_git = true,
-    highlight_opened_files = "none",
-    add_trailing = false, -- append a trailing slash to folder names
-    indent_markers = { enable = true },
-    icons = {
-      show = {
-        git = true,
-        folder = true,
-        file = true,
-      },
-      glyphs = {
-        default = "",
-        symlink = "",
-        git = {
-          unstaged = "✗",
-          staged = "✓",
-          unmerged = "",
-          renamed = "➜",
-          untracked = "★",
-          deleted = "",
-          ignored = "◌"
-        },
-        folder = {
-          default = "",
-          open = "",
-          empty = "", -- 
-          empty_open = "",
-          symlink = "",
-          symlink_open = ""
-        },
-      },
-    },
-  },
+  -- renderer = {
+  --   highlight_git = true,
+  --   highlight_opened_files = "none",
+  --   add_trailing = false, -- append a trailing slash to folder names
+  --   indent_markers = { enable = true },
+  --   icons = {
+  --     show = {
+  --       git = true,
+  --       folder = true,
+  --       file = true,
+  --     },
+  --     glyphs = {
+  --       default = "",
+  --       symlink = "",
+  --       git = {
+  --         unstaged = "✗",
+  --         staged = "✓",
+  --         unmerged = "",
+  --         renamed = "➜",
+  --         untracked = "★",
+  --         deleted = "",
+  --         ignored = "◌"
+  --       },
+  --       folder = {
+  --         default = "",
+  --         open = "",
+  --         empty = "", -- 
+  --         empty_open = "",
+  --         symlink = "",
+  --         symlink_open = ""
+  --       },
+  --     },
+  --   },
+  -- },
 }
 
 
