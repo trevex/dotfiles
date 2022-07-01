@@ -60,6 +60,8 @@ in
     ]);
 
     my.home = {
+      services.network-manager-applet.enable = true;
+
       services.polybar = {
         enable = true;
         package = pkgs.polybar.override {

@@ -12,7 +12,8 @@ with lib.my;
 
     user = mkOpt attrs { };
 
-    home = # mkOpt attrs instead?
+    # home = mkOpt attrs { };
+    home =
       mkOption { type = options.home-manager.users.type.functor.wrapped; };
 
     env = mkOption {

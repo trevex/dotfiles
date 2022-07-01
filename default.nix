@@ -37,7 +37,7 @@ with lib.my;
   ## Some reasonable, global defaults
   # This is here to appease 'nix flake check' for generic hosts with no
   # hardware-configuration.nix or fileSystem config.
-  fileSystems."/".device = mkDefault "/dev/disk/by-label/nixos";
+  # fileSystems."/".device = mkDefault "/dev/disk/by-label/nixos";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false
   # here. Per-interface useDHCP will be mandatory in the future, so we enforce
@@ -49,7 +49,7 @@ with lib.my;
     kernelPackages = mkDefault pkgs.linuxKernel.packages.linux_5_15;
     loader = {
       efi.canTouchEfiVariables = mkDefault true;
-      systemd-boot.configurationLimit = 10;
+      # systemd-boot.configurationLimit = 10;
       systemd-boot.enable = mkDefault true;
     };
   };

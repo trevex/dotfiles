@@ -4,7 +4,6 @@ let
     ! sudo showkey revealed, different keycodes than expected, so let's remap media keys
     keycode 114 = XF86AudioLowerVolume
     keycode 115 = XF86AudioRaiseVolume
-    keycode 106 = Right
   '';
 in
 {
@@ -41,10 +40,7 @@ in
   };
 
   hardware.tuxedo-keyboard.enable = true;
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  hardware.enableRedistributableFirmware = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
