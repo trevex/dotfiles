@@ -7,6 +7,7 @@ let
     ! sudo showkey revealed, different keycodes than expected, so let's remap media keys
     keycode 114 = XF86AudioLowerVolume
     keycode 115 = XF86AudioRaiseVolume
+    keycode 106 = Right
   '';
 in
 {
@@ -25,6 +26,8 @@ in
     pipewire
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
+  hardware.tuxedo-keyboard.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -76,6 +79,7 @@ in
 
   # Fix media keys
   services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xkbCustomLayout}";
+  services.xserver.exportConfiguration = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 }

@@ -18,6 +18,7 @@
     glxinfo
     lshw
     inkscape
+    element-desktop
   ];
 
   environment.etc."xdg/mimeapps.list" = {

@@ -13,6 +13,7 @@ super + shift + q
 # Toggle tiling mode of window
 super + shift + t
 	bspc node -t {pseudo_tiled,tiled}
+
 super + t
 	{bspc node -t floating && window-placer $(bspc query -T -d | grep -o '"state":"floating"' | wc -l),bspc node -t tiled}
 

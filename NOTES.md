@@ -5,6 +5,11 @@
 ```
 sudo nixos-rebuild switch --flake ".#$(hostname -s)"
 ```
+sudo nix-collect-garbage -d
+sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system 
+sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+```
+
 
 ## Non-NixOS
 
@@ -90,3 +95,4 @@ Reference: https://www.ghostscript.com/doc/current/VectorDevices.htm#PSPDF_IN:
 ### German Umlaute without Xmodmap
 
 https://blog.florianheinle.de/englische-tastatur-umlaute
+
