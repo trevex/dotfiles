@@ -17,7 +17,7 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
     let
-      inherit (lib.my) mapModules mapModulesRec mapHosts;
+      inherit (lib.my) mapModules mapModulesRec mapHosts mapHomes;
 
       system = "x86_64-linux";
 
@@ -30,7 +30,10 @@
       pkgs' = mkPkgs nixpkgs-unstable [ ];
 
       lib = nixpkgs.lib.extend
-        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
+        (self: super: {
+          my = import ./lib { inherit pkgs inputs; lib = self; };
+          hm = inputs.home-manager.lib.hm; # for home-manager compat
+        });
 
       overlay =
         final: prev: {
@@ -50,5 +53,8 @@
 
       nixosConfigurations =
         mapHosts ./hosts { };
+
+      homeConfigurations =
+        mapHomes ./homes { };
     };
 }
