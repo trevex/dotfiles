@@ -1,7 +1,6 @@
-{ config, options, lib, ... }:
-
+{ config, options, lib, mylib, ... }:
 with lib;
-with lib.my;
+with mylib;
 {
   options.my.nixGL = with types; {
     enable = mkBoolOpt false;

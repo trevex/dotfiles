@@ -73,10 +73,16 @@ let
     # On every laptop we want to suspend once the lid is closed
     services.logind.lidSwitch = "suspend";
 
-    # We also want to load the relevant home profile
-    my.home = {
-      imports = (mapModulesRec' (toString ../modules/home) import) ++ [
-        (import ("${path}/home.nix"))
+    # We also want to load the relevant home profile and setup home-manager
+    home-manager.extraSpecialArgs = {
+      inherit mylib inputs;
+    };
+    home-manager.sharedModules = (mapModulesRec' (toString ../modules/home) import);
+    my.home = { ... }: {
+      nixpkgs.config = pkgs.config;
+      nixpkgs.overlays = pkgs.overlays;
+      imports = [
+        "${path}/home.nix"
       ];
       my.nixGL.enable = true;
     };

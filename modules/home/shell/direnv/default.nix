@@ -1,7 +1,7 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, mylib, ... }:
 
 with lib;
-with lib.my;
+with mylib;
 let cfg = config.my.shell.direnv;
 in
 {
