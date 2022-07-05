@@ -1,7 +1,7 @@
 { config, lib, ... }:
 with lib;
 {
-  config = mkIf config.my.isNixos {
+  config = {
     ## System security tweaks
     # sets hidepid=2 on /proc (make process info visible only to owning user)
     # NOTE Was removed on nixpkgs-unstable because it doesn't do anything

@@ -1,7 +1,7 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, lib, pkgs, mylib, ... }:
 
 with lib;
-with lib.my;
+with mylib;
 let
   cfg = config.my.services.docker;
 in

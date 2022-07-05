@@ -1,7 +1,7 @@
-{ inputs, lib, pkgs, ... }:
+{ inputs, lib, mylib, pkgs, ... }:
 
 with lib;
-with lib.my;
+with mylib;
 let
   sys = "x86_64-linux";
   defaults = path: {
@@ -74,10 +74,9 @@ let
     services.logind.lidSwitch = "suspend";
 
     # We also want to load the relevant home profile
-    my.home = { ... }: {
-      imports = [
-        (mapModulesRec' (toString ../modules/home) import)
-        (import "${path}" + /home.nix)
+    my.home = {
+      imports = (mapModulesRec' (toString ../modules/home) import) ++ [
+        (import ("${path}/home.nix"))
       ];
       my.nixGL.enable = true;
     };
@@ -87,7 +86,7 @@ in
   mkHost = path: attrs @ { system ? sys, ... }:
     nixosSystem {
       inherit system;
-      specialArgs = { inherit lib inputs system; };
+      specialArgs = { inherit lib inputs system mylib; };
       modules = [
         {
           nixpkgs.pkgs = pkgs;

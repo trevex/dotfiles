@@ -1,7 +1,7 @@
-{ config, options, lib, home-manager, ... }:
+{ config, options, lib, home-manager, mylib, ... }:
 
 with lib;
-with lib.my;
+with mylib;
 {
   options.my = with types; {
     username = mkOption {

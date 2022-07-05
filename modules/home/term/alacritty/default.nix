@@ -1,6 +1,6 @@
-{ config, options, pkgs, lib, ... }:
+{ config, options, pkgs, lib, mylib, ... }:
 with lib;
-with lib.my;
+with mylib;
 let
   cfg = config.my.term.alacritty;
 

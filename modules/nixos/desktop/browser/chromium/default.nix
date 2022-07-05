@@ -1,6 +1,6 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, mylib, ... }:
 with lib;
-with lib.my;
+with mylib;
 let
   cfg = config.my.desktop.browser.chromium;
 in
