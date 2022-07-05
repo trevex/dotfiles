@@ -12,7 +12,7 @@ in
       defaults = { config, pkgs, lib, ... }: {
         imports =
           # All my personal modules
-          (mapModulesRec' (toString ../modules) import);
+          (mapModulesRec' (toString ../modules/home) import);
 
         programs.home-manager.enable = true;
         xdg.enable = true;

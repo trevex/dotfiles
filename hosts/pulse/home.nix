@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, config, lib, ... }:
 {
   my = {
     term = {

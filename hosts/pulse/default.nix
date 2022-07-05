@@ -21,21 +21,11 @@ in
     };
     desktop = {
       bspwm.enable = true;
-      term = {
-        alacritty.enable = true;
-      };
       browser = {
         chromium.enable = true;
       };
     };
-    editors = {
-      default = "nvim";
-      neovim.enable = true;
-    };
     shell = {
-      direnv.enable = true;
-      git.enable = true;
-      gnupg.enable = true;
       zsh.enable = true;
     };
     services = {

@@ -4,12 +4,12 @@ with lib;
 with lib.my;
 let
   sys = "x86_64-linux";
-  defaults = {
+  defaults = path: {
     imports =
       # I use home-manager to deploy files to $HOME; little else
       [ inputs.home-manager.nixosModules.home-manager ]
       # All my personal modules
-      ++ (mapModulesRec' (toString ../modules) import);
+      ++ (mapModulesRec' (toString ../modules/nixos) import);
 
     # Configure nix and nixpkgs
     environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
@@ -69,8 +69,18 @@ let
       unzip
     ];
 
+
     # On every laptop we want to suspend once the lid is closed
     services.logind.lidSwitch = "suspend";
+
+    # We also want to load the relevant home profile
+    my.home = { ... }: {
+      imports = [
+        (mapModulesRec' (toString ../modules/home) import)
+        (import "${path}" + /home.nix)
+      ];
+      my.nixGL.enable = true;
+    };
   };
 in
 {
@@ -84,7 +94,7 @@ in
           networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
         }
         (filterAttrs (n: v: !elem n [ "system" ]) attrs)
-        defaults
+        (defaults path)
         (import path)
       ];
     };
