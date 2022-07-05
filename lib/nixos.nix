@@ -4,7 +4,7 @@ with lib;
 with mylib;
 let
   sys = "x86_64-linux";
-  defaults = path: {
+  defaults = {
     imports =
       # I use home-manager to deploy files to $HOME; little else
       [ inputs.home-manager.nixosModules.home-manager ]
@@ -81,9 +81,6 @@ let
     my.home = { ... }: {
       nixpkgs.config = pkgs.config;
       nixpkgs.overlays = pkgs.overlays;
-      imports = [
-        "${path}/home.nix"
-      ];
       my.nixGL.enable = true;
     };
   };
@@ -99,7 +96,7 @@ in
           networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
         }
         (filterAttrs (n: v: !elem n [ "system" ]) attrs)
-        (defaults path)
+        defaults
         (import path)
       ];
     };

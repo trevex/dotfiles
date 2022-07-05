@@ -11,6 +11,7 @@ in
     ./hardware-configuration.nix
   ];
 
+  # Enable and configure relevant nixos modules
   my = {
     username = "nik";
     hardware = {
@@ -31,6 +32,22 @@ in
     };
     services = {
       docker.enable = true;
+    };
+  };
+  # Let's also setup and enable some home-manager modules
+  my.home = { ... }: {
+    my = {
+      term = {
+        alacritty.enable = true;
+      };
+      editors = {
+        neovim.enable = true;
+      };
+      shell = {
+        direnv.enable = true;
+        git.enable = true;
+        zsh.enable = true;
+      };
     };
   };
 

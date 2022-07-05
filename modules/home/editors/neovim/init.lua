@@ -153,9 +153,9 @@ require "bufferline".setup {
     separator_style = "slant"
   }
 }
-cmd [[hi BufferLineSeparator guifg=#504945]]
-cmd [[hi BufferLineSeparatorSelected guifg=#504945]]
-cmd [[hi BufferLineSeparatorVisible guifg=#504945]]
+cmd [[hi BufferLineSeparator guifg=#161616 guibg=#1e1e1e]]
+cmd [[hi BufferLineSeparatorSelected guifg=#161616 guibg=#282828]]
+cmd [[hi BufferLineSeparatorVisible guifg=#161616 guibg=#242424]]
 
 -- nvim-tree-lua
 g.nvim_tree_side = "left"
