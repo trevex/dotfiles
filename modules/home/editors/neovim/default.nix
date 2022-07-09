@@ -70,7 +70,6 @@ in
         cmp-path
         lspkind-nvim
         # colorscheme
-        lush-nvim
         gruvbox-nvim
         # telescope
         popup-nvim

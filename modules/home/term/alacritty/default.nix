@@ -19,12 +19,16 @@ in
 {
   options.my.term.alacritty = with types; {
     enable = mkBoolOpt false;
+    fontSize = mkOption {
+      type = types.float;
+      default = 10.0;
+    };
   };
 
   config = mkIf cfg.enable {
     xdg.configFile."alacritty/alacritty.yml".source = pkgs.substituteAll {
       src = ./alacritty.yml.tpl;
-      fontSize = 8.0;
+      fontSize = cfg.fontSize;
       colorScheme = builtins.readFile ("${alacrittyTheme}/themes/gruvbox_dark.yaml");
     };
 

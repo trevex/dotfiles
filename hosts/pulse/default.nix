@@ -21,7 +21,7 @@ in
       printing.enable = true;
     };
     desktop = {
-      bspwm.enable = true;
+      gnome.enable = true;
       browser = {
         chromium.enable = true;
       };
@@ -38,7 +38,10 @@ in
   my.home = { ... }: {
     my = {
       term = {
-        alacritty.enable = true;
+        alacritty = {
+          enable = true;
+          fontSize = 10.0;
+        };
       };
       editors = {
         neovim.enable = true;

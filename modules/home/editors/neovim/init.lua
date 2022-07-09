@@ -150,7 +150,8 @@ require "bufferline".setup {
     view = "multiwindow",
     show_buffer_close_icons = true,
     show_close_icon = false,
-    separator_style = "slant"
+    separator_style = "slant",
+    themable = true,
   }
 }
 cmd [[hi BufferLineSeparator guifg=#161616 guibg=#1e1e1e]]
