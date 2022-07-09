@@ -57,7 +57,7 @@ in
         nvim-lspconfig
         nvim-web-devicons
         nvim-tree-lua
-        bufferline-nvim
+        nvim-cokeline
         lualine-nvim # statusbar
         # code completion
         vim-vsnip # snippets

@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    # sources, packages, overlays
+    nvim-cokeline = {
+      url = "github:noib3/nvim-cokeline";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
@@ -36,14 +41,13 @@
         final: prev: {
           unstable = pkgs';
           my = self.packages."${system}";
-        };
+        } // (import ./overlays { inherit inputs; }) final prev;
     in
     {
-      overlays = # TODO: overlays available by modules?
-        { default = overlay; } // mapModules ./overlays import;
+      overlays.default = overlay;
 
       packages."${system}" =
-        mapModules ./packages (p: pkgs.callPackage p { });
+        mapModules ./packages (p: pkgs.callPackage p { inherit inputs; });
 
       nixosModules =
         { dotfiles = import ./.; } // mapModulesRec ./modules import;

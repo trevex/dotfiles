@@ -134,29 +134,48 @@ require "lualine".setup {
 }
 
 
--- Bufferline
-require "bufferline".setup {
-  options = {
-    offsets = {{filetype = "NvimTree", text = "", padding = 1}},
-    buffer_close_icon = "",
-    modified_icon = "",
-    left_trunc_marker = "",
-    right_trunc_marker = "",
-    max_name_length = 14,
-    max_prefix_length = 13,
-    tab_size = 20,
-    show_tab_indicators = true,
-    enforce_regular_tabs = false,
-    view = "multiwindow",
-    show_buffer_close_icons = true,
-    show_close_icon = false,
-    separator_style = "slant",
-    themable = true,
-  }
-}
-cmd [[hi BufferLineSeparator guifg=#161616 guibg=#1e1e1e]]
-cmd [[hi BufferLineSeparatorSelected guifg=#161616 guibg=#282828]]
-cmd [[hi BufferLineSeparatorVisible guifg=#161616 guibg=#242424]]
+-- nvim-cokeline
+local get_hex = require('cokeline/utils').get_hex
+
+require('cokeline').setup({
+  default_hl = {
+    fg = function(buffer)
+      return
+        buffer.is_focused
+        and get_hex('ColorColumn', 'bg')
+         or get_hex('Normal', 'fg')
+    end,
+    bg = function(buffer)
+      return
+        buffer.is_focused
+        and get_hex('Normal', 'fg')
+         or get_hex('ColorColumn', 'bg')
+    end,
+  },
+
+  components = {
+    {
+      text = function(buffer) return ' ' .. buffer.devicon.icon end,
+      fg = function(buffer) return buffer.devicon.color end,
+    },
+    {
+      text = function(buffer) return buffer.unique_prefix end,
+      fg = get_hex('Comment', 'fg'),
+      style = 'italic',
+    },
+    {
+      text = function(buffer) return buffer.filename .. ' ' end,
+    },
+    {
+      text = '',
+      delete_buffer_on_left_click = true,
+    },
+    {
+      text = ' ',
+    }
+  },
+})
+
 
 -- nvim-tree-lua
 g.nvim_tree_side = "left"

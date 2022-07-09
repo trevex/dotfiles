@@ -61,6 +61,10 @@ ssh-add -L | grep "cardno:000613075305" > ~/.ssh/id_rsa.pub
 
 ## Working with PDFs
 
+## Gnome
+
+`dconf dump /org/gnome/`
+
 ### Removing password
 
 ```

@@ -87,13 +87,30 @@
         "type": "indirect"
       }
     },
+    "nvim-cokeline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655796452,
+        "narHash": "sha256-mG0cJelaZLNth5mc9QNBuhlWzo+1pfeOAz+REtgUY8o=",
+        "owner": "noib3",
+        "repo": "nvim-cokeline",
+        "rev": "8d5022789014a605d5a2ec02ed5133eb85874aff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noib3",
+        "repo": "nvim-cokeline",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nvim-cokeline": "nvim-cokeline"
       }
     },
     "utils": {
