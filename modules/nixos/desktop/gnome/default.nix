@@ -53,6 +53,7 @@ in
         gnome.gnome-shell-extensions
         gnomeExtensions.appindicator
         gnomeExtensions.pop-shell
+        gnomeExtensions.dynamic-panel-transparency
       ];
 
       dconf = {
@@ -65,6 +66,7 @@ in
               "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
               "appindicatorsupport@rgcjonas.gmail.com"
               "pop-shell@system76.com"
+              "dynamic-panel-transparency@rockon999.github.io"
             ];
           };
           "org/gnome/shell/extensions/user-theme" = {
@@ -100,6 +102,13 @@ in
           };
           "org/gnome/eog/ui" = {
             image-gallery = true;
+          };
+          # Configure dynamic-panel-transparency
+          "org/gnome/shell/extensions/dynamic-panel-transparency" = {
+            enable-background-color = false;
+            enable-opacity = true;
+            panel-color = [ 80 73 69 ];
+            unmaximized-opacity = 128;
           };
           # Enable and configure pop-shell
           # (see https://github.com/pop-os/shell/blob/master_jammy/scripts/configure.sh)
