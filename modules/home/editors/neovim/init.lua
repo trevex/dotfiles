@@ -253,6 +253,7 @@ require'nvim-tree'.setup {
 -- Telescope
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = { "node%_modules/.*" },
     vimgrep_arguments = {
         "rg",
         "--color=never",
