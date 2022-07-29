@@ -17,7 +17,6 @@ with lib.my;
       tree
       gnumake
       unzip
-      protobuf
       htop
       fd
       dig
