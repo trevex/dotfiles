@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   my = {
+    nixGL.enable = true;
     term = {
       alacritty.enable = true;
     };
