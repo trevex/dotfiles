@@ -88,8 +88,8 @@ map("n", "<C-L>", "<C-W><C-L>", {noremap=true})
 map("n", "<C-H>", "<C-W><C-H>", {noremap=true})
 
 -- Additional keybindings
-map("n", "<C-x>", ":bnext<CR>", {noremap=true})
-map("n", "<C-z>", ":bprev<CR>", {noremap=true})
+map("n", "<C-x>", "<Plug>(cokeline-focus-next)", {noremap=true})
+map("n", "<C-z>", "<Plug>(cokeline-focus-prev)", {noremap=true})
 map("n", "<leader>w", ":w!<cr>")
 map("", "<Up>", "gk")
 map("", "<Down>", "gj")
