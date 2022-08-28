@@ -396,6 +396,33 @@ for _, lsp in ipairs(servers) do
 end
 
 
+require('rust-tools').setup({
+  -- https://github.com/sharksforarms/neovim-rust/blob/master/neovim-init-lsp-cmp-rust-tools.vim
+  tools = {
+    runnables = {
+      use_telescope = true
+    },
+    inlay_hints = {
+      auto = true,
+      show_parameter_hints = false,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+    },
+  },
+  server = {
+    on_attach = on_attach,
+    settings = {
+      ["rust-analyzer"] = {
+        -- enable clippy on save
+        checkOnSave = {
+          command = "clippy"
+        },
+      }
+    }
+  },
+})
+
+
 -- Dashboard
 local g = vim.g
 g.dashboard_default_executive ='telescope'

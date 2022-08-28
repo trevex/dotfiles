@@ -1,6 +1,7 @@
-{ config, options, pkgs, lib, mylib, ... }:
+{ inputs, config, options, pkgs, lib, mylib, ... }:
 with lib;
 with mylib;
+with inputs.home-manager.lib.hm.gvariant;
 let
   cfg = config.my.desktop.gnome;
 in
@@ -16,6 +17,7 @@ in
       font-manager
       dconf
       libnotify
+      wl-clipboard
       alacritty
     ];
 
@@ -85,6 +87,11 @@ in
           "org/gnome/desktop/peripherals/touchpad" = {
             tap-to-click = true;
             two-finger-scrolling-enabled = true;
+          };
+          "org/gnome/desktop/input-sources" = {
+            current = "uint32 0";
+            sources = [ (mkTuple [ "xkb" "de+us" ]) ];
+            xkb-options = [ "terminate:ctrl_alt_bksp" ];
           };
           "org/gnome/mutter" = {
             edge-tiling = true;

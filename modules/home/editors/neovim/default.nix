@@ -29,10 +29,17 @@ in
       unstable.terraform-ls
       unstable.rnix-lsp
       unstable.nodePackages.typescript-language-server
+      unstable.rust-analyzer
+      unstable.clippy
     ];
 
     # TODO: checkout https://github.com/glepnir/lspsaga.nvim
     #       related https://blog.inkdrop.info/how-to-set-up-neovim-0-5-modern-plugins-lsp-treesitter-etc-542c3d9c9887
+
+    # TODO: compose config and make some plugins optionals
+    #       we could check in lua as well:
+    #       local status, test = pcall(require, "test")
+    #       if(status) then
 
     xdg.configFile."nvim/lua/init.lua".source = ./init.lua;
 
@@ -93,6 +100,7 @@ in
         vim-terraform
         vim-helm
         vim-go
+        rust-tools-nvim
       ];
       extraConfig = ''
         lua require('init')
