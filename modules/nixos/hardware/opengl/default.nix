@@ -23,7 +23,6 @@ in
       extraPackages = with pkgs; [
         vaapiVdpau
         libvdpau-va-gl
-        amdvlk # for Vulkan
       ];
     };
   };

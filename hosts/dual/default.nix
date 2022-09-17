@@ -1,11 +1,4 @@
 { pkgs, config, lib, ... }:
-let
-  xkbCustomLayout = pkgs.writeText "xkb-layout" ''
-    ! sudo showkey revealed, different keycodes than expected, so let's remap media keys
-    keycode 114 = XF86AudioLowerVolume
-    keycode 115 = XF86AudioRaiseVolume
-  '';
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -55,11 +48,4 @@ in
   };
 
   time.timeZone = "Europe/Amsterdam";
-
-  # services.xserver.dpi = 90;
-
-  # Fix media keys
-  services.xserver.displayManager.sessionCommands = "${pkgs.xorg.xmodmap}/bin/xmodmap ${xkbCustomLayout}";
-  services.xserver.exportConfiguration = true;
-
 }

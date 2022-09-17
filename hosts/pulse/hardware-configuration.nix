@@ -3,12 +3,17 @@
 {
   imports = [ "${modulesPath}/installer/scan/not-detected.nix" ];
 
-  my.hardware = {
-    audio.enable = true;
-  };
   hardware.tuxedo-keyboard.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      amdvlk # for Vulkan on AMD
+    ];
+  };
 
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  boot.loader.systemd-boot.enable = true;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
   boot.initrd.luks.devices."cryptroot" = {
