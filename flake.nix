@@ -5,7 +5,7 @@
     nixpkgs.url = "nixpkgs/22.05";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:rycee/home-manager/master";
+      url = "github:rycee/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {

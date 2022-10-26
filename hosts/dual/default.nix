@@ -33,7 +33,7 @@
       term = {
         alacritty = {
           enable = true;
-          fontSize = 10.0;
+          fontSize = 11.0;
         };
       };
       editors = {
