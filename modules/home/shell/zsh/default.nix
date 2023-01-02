@@ -63,9 +63,6 @@ in
 
         # Make sure krew works
         export PATH="$PATH:$HOME/.krew/bin"
-
-	# Preload libnss-cache if it is installed
-	[[ ! -f /lib/x86_64-linux-gnu/libnss_cache.so.2 ]] || export LD_PRELOAD=/lib/x86_64-linux-gnu/libnss_cache.so.2:$LD_PRELOAD
       '';
     };
 

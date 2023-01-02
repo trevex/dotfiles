@@ -46,5 +46,6 @@
 
   fonts.fontconfig.enable = true;
 
-
+  home.sessionVariables = { LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2"; };
+  systemd.user.sessionVariables = { LD_PRELOAD = "/usr/lib/x86_64-linux-gnu/libnss_cache.so.2"; };
 }
