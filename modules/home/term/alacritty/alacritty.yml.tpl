@@ -23,7 +23,6 @@ font:
     family: MesloLGS Nerd Font Mono
     style: Italic
   size: @fontSize@
-  use_thin_strokes: true
 
 draw_bold_text_with_bright_colors: true
 

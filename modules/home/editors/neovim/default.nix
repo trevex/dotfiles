@@ -60,7 +60,7 @@ in
         vim-repeat
         vim-peekaboo
         # some neovim essentials
-        nvim-treesitter
+	nvim-treesitter.withAllGrammars
         nvim-lspconfig
         nvim-web-devicons
         nvim-tree-lua

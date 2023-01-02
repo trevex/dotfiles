@@ -2,10 +2,10 @@
   description = "dotfiles";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/22.05";
+    nixpkgs.url = "nixpkgs/22.11";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:rycee/home-manager/release-22.05";
+      url = "github:rycee/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {

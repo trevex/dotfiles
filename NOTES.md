@@ -5,6 +5,8 @@
 ```
 sudo nixos-rebuild switch --flake ".#$(hostname -s)"
 ```
+
+```
 sudo nix-collect-garbage -d
 sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system 
 sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
@@ -14,12 +16,15 @@ sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
 ## Non-NixOS
 
 ```
+# Install any version of nix
 apt install nix
 # Add user to `nix-users` group (and logout/login)
-nix-channel --add https://nixos.org/channels/nixos-21.11 nixpkgs
+sudo usermod -a -G nix-users $USER
+# Add the proper nixpkgs channel
+nix-channel --add https://nixos.org/channels/nixos-22.11 nixpkgs
 nix-channel --update
 nix-instantiate '<nixpkgs>' -A hello # just to test
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
 nix-channel --update
 # Let's create the first generation with home-manager
 nix-shell '<home-manager>' -A install
@@ -31,12 +36,6 @@ Add to `.profile`:
 export XDG_DATA_DIRS="$HOME/.nix-profile/share/:$XDG_DATA_DIRS"
 ```
 
-Changing to zsh without `chsh`:
-```
-if echo $- | grep -q 'i' && [[ -x "$HOME/.nix-profile/bin/zsh" ]]; then
-  exec "$HOME/.nix-profile/bin/zsh" -i
-fi
-```
 
 Also source home-manager if `.bashrc` is off limits for `nix`:
 ```
@@ -44,6 +43,24 @@ Also source home-manager if `.bashrc` is off limits for `nix`:
 ```
 
 For alacritty you'll have to create a Desktop item manually as the packet is overriden, checkout its repository for an example.
+
+If nix command or flakes are not available:
+```
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+```
+
+## ZSH
+
+Changing to zsh without `chsh` (change `.bashrc`):
+```
+if echo $- | grep -q 'i' && [[ -x "$HOME/.nix-profile/bin/zsh" ]]; then
+  exec "$HOME/.nix-profile/bin/zsh" -i
+fi
+```
+
+You might have to restart it after first run as plugins might install.
+
 
 ## Yubikey
 

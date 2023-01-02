@@ -19,7 +19,6 @@ g.mapleader = ","
 
 -- Treesitter
 require "nvim-treesitter.configs".setup {
-  ensure_installed = "all",
   highlight = {
     enable = true,
     disable = { "yaml" },
@@ -191,7 +190,7 @@ require'nvim-tree'.setup {
   disable_netrw = true,
   hijack_netrw = false,
   open_on_tab = false,
-  update_to_buf_dir   = {
+  hijack_directories = {
     -- enable the feature
     enable = true,
     -- allow to open the tree if it was previously closed
@@ -384,7 +383,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { "gopls", "rnix", "terraformls", "tsserver" }
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
@@ -424,15 +423,36 @@ require('rust-tools').setup({
 
 
 -- Dashboard
-local g = vim.g
-g.dashboard_default_executive ='telescope'
-g.dashboard_custom_section = {
-    a = {description = {"  Find File                 leader f f"}, command = "Telescope find_files"},
-    c = {description = {"  Find Word                 leader f g"}, command = "Telescope live_grep"},
-    e = {description = {"  Projects                  leader f p"}, command = "Telescope projects"},
-    i = {description = {"  Exit                      leader e e"}, command = "exit"}
+local dashboard = require('dashboard')
+
+--g.dashboard_default_executive ='telescope'
+dashboard.custom_center = {
+  {
+    icon = " ",
+    desc = "Find File", 
+    shortcut = "leader f f",
+    action = "Telescope find_files",
+  },
+  {
+    icon = "  ",
+    desc = "Find Word",
+    shortcut = "leader f g", 
+    action = "Telescope live_grep"
+  },
+  {
+    icon = " ",
+    desc = "Projects",
+    shortcut = "leader f p", 
+    action = "Telescope projects"
+  },
+  { 
+    icon = "  ",
+    desc = "Exit",
+    shortcut = "leader e e", 
+    action = "exit"
+  }
 }
-g.dashboard_custom_footer = {'type  :help<Enter>  or  <F1>  for on-line help'}
+dashboard.custom_footer = {'type  :help<Enter>  or  <F1>  for on-line help'}
 vim.cmd [[
 augroup dashboard_au
      autocmd! * <buffer>
@@ -441,7 +461,7 @@ augroup dashboard_au
 augroup END
 ]]
 
-g.dashboard_custom_header = {
+dashboard.custom_header = {
   "⠪⠐⠐⠀⠂⠠⢑⠑⢕⠱⢱⢑⢕⠕⡕⡕⡜⡄⠕⢌⠢⡑⢌⠢⡑⡨⢐⢐⢐⢀⠂⡐⢀⠂⡐⢀⠂⡐⢀",
   "⠂⢀⠁⠈⡀⠁⠂⠠⡀⠑⡀⠊⡘⢘⠌⠌⡘⠸⠱⡱⡱⡸⡐⡕⡌⡢⡑⡰⡐⢔⢀⢂⠐⡀⢂⠐⡀⢂⠐",
   "⠠⠀⠀⠄⠀⠐⠈⠀⠂⠠⠀⠑⠌⠄⡌⡐⡈⠄⠡⠐⠱⢱⢱⢱⢱⢱⡨⡢⡊⡆⢆⡂⡂⢂⠂⢂⠂⡂⠌",

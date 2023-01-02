@@ -19,7 +19,7 @@ in
         #   BROWSER = "google-chrome";
         #   TERMINAL = "alacritty";
         # };
-        home.stateVersion = "22.05";
+        home.stateVersion = "22.11";
         home.username = username;
         home.homeDirectory = homeDirectory;
       };
@@ -36,7 +36,7 @@ in
       };
     };
 
-  mapHomes = dir: attrs @ { system ? system, ... }:
+  mapHomes = dir: attrs @ { system ? sys, ... }:
     mapModules dir
       (homePath: mkHome homePath attrs);
 }
