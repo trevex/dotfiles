@@ -26,10 +26,10 @@ let
           "nixpkgs-overlays=${builtins.toString ../overlays}"
           "dotfiles=${builtins.toString ../.}"
         ];
-        allowedUsers = [ "@wheel" ];
-        trustedUsers = [ "root" "@wheel" ];
         registry = registryInputs // { dotfiles.flake = inputs.self; };
         settings = {
+          allowed-users = [ "@wheel" ];
+          trusted-users = [ "root" "@wheel" ];
           auto-optimise-store = true;
         };
       };
