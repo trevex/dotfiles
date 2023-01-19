@@ -60,7 +60,7 @@ in
         vim-repeat
         vim-peekaboo
         # some neovim essentials
-	nvim-treesitter.withAllGrammars
+        nvim-treesitter.withAllGrammars
         nvim-lspconfig
         nvim-web-devicons
         nvim-tree-lua
@@ -100,7 +100,8 @@ in
         vim-terraform
         vim-helm
         vim-go
-        rust-tools-nvim
+        # workaround https://github.com/simrat39/rust-tools.nvim/issues/312#issuecomment-1374666492
+        pkgs.unstable.vimPlugins.rust-tools-nvim
       ];
       extraConfig = ''
         lua require('init')
