@@ -10,6 +10,7 @@ in
     enable = mkBoolOpt false;
   };
 
+  # TODO: gnome 43 broke lots of things...
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -55,7 +56,7 @@ in
         gnome.gnome-shell-extensions
         gnomeExtensions.appindicator
         gnomeExtensions.pop-shell
-        gnomeExtensions.dynamic-panel-transparency
+        # gnomeExtensions.dynamic-panel-transparency does not work with gnome 43
       ];
 
       dconf = {
@@ -68,12 +69,12 @@ in
               "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
               "appindicatorsupport@rgcjonas.gmail.com"
               "pop-shell@system76.com"
-              "dynamic-panel-transparency@rockon999.github.io"
+              # "dynamic-panel-transparency@rockon999.github.io"
             ];
           };
-          "org/gnome/shell/extensions/user-theme" = {
-            name = config.gtk.theme.name;
-          };
+          # "org/gnome/shell/extensions/user-theme" = {
+          #   name = config.gtk.theme.name;
+          # }; was broken by gnome 43
           "org/gnome/desktop/interface" = {
             monospace-font-name = "MesloLGS Nerd Font Mono 10";
             color-scheme = "prefer-dark";

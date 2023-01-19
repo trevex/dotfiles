@@ -38,7 +38,6 @@ cmd [[
 
 
 -- Better-whitespace
-g.better_whitespace_enabled = 1
 g.strip_whitespace_on_save = 1
 
 
@@ -429,26 +428,26 @@ local dashboard = require('dashboard')
 dashboard.custom_center = {
   {
     icon = " ",
-    desc = "Find File", 
+    desc = "Find File",
     shortcut = "leader f f",
     action = "Telescope find_files",
   },
   {
     icon = "  ",
     desc = "Find Word",
-    shortcut = "leader f g", 
+    shortcut = "leader f g",
     action = "Telescope live_grep"
   },
   {
     icon = " ",
     desc = "Projects",
-    shortcut = "leader f p", 
+    shortcut = "leader f p",
     action = "Telescope projects"
   },
-  { 
+  {
     icon = "  ",
     desc = "Exit",
-    shortcut = "leader e e", 
+    shortcut = "leader e e",
     action = "exit"
   }
 }
@@ -491,6 +490,10 @@ g.terraform_fmt_on_save = 1
 
 -- Indentation defaults
 cmd [[
+  " do not highlight trailing whitespaces in dashboard
+  autocmd! FileType dashboard  let g:better_whitespace_enabled=0
+  autocmd BufLeave <buffer> let g:better_whitespace_enabled=1
+
   autocmd Filetype bash setlocal ts=2 sw=2 expandtab
   autocmd Filetype sh setlocal ts=2 sw=2 expandtab
   autocmd FileType yaml setlocal ts=2 sw=2 expandtab
