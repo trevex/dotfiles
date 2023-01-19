@@ -42,13 +42,26 @@ Also source home-manager if `.bashrc` is off limits for `nix`:
 . "/home/nvoss/.nix-profile/etc/profile.d/hm-session-vars.sh"
 ```
 
-For alacritty you'll have to create a Desktop item manually as the packet is overriden, checkout its repository for an example.
+For alacritty you'll have to create a Desktop item manually as the packet is overriden, checkout its repository for an example and make sure to add required environment variables.
 
 If nix command or flakes are not available:
 ```
 mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ```
+
+Some manual gnome stuff for now:
+```
+for i in {1..9}; do 
+  gsettings set "org.gnome.shell.keybindings" "switch-to-application-$i" "[]"
+  gsettings set "org.gnome.desktop.wm.keybindings" "switch-to-workspace-$i" "['<Super>${i}']"
+  gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-${i} "['<Super><Shift>${i}']"
+done
+```
+
+Also setup alacritty, e.g. copy command from desktop entry and create custom shortcut through GUI.
+
+Obsolete once gnome settings are moved out of nixos module and part of home manager module.
 
 ## ZSH
 
