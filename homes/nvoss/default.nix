@@ -7,6 +7,7 @@
     };
     editors = {
       neovim.enable = true;
+      helix.enable = true;
     };
     shell = {
       direnv.enable = true;
