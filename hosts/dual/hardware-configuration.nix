@@ -5,16 +5,19 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
- 
+
   my.hardware = {
     audio.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true; # NVIDIA
+  hardware.enableAllFirmware = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
- 
+
   time.hardwareClockInLocalTime = true;
 
   boot.loader.systemd-boot.enable = false;
@@ -24,7 +27,7 @@
     device = "nodev";
     efiSupport = true;
     useOSProber = true;
-    # 28A81037A810064A                                     
+    # 28A81037A810064A
   };
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
@@ -38,18 +41,19 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ebd73ac2-4aa0-47a4-afec-c1866f9263c4";
+    {
+      device = "/dev/disk/by-uuid/ebd73ac2-4aa0-47a4-afec-c1866f9263c4";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8C10-FCC2";
+    {
+      device = "/dev/disk/by-uuid/8C10-FCC2";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/73f7275a-9957-4ecb-85aa-5ffecd16a64a"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/73f7275a-9957-4ecb-85aa-5ffecd16a64a"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

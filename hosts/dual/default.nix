@@ -29,6 +29,11 @@
   };
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
+    home.packages = with pkgs; [
+      teamspeak_client
+      xclip
+    ];
+
     my = {
       term = {
         alacritty = {
@@ -38,6 +43,7 @@
       };
       editors = {
         neovim.enable = true;
+        helix.enable = true;
       };
       shell = {
         direnv.enable = true;

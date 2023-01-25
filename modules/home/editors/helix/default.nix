@@ -1,15 +1,15 @@
-{
-  config,
-  options,
-  lib,
-  pkgs,
-  mylib,
-  ...
+{ config
+, options
+, lib
+, pkgs
+, mylib
+, ...
 }:
 with lib;
 with mylib; let
   cfg = config.my.editors.helix;
-in {
+in
+{
   options.my.editors.helix = {
     enable = mkBoolOpt false;
   };
@@ -23,8 +23,35 @@ in {
       languages = [
         {
           name = "nix";
-          language-server = {command = lib.getExe pkgs.unstable.nil;};
-          config.nil.formatting.command = [(lib.getExe pkgs.unstable.alejandra) "-q"];
+          language-server = { command = lib.getExe pkgs.unstable.nil; };
+          config.nil.formatting.command = [ (lib.getExe pkgs.unstable.alejandra) "-q" ];
+        }
+        {
+          name = "rust";
+          auto-format = true;
+          language-server = {
+            command = lib.getExe pkgs.unstable.rust-analyzer;
+          };
+          config.checkOnSave.command = (lib.getExe pkgs.unstable.clippy);
+          debugger = {
+            # TODO: make debug adapter configurate, to allow swapping to lldb directly, e.g. https://github.com/helix-editor/helix/blob/master/languages.toml
+            command = "${pkgs.unstable.vscode-extensions.vadimcn.vscode-lldb.adapter}/bin/codelldb";
+            name = "codelldb";
+            port-arg = "--port {}";
+            transport = "tcp";
+            templates = [{
+              name = "binary";
+              request = "launch";
+              completion = [{
+                completion = "filename";
+                name = "binary";
+              }];
+              args = {
+                program = "{0}";
+                runInTerminal = true;
+              };
+            }];
+          };
         }
       ];
 
@@ -50,7 +77,7 @@ in {
               select = "SELECT";
             };
           };
-          gutters = ["diagnostics" "line-numbers" "spacer" "diff"];
+          gutters = [ "diagnostics" "line-numbers" "spacer" "diff" ];
         };
         keys = {
           insert = {
@@ -62,3 +89,4 @@ in {
 
   };
 }
+
