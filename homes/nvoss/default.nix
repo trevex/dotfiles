@@ -13,6 +13,7 @@
       direnv.enable = true;
       git.enable = true;
       zsh.enable = true;
+      kubectl.enable = true;
     };
   };
 
