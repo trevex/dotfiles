@@ -63,6 +63,7 @@ in
 
         # Make sure krew works
         export PATH="$PATH:$HOME/.krew/bin"
+        export EDITOR="vim"
       '';
     };
 

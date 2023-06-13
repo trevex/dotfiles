@@ -31,6 +31,7 @@ in
       unstable.nodePackages.typescript-language-server
       unstable.rust-analyzer
       unstable.clippy
+      unstable.vimv
     ];
 
     # TODO: checkout https://github.com/glepnir/lspsaga.nvim
