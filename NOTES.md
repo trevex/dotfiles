@@ -21,10 +21,10 @@ apt install nix
 # Add user to `nix-users` group (and logout/login)
 sudo usermod -a -G nix-users $USER
 # Add the proper nixpkgs channel
-nix-channel --add https://nixos.org/channels/nixos-22.11 nixpkgs
+nix-channel --add https://nixos.org/channels/nixos-23.05 nixpkgs
 nix-channel --update
 nix-instantiate '<nixpkgs>' -A hello # just to test
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
 nix-channel --update
 # Let's create the first generation with home-manager
 nix-shell '<home-manager>' -A install
