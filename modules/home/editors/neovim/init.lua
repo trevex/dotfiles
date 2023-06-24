@@ -169,7 +169,7 @@ require('cokeline').setup({
       text = function(buffer) return buffer.filename .. ' ' end,
     },
     {
-      text = '',
+      text = '',
       delete_buffer_on_left_click = true,
     },
     {
