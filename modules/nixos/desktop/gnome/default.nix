@@ -15,7 +15,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       qt5.qtwayland
-      font-manager
       dconf
       libnotify
       wl-clipboard
@@ -66,7 +65,7 @@ in
             disable-user-extensions = false;
             enabled-extensions = [
               "user-theme@gnome-shell-extensions.gcampax.github.com"
-              "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+              # "workspace-indicator@gnome-shell-extensions.gcampax.github.com" obsolete in newest version
               "appindicatorsupport@rgcjonas.gmail.com"
               "pop-shell@system76.com"
               # "dynamic-panel-transparency@rockon999.github.io"
@@ -76,7 +75,8 @@ in
           #   name = config.gtk.theme.name;
           # }; was broken by gnome 43
           "org/gnome/desktop/interface" = {
-            monospace-font-name = "MesloLGS Nerd Font Mono 10";
+            monospace-font-name = "SFMono Nerd Font Mono 11";
+            font-name = "SF Pro Text 11";
             color-scheme = "prefer-dark";
           };
           "org/gnome/desktop/background" = {

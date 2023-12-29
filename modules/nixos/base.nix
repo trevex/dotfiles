@@ -10,7 +10,7 @@ with lib.my;
       git-lfs
       ripgrep
       curl
-      exa
+      eza
       gcc
       bat
       moreutils

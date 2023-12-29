@@ -2,10 +2,10 @@
   description = "dotfiles";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/23.05";
+    nixpkgs.url = "nixpkgs/23.11";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:rycee/home-manager/release-23.05";
+      url = "github:rycee/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     darwin = {
@@ -15,7 +15,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     # sources, packages, overlays
     nvim-cokeline = {
-      url = "github:noib3/nvim-cokeline";
+      url = "github:willothy/nvim-cokeline";
       flake = false;
     };
   };

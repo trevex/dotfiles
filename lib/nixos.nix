@@ -34,7 +34,7 @@ let
         };
       };
     system.configurationRevision = with inputs; mkIf (self ? rev) self.rev;
-    system.stateVersion = "23.05";
+    system.stateVersion = "23.11";
 
     ## Some reasonable, global defaults
     # This is here to appease 'nix flake check' for generic hosts with no
@@ -79,7 +79,7 @@ let
     my.home = { ... }: {
       nixpkgs.config = pkgs.config;
       nixpkgs.overlays = pkgs.overlays;
-      my.nixGL.enable = true;
+      my.nixGL.enable = false; # we are on NixOS and should not need nixGL
     };
   };
 in

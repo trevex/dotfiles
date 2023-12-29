@@ -14,13 +14,13 @@ scrolling:
 
 font:
   normal:
-    family: MesloLGS Nerd Font Mono
+    family: SFMono Nerd Font Mono
     style: Regular
   bold:
-    family: MesloLGS Nerd Font Mono
+    family: SFMono Nerd Font Mono
     style: Bold
   italic:
-    family: MesloLGS Nerd Font Mono
+    family: SFMono Nerd Font Mono
     style: Italic
   size: @fontSize@
 

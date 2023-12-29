@@ -74,7 +74,6 @@ in
         cmp-vsnip
         cmp-nvim-lsp
         cmp-buffer
-        cmp-tabnine
         cmp-path
         lspkind-nvim
         # colorscheme

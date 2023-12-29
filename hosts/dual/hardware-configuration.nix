@@ -13,7 +13,6 @@
     audio.enable = true;
   };
 
-  nixpkgs.config.allowUnfree = true; # NVIDIA
   hardware.enableAllFirmware = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];

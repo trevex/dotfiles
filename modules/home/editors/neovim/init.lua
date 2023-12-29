@@ -56,7 +56,7 @@ g.gruvbox_contrast_dark = "medium"
 cmd "if has('mouse') | set mouse=a | endif"
 cmd "if has('persistent_undo') | set undofile | set undodir=~/.local/share/nvim-undo | endif"
 cmd "set shada='100,<500,/50,:100,@100,s10,h,c,n$HOME/.local/nvim/shada"
-opt.number = true -- Show line numbers
+cmd "set number" -- Show line numbers
 opt.hidden = true -- If hidden is not set, TextEdit might fail
 opt.updatetime = 300 -- Smaller updatetime for CursorHold and CursorHoldI
 opt.signcolumn = "yes"
@@ -137,7 +137,7 @@ require "lualine".setup {
 
 
 -- nvim-cokeline
-local get_hex = require('cokeline/utils').get_hex
+local get_hex = require('cokeline.hlgroups').get_hl_attr
 
 require('cokeline').setup({
   default_hl = {
@@ -301,15 +301,6 @@ map("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {n
 map("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap=true})
 map("n", "<leader>fp", "<cmd>lua require('telescope').extensions.project.project{ display_type = 'full' }<cr>", {noremap=true})
 
--- Tabninefor code completion
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({
-  max_lines = 1000;
-  max_num_results = 20;
-  sort = true;
-	run_on_every_keystroke = true;
-	snippet_placeholder = '..';
-})
 -- Icons for code completion
 local lspkind = require "lspkind"
 -- Code completion

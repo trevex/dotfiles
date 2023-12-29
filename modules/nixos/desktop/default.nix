@@ -12,9 +12,10 @@ in
 
     fonts = {
       fontDir.enable = true;
-      fonts = with pkgs; [
+      packages = with pkgs; [
         dejavu_fonts
         material-design-icons
+        apple-fonts
         (nerdfonts.override { fonts = [ "Meslo" ]; })
       ];
     };
