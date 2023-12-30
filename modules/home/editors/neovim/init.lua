@@ -14,8 +14,13 @@ g.mapleader = ","
 
 
 -- Gitsigns
--- require "gitsigns".setup {}
+require "gitsigns".setup {}
 
+
+-- which-key.nvim
+vim.o.timeout = true
+vim.o.timeoutlen = 500
+require("which-key").setup {}
 
 -- Treesitter
 require "nvim-treesitter.configs".setup {
@@ -155,6 +160,30 @@ require('cokeline').setup({
     end,
   },
 
+  sidebar = {
+    filetype = {'NvimTree', 'neo-tree'},
+    components = {
+      {
+        text = function(buf)
+          return buf.filetype
+        end,
+        fg = function(buffer)
+          return
+            buffer.is_focused
+            and get_hex('ColorColumn', 'bg')
+             or get_hex('Normal', 'fg')
+        end,
+        bg = function(buffer)
+          return
+            buffer.is_focused
+            and get_hex('Normal', 'fg')
+             or get_hex('ColorColumn', 'bg')
+        end,
+        bold = true,
+      },
+    }
+  },
+
   components = {
     {
       text = function(buffer) return ' ' .. buffer.devicon.icon end,
@@ -167,10 +196,6 @@ require('cokeline').setup({
     },
     {
       text = function(buffer) return buffer.filename .. ' ' end,
-    },
-    {
-      text = '',
-      delete_buffer_on_left_click = true,
     },
     {
       text = ' ',
@@ -376,7 +401,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "gopls", "rnix", "terraformls", "tsserver" }
+local servers = { "gopls", "rnix", "terraformls", "tsserver", "svelte" }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -417,45 +442,7 @@ require('rust-tools').setup({
 
 
 -- Dashboard
-local dashboard = require('dashboard')
-
---g.dashboard_default_executive ='telescope'
-dashboard.custom_center = {
-  {
-    icon = " ",
-    desc = "Find File",
-    shortcut = "leader f f",
-    action = "Telescope find_files",
-  },
-  {
-    icon = "  ",
-    desc = "Find Word",
-    shortcut = "leader f g",
-    action = "Telescope live_grep"
-  },
-  {
-    icon = " ",
-    desc = "Projects",
-    shortcut = "leader f p",
-    action = "Telescope projects"
-  },
-  {
-    icon = "  ",
-    desc = "Exit",
-    shortcut = "leader e e",
-    action = "exit"
-  }
-}
-dashboard.custom_footer = {'type  :help<Enter>  or  <F1>  for on-line help'}
-vim.cmd [[
-augroup dashboard_au
-     autocmd! * <buffer>
-     autocmd User dashboardReady let &l:stl = 'Dashboard'
-     autocmd User dashboardReady nnoremap <buffer> <leader>ee <cmd>exit<CR>
-augroup END
-]]
-
-dashboard.custom_header = {
+local header = {
   "⠪⠐⠐⠀⠂⠠⢑⠑⢕⠱⢱⢑⢕⠕⡕⡕⡜⡄⠕⢌⠢⡑⢌⠢⡑⡨⢐⢐⢐⢀⠂⡐⢀⠂⡐⢀⠂⡐⢀",
   "⠂⢀⠁⠈⡀⠁⠂⠠⡀⠑⡀⠊⡘⢘⠌⠌⡘⠸⠱⡱⡱⡸⡐⡕⡌⡢⡑⡰⡐⢔⢀⢂⠐⡀⢂⠐⡀⢂⠐",
   "⠠⠀⠀⠄⠀⠐⠈⠀⠂⠠⠀⠑⠌⠄⡌⡐⡈⠄⠡⠐⠱⢱⢱⢱⢱⢱⡨⡢⡊⡆⢆⡂⡂⢂⠂⢂⠂⡂⠌",
@@ -476,6 +463,22 @@ dashboard.custom_header = {
   "⡀⠄⠀⠄⠀⠂⠠⠁⠡⠡⠡⠡⠡⠡⡁⡂⠢⠡⠣⡱⢱⢱⢹⢸⢸⢜⢎⢎⢧⢳⢱⡹⡜⡎⡮⡪⡪⠪⡪",
   "⠀⠄⠂⠀⠄⠁⡀⠈⠄⢈⠨⠈⢌⢂⢂⠢⠡⠨⠨⢈⠊⢆⢣⢣⢣⢣⢳⢱⢱⢱⢱⢱⠱⡑⢕⢑⢌⢪⠨",
   "⠠⠀⠀⠂⠀⠁⠀⠂⠐⠀⡀⠁⠐⡀⠅⠊⠌⢌⢌⢐⠨⠠⠑⡈⠪⡊⢎⢪⠢⡣⡑⡕⡱⠡⠣⡑⢔⢱⢩",
+}
+local dashboard = require('dashboard').setup {
+  theme = "hyper",
+  hide = {
+    statusline = false,
+  },
+  config = {
+    header = header,
+    shortcut = {
+      { desc = " Find File", group = 'DashboardShortCut', key = 'f', action = 'Telescope find_files' },
+      { desc = " Find Word", group = 'DashboardShortCut', key = 'g', action = 'Telescope live_grep' },
+    },
+    week_header = { enable = false },
+    packages = { enable = false },
+    footer = {'', 'type  :help<Enter>  or  <F1>  for on-line help'}
+  },
 }
 
 

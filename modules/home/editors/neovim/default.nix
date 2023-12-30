@@ -3,19 +3,6 @@ with lib;
 with mylib;
 let
   cfg = config.my.editors.neovim;
-  go-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "go.nvim";
-    version = "29-11-2021";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "go.nvim";
-      rev = "3329238deb8c2294d1b7f5ceffdeb3d5b31fe8be";
-      sha256 = "14vw0nrn4qqshj8ajz6s0k5y96qn06j08nax12lf52by7cfvvni0";
-    };
-    prePatch = ''
-      rm Makefile
-    '';
-  };
 in
 {
   options.my.editors.neovim = {
@@ -29,6 +16,7 @@ in
       unstable.terraform-ls
       unstable.rnix-lsp
       unstable.nodePackages.typescript-language-server
+      unstable.nodePackages.svelte-language-server
       unstable.rust-analyzer
       unstable.clippy
       unstable.vimv
@@ -65,8 +53,10 @@ in
         nvim-lspconfig
         nvim-web-devicons
         nvim-tree-lua
-        nvim-cokeline
+        nvim-cokeline # buffer-tabs
         lualine-nvim # statusbar
+        gitsigns-nvim
+        which-key-nvim
         # code completion
         vim-vsnip # snippets
         friendly-snippets
@@ -88,11 +78,10 @@ in
         vim-visual-multi
         gitsigns-nvim # depends on nvim-lua/plenary.nvim
         quick-scope # f/F/t/T preview
-        vim-sneak # s<char><char>
+        leap-nvim # s<char><char> (vim-sneak alternative)
         vim-better-whitespace # whitespace cleanup
         indent-blankline-nvim
         symbols-outline-nvim
-        # stabilize-nvim # TODO: not available yet :/
         dashboard-nvim # \o/
         # language support
         vim-jsx-typescript
