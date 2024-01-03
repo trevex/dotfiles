@@ -34,6 +34,15 @@
       xclip
     ];
 
+    programs.git = {
+      enable = true;
+      userName = "Niklas Voss";
+      userEmail = "niklas.voss@gmail.com";
+      extraConfig = {
+        url."git@github.com:".insteadOf = "https://github.com/";
+      };
+    };
+
     my = {
       term = {
         alacritty = {
