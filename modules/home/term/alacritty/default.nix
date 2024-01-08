@@ -4,11 +4,6 @@ with mylib;
 let
   cfg = config.my.term.alacritty;
 
-  nixGLIntel = (pkgs.callPackage "${builtins.fetchTarball {
-      url = https://github.com/guibou/nixGL/archive/58ab858a1b1059184e0cdb358f3470fa8ededeac.tar.gz;
-      sha256 = "0jwk4ci3xn1v21pns01v36ilw5q9nrf02cb3ir1npm6m15744i04";
-    }}/nixGL.nix"
-    { }).nixGLIntel;
   alacrittyTheme = pkgs.fetchFromGitHub {
     owner = "eendroroy";
     repo = "alacritty-theme";
@@ -36,7 +31,7 @@ in
       (mkIf config.my.nixGL.enable {
         enable = true;
         package = (pkgs.writeShellScriptBin "alacritty" ''
-          ${nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty "$@"
+          ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty "$@"
         '');
       })
       (mkIf (config.my.nixGL.enable != true) {

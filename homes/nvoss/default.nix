@@ -7,7 +7,7 @@
     };
     editors = {
       neovim.enable = true;
-      helix.enable = true;
+      helix.enable = false;
     };
     shell = {
       direnv.enable = true;
@@ -41,6 +41,7 @@
     # TODO: move fonts
     dejavu_fonts
     material-design-icons
+    apple-fonts
     (nerdfonts.override { fonts = [ "Meslo" ]; })
     # misc
     signal-desktop

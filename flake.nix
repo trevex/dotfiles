@@ -13,11 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    # sources, packages, overlays
-    nvim-cokeline = {
-      url = "github:willothy/nvim-cokeline";
-      flake = false;
-    };
+    nixgl.url = "github:guibou/nixGL";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
@@ -41,7 +37,7 @@
         final: prev: {
           unstable = pkgs';
           my = self.packages."${system}";
-        } // (import ./overlays { inherit inputs; }) final prev;
+        } // (import ./overlays { inherit inputs; }) final prev // inputs.nixgl.overlay final prev;
     in
     {
       overlays.default = overlay;
