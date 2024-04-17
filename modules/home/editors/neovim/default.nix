@@ -14,7 +14,6 @@ in
       # language servers
       unstable.gopls
       unstable.terraform-ls
-      unstable.rnix-lsp
       unstable.nodePackages.typescript-language-server
       unstable.nodePackages.svelte-language-server
       unstable.rust-analyzer

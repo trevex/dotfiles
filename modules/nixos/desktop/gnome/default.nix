@@ -98,6 +98,7 @@ in
             edge-tiling = true;
             workspaces-only-on-primary = false;
             dynamic-workspaces = false;
+            experimental-features = [ "scale-monitor-framebuffer" ];
           };
           "org/gnome/desktop/wm/preferences" = {
             num-workspaces = 4;

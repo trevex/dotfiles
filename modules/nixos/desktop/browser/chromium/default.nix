@@ -26,6 +26,8 @@ in
         # to enable it by passing in the required flags.
         package = (pkgs.chromium.override {
           commandLineArgs = [
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
             "--enable-features=VaapiVideoDecoder"
             "--enable-gpu-rasterization"
             # "--enable-zero-copy"
