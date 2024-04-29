@@ -50,7 +50,7 @@ let
 
     # Use the latest kernel
     boot = {
-      kernelPackages = mkDefault pkgs.linuxKernel.packages.linux_5_15;
+      kernelPackages = mkDefault pkgs.linuxPackages_latest;
       loader = {
         efi.canTouchEfiVariables = mkDefault true;
       };
