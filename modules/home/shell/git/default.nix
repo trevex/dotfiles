@@ -7,6 +7,14 @@ in
 {
   options.my.shell.git = {
     enable = mkBoolOpt false;
+    userName = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
+    userEmail = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -42,9 +50,8 @@ in
         rs = "remote show";
         st = "status";
       };
-      # TODO: set username and email in user part
-      # userName = "Niklas Voss";
-      # userEmail = "niklas.voss@gmail.com";
+      userName = cfg.userName;
+      userEmail = cfg.userEmail;
       # signing = {
       #   key = "";
       #   signByDefault = true;

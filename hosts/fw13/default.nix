@@ -40,9 +40,13 @@
         neovim.enable = true;
       };
       shell = {
-        direnv.enable = true;
-        git.enable = true;
+        git = {
+          enable = true;
+          userName = "Niklas Voss";
+          userEmail = "niklas.voss@gmail.com";
+        };
         zsh.enable = true;
+        direnv.enable = true;
       };
     };
   };
