@@ -12,6 +12,12 @@ in
 
   config = mkIf cfg.enable {
 
+    home.packages = with pkgs; [
+      kubectl
+      kubernetes-helm
+      kubectx
+    ];
+
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;

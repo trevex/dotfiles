@@ -21,5 +21,10 @@ in
         # listenOptions = [];
       };
     };
+
+
+    environment.systemPackages = with pkgs; [
+      skopeo
+    ];
   };
 }
