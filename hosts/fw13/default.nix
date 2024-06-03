@@ -17,6 +17,7 @@
       gnome.enable = true;
       browser = {
         chromium.enable = true;
+        firefox.enable = true;
       };
     };
     shell = {
@@ -29,6 +30,10 @@
   };
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
+    home.packages = with pkgs; [
+      unstable.signal-desktop
+    ];
+
     my = {
       term = {
         alacritty = {
