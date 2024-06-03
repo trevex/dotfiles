@@ -26,6 +26,7 @@
     };
     services = {
       docker.enable = true;
+      libvirtd.enable = true;
     };
   };
   # Let's also setup and enable some home-manager modules
