@@ -3,13 +3,6 @@ with lib;
 with mylib;
 let
   cfg = config.my.term.alacritty;
-
-  alacrittyTheme = pkgs.fetchFromGitHub {
-    owner = "eendroroy";
-    repo = "alacritty-theme";
-    rev = "dd3a1ef22585b93a59da98a01ca8b641e0484bb9";
-    sha256 = "053shryakxvw7yrhycflxxcdw3sqgxf3ii5914d4x6d4f5vzsxf3";
-  };
 in
 {
   options.my.term.alacritty = with types; {
@@ -21,10 +14,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."alacritty/alacritty.yml".source = pkgs.substituteAll {
-      src = ./alacritty.yml.tpl;
+    xdg.configFile."alacritty/alacritty.toml".source = pkgs.substituteAll {
+      src = ./alacritty.toml.tpl;
       fontSize = cfg.fontSize;
-      colorScheme = builtins.readFile ("${alacrittyTheme}/themes/gruvbox_dark.yaml");
     };
 
     programs.alacritty = (mkMerge [
