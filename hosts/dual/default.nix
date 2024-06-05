@@ -34,15 +34,6 @@
       xclip
     ];
 
-    programs.git = {
-      enable = true;
-      userName = "Niklas Voss";
-      userEmail = "niklas.voss@gmail.com";
-      extraConfig = {
-        url."git@github.com:".insteadOf = "https://github.com/";
-      };
-    };
-
     my = {
       term = {
         alacritty = {
@@ -54,8 +45,12 @@
         neovim.enable = true;
       };
       shell = {
+        git = {
+          enable = true;
+          userName = "Niklas Voss";
+          userEmail = "niklas.voss@gmail.com";
+        };
         direnv.enable = true;
-        git.enable = true;
         zsh.enable = true;
       };
     };
