@@ -23,6 +23,7 @@
     shell = {
       zsh.enable = true;
       yubikey.enable = true;
+      gnupg.enable = true;
     };
     services = {
       docker.enable = true;
@@ -33,6 +34,7 @@
   my.home = { ... }: {
     home.packages = with pkgs; [
       unstable.signal-desktop
+      unstable.slack
     ];
 
     my = {

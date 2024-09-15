@@ -30,9 +30,7 @@ in
         };
       };
     };
-  } // mkIf config.my.desktop.gnome.enable {
-    environment.systemPackages = with pkgs; [
-      virt-manager
-    ];
+
+    programs.virt-manager.enable = config.my.desktop.gnome.enable;
   };
 }
