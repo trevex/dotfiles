@@ -19,6 +19,7 @@ in
         autoPrune.enable = true;
         enableOnBoot = mkDefault false;
         # listenOptions = [];
+        extraOptions = "--ipv6 --fixed-cidr-v6 fdff::/80";
       };
     };
 

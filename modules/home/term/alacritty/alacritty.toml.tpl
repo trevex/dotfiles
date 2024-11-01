@@ -67,3 +67,9 @@ startup_mode = "Windowed"
 [window.padding]
 x = 5
 y = 5
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]
