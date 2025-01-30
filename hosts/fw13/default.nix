@@ -28,6 +28,7 @@
     services = {
       docker.enable = true;
       libvirtd.enable = true;
+      tailscale.enable = true;
     };
   };
   # Let's also setup and enable some home-manager modules
@@ -35,6 +36,8 @@
     home.packages = with pkgs; [
       unstable.signal-desktop
       unstable.slack
+      unstable.discord
+      nixfmt-rfc-style # TODO: relevant everywhere?
     ];
 
     my = {

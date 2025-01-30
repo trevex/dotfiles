@@ -21,14 +21,16 @@ let
       in
       {
         package = pkgs.nixFlakes;
-        extraOptions = "experimental-features = nix-command flakes";
+        extraOptions = "experimental-features = nix-command flakes impure-derivations ca-derivations";
         nixPath = nixPathInputs ++ [
           "nixpkgs-overlays=${builtins.toString ../overlays}"
           "dotfiles=${builtins.toString ../.}"
         ];
         registry = registryInputs // { dotfiles.flake = inputs.self; };
         settings = {
+          sandbox = "relaxed";
           allowed-users = [ "@wheel" ];
+          trusted-substituters = [ "root" "@wheel" ];
           trusted-users = [ "root" "@wheel" ];
           auto-optimise-store = true;
         };
