@@ -20,7 +20,7 @@ let
         registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
       in
       {
-        package = pkgs.nixFlakes;
+        package = pkgs.nixVersions.stable;
         extraOptions = "experimental-features = nix-command flakes impure-derivations ca-derivations";
         nixPath = nixPathInputs ++ [
           "nixpkgs-overlays=${builtins.toString ../overlays}"
@@ -36,7 +36,7 @@ let
         };
       };
     system.configurationRevision = with inputs; mkIf (self ? rev) self.rev;
-    system.stateVersion = "24.05";
+    system.stateVersion = "24.11";
 
     ## Some reasonable, global defaults
     # This is here to appease 'nix flake check' for generic hosts with no

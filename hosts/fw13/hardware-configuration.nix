@@ -45,7 +45,7 @@
 
   services.fwupd.enable = true;
 
-  hardware.opengl = {
+  hardware.graphics = {
     extraPackages = with pkgs; [
       amdvlk # for Vulkan on AMD
     ];

@@ -1,5 +1,14 @@
 # Random assembly of notes
 
+## `nixos-anywhere`
+
+```
+nix run github:nix-community/nixos-anywhere -- \
+  --generate-hardware-config nixos-generate-config ./hosts/x3d/hardware-configuration.nix \
+  --flake .#nixosConfigurations.x3d.config --target-host root@192.168.1.138 \
+  --no-substitute-on-destination --debug
+```
+
 ## NixOS
 
 ```

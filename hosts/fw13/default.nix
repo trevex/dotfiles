@@ -37,6 +37,7 @@
       unstable.signal-desktop
       unstable.slack
       unstable.discord
+      unstable.zoom-us
       nixfmt-rfc-style # TODO: relevant everywhere?
     ];
 

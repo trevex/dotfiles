@@ -24,7 +24,6 @@ in
     environment.gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
-    ]) ++ (with pkgs.gnome; [
       cheese # webcam tool
       gnome-music
       epiphany # web browser
@@ -47,12 +46,12 @@ in
     };
 
     services.gnome.core-utilities.enable = true;
-    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
     my.home = { config, pkgs, ... }: {
       home.packages = with pkgs; [
-        gnome.nautilus
-        gnome.gnome-shell-extensions
+        nautilus
+        gnome-shell-extensions
         gnomeExtensions.appindicator
         gnomeExtensions.pop-shell
         # gnomeExtensions.dynamic-panel-transparency does not work with gnome 43
@@ -192,7 +191,7 @@ in
         enable = true;
         iconTheme = {
           name = "Adwaita";
-          package = pkgs.gnome.adwaita-icon-theme;
+          package = pkgs.adwaita-icon-theme;
         };
         theme = {
           name = "Pop";

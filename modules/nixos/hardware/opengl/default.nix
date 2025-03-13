@@ -17,9 +17,8 @@ in
     ];
 
     # Configure OpenGL fo VA-API (encoding HW-accleration) and Vulkan
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true; # for Vulkan
       extraPackages = with pkgs; [
         vaapiVdpau
         libvdpau-va-gl
