@@ -16,7 +16,7 @@ in
         dejavu_fonts
         material-design-icons
         apple-fonts
-        (nerdfonts.override { fonts = [ "Meslo" ]; })
+        nerd-fonts.meslo-lg
       ];
     };
 

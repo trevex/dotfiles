@@ -54,7 +54,7 @@ in
         tf = "terraform";
         tg = "terragrunt";
       };
-      initExtra = ''
+      initContent = ''
         # Disable the underline for paths
         typeset -A ZSH_HIGHLIGHT_STYLES
         ZSH_HIGHLIGHT_STYLES[path]='none'

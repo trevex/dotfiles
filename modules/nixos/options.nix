@@ -14,7 +14,7 @@ with mylib;
 
     # home = mkOpt attrs { };
     home =
-      mkOption { type = options.home-manager.users.type.functor.wrapped; };
+      mkOption { type = options.home-manager.users.type.nestedTypes.elemType; };
 
     env = mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);

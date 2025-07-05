@@ -45,7 +45,7 @@ in
       desktopManager.gnome.enable = true;
     };
 
-    services.gnome.core-utilities.enable = true;
+    services.gnome.core-apps.enable = true;
     services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
     my.home = { config, pkgs, ... }: {

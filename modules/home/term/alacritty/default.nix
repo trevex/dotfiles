@@ -14,8 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."alacritty/alacritty.toml".source = pkgs.substituteAll {
-      src = ./alacritty.toml.tpl;
+    xdg.configFile."alacritty/alacritty.toml".source = pkgs.replaceVars ./alacritty.toml.tpl {
       fontSize = cfg.fontSize;
     };
 
