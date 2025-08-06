@@ -25,14 +25,8 @@
 
   # windows dual-boot
   time.hardwareClockInLocalTime = true;
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-  };
 
   users.users.nik.hashedPassword = "$y$j9T$D2b0WHUb1BkJr7wIpX7LH0$vrTmyfrLdD4ct2Wr1QJnSUabaiEC3txQRzISRGmbe74";
 
@@ -49,6 +43,7 @@
       gnome.enable = true;
       browser = {
         chromium.enable = true;
+        firefox.enable = true;
       };
     };
     shell = {
