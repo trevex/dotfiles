@@ -15,7 +15,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -25,8 +25,23 @@
 
   # windows dual-boot
   time.hardwareClockInLocalTime = true;
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  environment.systemPackages = [
+    # For debugging and troubleshooting Secure Boot.
+    pkgs.sbctl
+  ];
+
+  # Lanzaboote currently replaces the systemd-boot module.
+  # This setting is usually set to true in configuration.nix
+  # generated at installation time. So we force it to false
+  # for now.
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 
   users.users.nik.hashedPassword = "$y$j9T$D2b0WHUb1BkJr7wIpX7LH0$vrTmyfrLdD4ct2Wr1QJnSUabaiEC3txQRzISRGmbe74";
 
@@ -54,6 +69,7 @@
       docker.enable = true;
     };
   };
+
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
     home.packages = with pkgs; [

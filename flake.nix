@@ -18,6 +18,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
@@ -27,9 +31,11 @@
       system = "x86_64-linux";
 
       mkPkgs = pkgs: overlays: import pkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = overlays;
+        inherit system overlays;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
       };
       pkgs = mkPkgs nixpkgs (lib.attrValues self.overlays);
       pkgs' = mkPkgs nixpkgs-unstable [ ];

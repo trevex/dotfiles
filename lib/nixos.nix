@@ -91,6 +91,7 @@ in
       inherit system;
       specialArgs = { inherit lib inputs system mylib; };
       modules = [
+        inputs.lanzaboote.nixosModules.lanzaboote
         {
           nixpkgs.pkgs = pkgs;
           networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
