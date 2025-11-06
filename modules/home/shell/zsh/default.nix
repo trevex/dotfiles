@@ -16,6 +16,7 @@ in
       kubectl
       kubernetes-helm
       kubectx
+      pass
     ];
 
     programs.fzf = {
