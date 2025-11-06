@@ -22,6 +22,7 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:

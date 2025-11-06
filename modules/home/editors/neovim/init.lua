@@ -357,29 +357,17 @@ cmp.setup({
 })
 
 
--- Gruvbox for cmp
--- cmd [[highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0]]
-
--- LSP
-local lspconfig = require "lspconfig"
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-
-end
-
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { "gopls", "terraformls", "ts_ls", "svelte" }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     },
-  }
+  })
 end
 
 -- Global mappings.
@@ -445,7 +433,6 @@ require('rust-tools').setup({
     },
   },
   server = {
-    on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = {
         -- enable clippy on save

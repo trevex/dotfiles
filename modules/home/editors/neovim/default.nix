@@ -89,8 +89,7 @@ in
         vim-helm
         vim-go
         vim-just
-        # workaround https://github.com/simrat39/rust-tools.nvim/issues/312#issuecomment-1374666492
-        pkgs.unstable.vimPlugins.rust-tools-nvim
+        rust-tools-nvim
       ];
       extraConfig = ''
         lua require('init')

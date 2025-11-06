@@ -6,8 +6,10 @@ let
   sys = "x86_64-linux";
   defaults = {
     imports =
-      # I use home-manager to deploy files to $HOME; little else
-      [ inputs.home-manager.nixosModules.home-manager ]
+      [
+        inputs.home-manager.nixosModules.home-manager
+        inputs.nix-flatpak.nixosModules.nix-flatpak
+      ]
       # All my personal modules
       ++ (mapModulesRec' (toString ../modules/nixos) import);
 

@@ -27,10 +27,21 @@
     };
     services = {
       docker.enable = true;
-      libvirtd.enable = true;
+      libvirtd.enable = false;
       tailscale.enable = true;
     };
   };
+  # ProtonVPN TODO: modularize
+  networking.firewall.checkReversePath = false;
+  environment.systemPackages = with pkgs; [wireguard-tools protonvpn-gui];
+  # Configure nix-flatpak
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "org.jdownloader.JDownloader"
+    ];
+  };
+
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
     home.packages = with pkgs; [
@@ -64,4 +75,13 @@
   };
 
   time.timeZone = "Europe/Amsterdam";
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.wireless.iwd.settings = {
+    IPv6 = {
+      Enabled = true;
+    };
+    Settings = {
+      AutoConnect = true;
+    };
+  };
 }
