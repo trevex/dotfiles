@@ -38,7 +38,7 @@ let
         };
       };
     system.configurationRevision = with inputs; mkIf (self ? rev) self.rev;
-    system.stateVersion = "25.05";
+    system.stateVersion = "25.11";
 
     ## Some reasonable, global defaults
     # This is here to appease 'nix flake check' for generic hosts with no
@@ -73,7 +73,7 @@ let
 
 
     # On every laptop we want to suspend once the lid is closed
-    services.logind.lidSwitch = "suspend";
+    services.logind.settings.Login.HandleLidSwitch = "suspend";
 
     # We also want to load the relevant home profile and setup home-manager
     home-manager.extraSpecialArgs = {

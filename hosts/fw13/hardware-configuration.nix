@@ -44,10 +44,4 @@
   hardware.enableRedistributableFirmware = true;
 
   services.fwupd.enable = true;
-
-  hardware.graphics = {
-    extraPackages = with pkgs; [
-      amdvlk # for Vulkan on AMD
-    ];
-  };
 }

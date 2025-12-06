@@ -19,6 +19,7 @@ in
       unstable.rust-analyzer
       unstable.clippy
       unstable.vimv
+      unstable.devenv
     ];
 
     # TODO: checkout https://github.com/glepnir/lspsaga.nvim
@@ -89,7 +90,6 @@ in
         vim-helm
         vim-go
         vim-just
-        rust-tools-nvim
       ];
       extraConfig = ''
         lua require('init')

@@ -49,6 +49,7 @@
       unstable.slack
       unstable.discord
       unstable.zoom-us
+      unstable.kubefwd
       nixfmt-rfc-style # TODO: relevant everywhere?
     ];
 
@@ -61,6 +62,7 @@
       };
       editors = {
         neovim.enable = true;
+        vscode.enable = true;
       };
       shell = {
         git = {
@@ -70,6 +72,7 @@
         };
         zsh.enable = true;
         direnv.enable = true;
+        kubectl.enable = false; # TODO: broken...
       };
     };
   };

@@ -19,7 +19,7 @@ in
         #   BROWSER = "google-chrome";
         #   TERMINAL = "alacritty";
         # };
-        home.stateVersion = "25.05";
+        home.stateVersion = "25.11";
         home.username = username;
         home.homeDirectory = homeDirectory;
       };

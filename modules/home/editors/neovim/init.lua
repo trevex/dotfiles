@@ -368,6 +368,7 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     },
   })
+  vim.lsp.enable(lsp)
 end
 
 -- Global mappings.
@@ -416,32 +417,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.api.nvim_command [[augroup END]]
     end
   end,
-})
-
-
-require('rust-tools').setup({
-  -- https://github.com/sharksforarms/neovim-rust/blob/master/neovim-init-lsp-cmp-rust-tools.vim
-  tools = {
-    runnables = {
-      use_telescope = true
-    },
-    inlay_hints = {
-      auto = true,
-      show_parameter_hints = false,
-      parameter_hints_prefix = "",
-      other_hints_prefix = "",
-    },
-  },
-  server = {
-    settings = {
-      ["rust-analyzer"] = {
-        -- enable clippy on save
-        checkOnSave = {
-          command = "clippy"
-        },
-      }
-    }
-  },
 })
 
 

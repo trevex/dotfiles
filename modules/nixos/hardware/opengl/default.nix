@@ -13,14 +13,14 @@ in
     environment.systemPackages = with pkgs; [
       libva-utils
       ffmpeg-full
-      glxinfo
+      mesa-demos
     ];
 
     # Configure OpenGL fo VA-API (encoding HW-accleration) and Vulkan
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };

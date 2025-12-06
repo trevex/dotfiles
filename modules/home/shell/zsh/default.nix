@@ -54,6 +54,8 @@ in
         kns = "kubens";
         tf = "terraform";
         tg = "terragrunt";
+        docker-rm-all = "docker rm -vf $(docker ps -aq)";
+        docker-rmi-all = "docker rmi -f $(docker images -aq)";
       };
       initContent = ''
         # Disable the underline for paths
