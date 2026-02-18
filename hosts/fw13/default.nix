@@ -39,6 +39,7 @@
     enable = true;
     packages = [
       "org.jdownloader.JDownloader"
+      "im.riot.Riot"
     ];
   };
 
@@ -51,6 +52,9 @@
       unstable.zoom-us
       unstable.kubefwd
       nixfmt-rfc-style # TODO: relevant everywhere?
+      inkscape
+      unstable.element-desktop
+      unstable.gh
     ];
 
     my = {
