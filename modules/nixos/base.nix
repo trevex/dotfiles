@@ -6,6 +6,7 @@ with lib.my;
   config = {
     environment.systemPackages = with pkgs; [
       vim
+      inetutils
       git
       git-lfs
       ripgrep
@@ -24,6 +25,7 @@ with lib.my;
       openssl
       tokei
       httpie
+      jq
     ];
   };
 }

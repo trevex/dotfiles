@@ -55,6 +55,7 @@
       inkscape
       unstable.element-desktop
       unstable.gh
+      unstable.github-copilot-cli
     ];
 
     my = {
