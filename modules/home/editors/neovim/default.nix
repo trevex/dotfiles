@@ -12,10 +12,10 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # language servers
+      nodePackages.typescript-language-server
+      nodePackages.svelte-language-server
       unstable.gopls
       unstable.terraform-ls
-      unstable.nodePackages.typescript-language-server
-      unstable.nodePackages.svelte-language-server
       unstable.rust-analyzer
       unstable.clippy
       unstable.vimv

@@ -55,6 +55,7 @@ in
         nautilus
         gnome-shell-extensions
         gnomeExtensions.appindicator
+        gnomeExtensions.caffeine
         gnomeExtensions.pop-shell
         # gnomeExtensions.dynamic-panel-transparency does not work with gnome 43
       ];
@@ -68,6 +69,7 @@ in
               "user-theme@gnome-shell-extensions.gcampax.github.com"
               # "workspace-indicator@gnome-shell-extensions.gcampax.github.com" obsolete in newest version
               "appindicatorsupport@rgcjonas.gmail.com"
+              "caffeine@patapon.info"
               "pop-shell@system76.com"
               # "dynamic-panel-transparency@rockon999.github.io"
             ];

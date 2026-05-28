@@ -23,6 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
@@ -48,7 +49,7 @@
         final: prev: {
           unstable = pkgs';
           my = self.packages."${system}";
-        } // (import ./overlays { inherit inputs; }) final prev // inputs.nixgl.overlay final prev;
+        } // (import ./overlays { inherit inputs; }) final prev // inputs.nixgl.overlay final prev // inputs.claude-code.overlays.default final prev;
     in
     {
       overlays.default = overlay;

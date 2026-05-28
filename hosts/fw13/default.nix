@@ -4,6 +4,9 @@
     ./hardware-configuration.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "amdgpu.sg_display=0" ];
+
   # Enable and configure relevant nixos modules
   my = {
     username = "nik";
@@ -33,7 +36,8 @@
   };
   # ProtonVPN TODO: modularize
   networking.firewall.checkReversePath = false;
-  environment.systemPackages = with pkgs; [wireguard-tools protonvpn-gui];
+  services.netbird.enable = true; # for netbird service & CLI
+  environment.systemPackages = with pkgs; [ wireguard-tools protonvpn-gui netbird-ui ];
   # Configure nix-flatpak
   services.flatpak = {
     enable = true;
@@ -56,6 +60,7 @@
       unstable.element-desktop
       unstable.gh
       unstable.github-copilot-cli
+      claude-code # via overlay
     ];
 
     my = {
@@ -74,6 +79,20 @@
           enable = true;
           userName = "Niklas Voss";
           userEmail = "niklas.voss@gmail.com";
+          includes = [
+            {
+              condition = "gitdir:~/Development/ace/";
+              path = "~/Development/ace/.gitconfig";
+            }
+            {
+              condition = "gitdir:~/Development/odp/";
+              path = "~/Development/odp/.gitconfig";
+            }
+            {
+              condition = "gitdir:~/Development/icn/";
+              path = "~/Development/icn/.gitconfig";
+            }
+          ];
         };
         zsh.enable = true;
         direnv.enable = true;

@@ -15,6 +15,11 @@ in
       type = types.nullOr types.str;
       default = null;
     };
+    includes = mkOption {
+      type = types.listOf types.attrs;
+      default = [ ];
+      description = "List of conditional includes for git config.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -57,8 +62,8 @@ in
         #   key = "";
         #   signByDefault = true;
         # };
-        # Or use work sub-dir, e.g. https://github.com/jonringer/nixpkgs-config/blob/14626b49310d747a2a4d4c1e3fd62dedef4cb860/home.nix
       };
+      includes = cfg.includes;
     };
   };
 }
