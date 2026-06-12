@@ -52,7 +52,7 @@
       audio.enable = true;
       bluetooth.enable = true;
       opengl.enable = true;
-      printing.enable = true;
+      printing.enable = false;
     };
     desktop = {
       gnome.enable = true;
@@ -73,7 +73,6 @@
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
     home.packages = with pkgs; [
-      teamspeak_client
       xclip
     ];
 

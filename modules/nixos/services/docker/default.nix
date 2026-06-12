@@ -16,6 +16,7 @@ in
     virtualisation = {
       docker = {
         enable = true;
+        package = pkgs.docker_29;
         autoPrune.enable = true;
         enableOnBoot = mkDefault false;
         # listenOptions = [];
