@@ -17,6 +17,14 @@ in
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+
+      # Disable WirePlumber's libcamera monitor. It aborts (SIGABRT) when it
+      # enumerates a UVC webcam twice ("duplicated ID"), crash-looping the
+      # session manager and dropping all audio sinks to "Dummy Output" until
+      # systemd restarts it. The webcam still works via the V4L2 path.
+      wireplumber.extraConfig."10-disable-libcamera" = {
+        "wireplumber.profiles".main."monitor.libcamera" = "disabled";
+      };
     };
 
     # We still need pactl for some scripts

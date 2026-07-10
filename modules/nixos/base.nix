@@ -4,6 +4,13 @@ with lib;
 with lib.my;
 {
   config = {
+    # Make /etc/hosts a real, writable file instead of a read-only symlink
+    # into the Nix store. Setting a mode other than "symlink" makes NixOS copy
+    # the file into /etc, so tools that patch /etc/hosts at runtime work.
+    # Note: `nixos-rebuild switch` regenerates it, so persistent entries still
+    # belong in `networking.hosts` / `networking.extraHosts`.
+    environment.etc.hosts.mode = "0644";
+
     environment.systemPackages = with pkgs; [
       vim
       inetutils

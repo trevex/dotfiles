@@ -91,7 +91,7 @@ in
   mkHost = path: attrs @ { system ? sys, ... }:
     nixosSystem {
       inherit system;
-      specialArgs = { inherit lib inputs system mylib; };
+      specialArgs = { inherit lib inputs system mylib; basePkgs = pkgs; };
       modules = [
         inputs.lanzaboote.nixosModules.lanzaboote
         {
