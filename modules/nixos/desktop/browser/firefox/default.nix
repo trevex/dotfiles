@@ -16,6 +16,8 @@ in
 
       programs.firefox = {
         enable = true;
+        # 26.05 moved the default to XDG; keep the legacy ~/.mozilla/firefox path
+        configPath = ".mozilla/firefox";
         profiles = {
           default = {
             id = 0;

@@ -44,7 +44,6 @@ in
     };
     services.displayManager = {
       gdm.enable = true;
-      gdm.wayland = true;
     };
 
     services.gnome.core-apps.enable = true;
@@ -201,6 +200,8 @@ in
           name = "Pop";
           package = pkgs.pop-gtk-theme;
         };
+        # 26.05 changed the default to null; keep applying the gtk3 theme to gtk4
+        gtk4.theme = config.gtk.theme;
       };
       # qt = {
       #   enable = true;

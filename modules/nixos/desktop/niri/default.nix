@@ -12,7 +12,6 @@ in
   config = mkIf cfg.enable {
     services.displayManager = {
       gdm.enable = true;
-      gdm.wayland = true;
     };
 
     programs.niri.enable = true;

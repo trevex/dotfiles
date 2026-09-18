@@ -68,9 +68,12 @@
   services.netbird.enable = true; # for netbird service & CLI
   environment.systemPackages = with pkgs; [
     wireguard-tools
-    protonvpn-gui
+    proton-vpn
     netbird-ui
+    openconnect
   ];
+  networking.networkmanager.plugins = [ pkgs.networkmanager-openconnect ];
+
   # Configure nix-flatpak
   services.flatpak = {
     enable = true;
@@ -81,9 +84,15 @@
 
   # Let's also setup and enable some home-manager modules
   my.home = { ... }: {
-    # Disable GNOME's ambient-light auto-brightness. The Framework 13 ALS
-    # otherwise dims/brightens the panel on its own as room light changes.
-    dconf.settings."org/gnome/settings-daemon/plugins/power".ambient-enabled = false;
+    # Stop GNOME from changing the backlight on its own:
+    #  - ambient-enabled: ALS-driven auto-brightness (room light). (Note: no
+    #    iio-sensor-proxy is installed, so this is belt-and-suspenders.)
+    #  - idle-dim: dims the panel to idle-brightness% when the session goes
+    #    idle. This is the one that actually dims the Framework 13 panel.
+    dconf.settings."org/gnome/settings-daemon/plugins/power" = {
+      ambient-enabled = false;
+      idle-dim = false;
+    };
 
     home.packages = with pkgs; [
       unstable.signal-desktop
@@ -91,8 +100,9 @@
       unstable.discord
       unstable.zoom-us
       unstable.kubefwd
-      nixfmt-rfc-style # TODO: relevant everywhere?
+      nixfmt # TODO: relevant everywhere?
       inkscape
+      unstable.teamspeak6-client
       unstable.element-desktop
       unstable.gh
       unstable.glab
@@ -128,6 +138,10 @@
             {
               condition = "gitdir:~/Development/icn/";
               path = "~/Development/icn/.gitconfig";
+            }
+            {
+              condition = "gitdir:~/Development/ocm/";
+              path = "~/Development/ocm/.gitconfig";
             }
           ];
         };

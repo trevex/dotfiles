@@ -26,6 +26,8 @@ in
 
     programs.zsh = {
       enable = true;
+      # 26.05 will move the default dotDir to XDG; lock in the current (home) path
+      dotDir = config.home.homeDirectory;
       zplug = {
         enable = true;
         plugins = [

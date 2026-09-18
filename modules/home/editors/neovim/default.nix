@@ -12,8 +12,8 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # language servers
-      nodePackages.typescript-language-server
-      nodePackages.svelte-language-server
+      typescript-language-server
+      svelte-language-server
       unstable.gopls
       unstable.terraform-ls
       unstable.rust-analyzer
@@ -37,6 +37,9 @@ in
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      # 26.05 changed these defaults to false; keep legacy providers enabled
+      withRuby = true;
+      withPython3 = true;
 
       # Plugin list can be found here:
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/misc/vim-plugins/vim-plugin-names

@@ -32,7 +32,6 @@ let
         settings = {
           sandbox = "relaxed";
           allowed-users = [ "@wheel" ];
-          trusted-substituters = [ "root" "@wheel" ];
           trusted-users = [ "root" "@wheel" ];
           auto-optimise-store = true;
         };
