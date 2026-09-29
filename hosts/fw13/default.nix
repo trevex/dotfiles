@@ -36,6 +36,22 @@
     )
   );
 
+  # Pin the NuPhy Air75 V2 (19f5:3246) out of USB runtime power management. It
+  # hangs three hub levels deep off the HP USB-C Dock G5, and usbhid happily
+  # autosuspends HID keyboards that advertise remote wakeup (bmAttributes=0xa0)
+  # once usbcore.autosuspend's 2s idle timer expires — it then relies on the
+  # keypress itself to wake the device, which eats the first few keystrokes.
+  # Known, never-root-caused kernel issue; upstream's advice is simply not to
+  # autosuspend keyboards (Documentation/driver-api/usb/power-management.rst).
+  # Windows doesn't selective-suspend HID, hence no symptom when the other
+  # laptop is docked. System suspend is unaffected, so wake-on-keypress still
+  # works. The Logitech mouse on the same dock stays on `auto` on purpose: it is
+  # self-powered, so bus suspend doesn't force its MCU into deep sleep, and a
+  # dropped motion delta is imperceptible regardless.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="19f5", ATTR{idProduct}=="3246", TEST=="power/control", ATTR{power/control}="on"
+  '';
+
   # Enable and configure relevant nixos modules
   my = {
     username = "nik";

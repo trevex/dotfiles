@@ -23,12 +23,18 @@ vim.o.timeoutlen = 500
 require("which-key").setup {}
 
 -- Treesitter
-require "nvim-treesitter.configs".setup {
-  highlight = {
-    enable = true,
-    disable = { "yaml" },
-  },
-}
+-- nixpkgs 26.05 ships nvim-treesitter's `main` branch rewrite, which removed
+-- `nvim-treesitter.configs` (and its `setup { highlight = ... }` API).
+-- Highlighting is now Neovim-native: start it per buffer. Parsers and queries
+-- come from `withAllGrammars` via the runtimepath, so nothing to install.
+local ts_ignore = { yaml = true }
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true }),
+  callback = function(ev)
+    if ts_ignore[ev.match] then return end
+    pcall(vim.treesitter.start, ev.buf)
+  end,
+})
 
 
 -- Quick-scope

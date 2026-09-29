@@ -35,6 +35,11 @@ let
           trusted-users = [ "root" "@wheel" ];
           auto-optimise-store = true;
         };
+        gc = {
+          automatic = true;
+          dates = "weekly";
+          options = "--delete-older-than 30d";
+        };
       };
     system.configurationRevision = with inputs; mkIf (self ? rev) self.rev;
     system.stateVersion = "25.11";
@@ -51,11 +56,16 @@ let
     # We use network-manager by default
     networking.networkmanager.enable = mkDefault true;
 
+    # Keep the journal from growing without bound
+    services.journald.extraConfig = "SystemMaxUse=1G";
+
     # Use the latest kernel
     boot = {
       kernelPackages = mkDefault pkgs.linuxPackages_latest;
       loader = {
         efi.canTouchEfiVariables = mkDefault true;
+        systemd-boot.configurationLimit = mkDefault 10;
+        grub.configurationLimit = mkDefault 10;
       };
     };
 
