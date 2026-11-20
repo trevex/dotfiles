@@ -30,30 +30,29 @@ stdenv.mkDerivation rec {
   dontUnpack = true;
 
   buildPhase = ''
-    7z x ${pro}
-    cd SFProFonts
-    7z x 'SF Pro Fonts.pkg'
-    7z x 'Payload~'
     mkdir -p $out/fontfiles
-    mv Library/Fonts/* $out/fontfiles
-    cd ..
-    7z x ${mono}
-    cd SFMonoFonts
-    7z x 'SF Mono Fonts.pkg'
-    7z x 'Payload~'
-    mv Library/Fonts/* $out/fontfiles
-    cd ..
-    7z x ${compact}
-    cd SFCompactFonts
-    7z x 'SF Compact Fonts.pkg'
-    7z x 'Payload~'
-    mv Library/Fonts/* $out/fontfiles
-    cd ..
-    7z x ${ny}
-    cd NYFonts
-    7z x 'NY Fonts.pkg'
-    7z x 'Payload~'
-    mv Library/Fonts/* $out/fontfiles
+
+    # Apple now ships two DMG layouts. SF Pro and SF Compact are APFS images
+    # wrapping a flat package, which 7z unwraps all the way down to the cpio in
+    # one step; SF Mono and NY are still HFS+ images nesting a
+    # <Name>Fonts/<Name> Fonts.pkg. Handle both, and give each DMG its own work
+    # dir since the new layout drops Payload~ straight into the cwd. The cpio
+    # needs an explicit -tcpio: it is the 070707 (odc) variant and 7z fails to
+    # sniff that out of the two large payloads.
+    for dmg in ${pro} ${compact} ${mono} ${ny}; do
+      work=$(mktemp -d)
+      (
+        cd $work
+        7z x $dmg
+        if [ ! -e 'Payload~' ]; then
+          cd *Fonts
+          7z x ./*.pkg
+        fi
+        7z x -tcpio 'Payload~'
+        mv Library/Fonts/* $out/fontfiles/
+      )
+      rm -rf $work
+    done
 
     for f in $out/fontfiles/SF-Mono-*; do
      nerd-font-patcher $f --mono --quiet --fontawesome --octicons --pomicons --codicons --powerline --out $out/fontfiles

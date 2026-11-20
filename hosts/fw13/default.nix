@@ -142,6 +142,7 @@
           enable = true;
           userName = "Niklas Voss";
           userEmail = "niklas.voss@gmail.com";
+          signingKey = "~/.ssh/id_ed25519.pub";
           includes = [
             {
               condition = "gitdir:~/Development/ace/";

@@ -15,6 +15,11 @@ in
       type = types.nullOr types.str;
       default = null;
     };
+    signingKey = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "SSH public key that signs commits and tags by default; null signs nothing.";
+    };
     includes = mkOption {
       type = types.listOf types.attrs;
       default = [ ];
@@ -58,10 +63,11 @@ in
         };
         user.name = cfg.userName;
         user.email = cfg.userEmail;
-        # signing = {
-        #   key = "";
-        #   signByDefault = true;
-        # };
+      };
+      signing = mkIf (cfg.signingKey != null) {
+        format = "ssh";
+        key = cfg.signingKey;
+        signByDefault = true;
       };
       includes = cfg.includes;
     };
